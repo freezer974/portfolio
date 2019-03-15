@@ -13,7 +13,8 @@
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('admin')->group(function () {
     Route::resource ('category', 'CategoryController', [
@@ -26,3 +27,5 @@ Route::middleware ('auth', 'verified')->group (function () {
         'only' => ['create', 'store', 'destroy', 'update']
     ]);
 });
+
+Route::name('category')->get('category/{slug}', 'ImageController@category');
