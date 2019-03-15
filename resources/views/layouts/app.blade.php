@@ -53,7 +53,10 @@
             @endadmin
             @auth
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle{{ currentRoute(route('image.create'))}}"
+                    <a class="nav-link dropdown-toggle{{ currentRoute(
+                                        route('album.create'),
+                                        route('image.create')
+                                    )}}"
                     href="#" id="navbarDropdownGestAlbum" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                         @lang('Gestion')
@@ -61,6 +64,9 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownGestAlbum">
                         <a class="dropdown-item" href="{{ route('image.create') }}">
                             <i class="fas fa-images fa-lg"></i> @lang('Ajouter une image')
+                        </a>
+                        <a class="dropdown-item" href="{{ route('album.create') }}">
+                            <i class="fas fa-folder-open fa-lg"></i> @lang('Ajouter un album')
                         </a>
                     </div>
                 </li>
