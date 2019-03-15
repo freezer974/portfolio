@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\ImageRepository;
+use App\Repositories\CategoryRepository;
 
 class ImageController extends Controller
 {
     protected $repository;
+    protected $categoryRepository;
 
-    public function __construct(ImageRepository $repository)
+    public function __construct(ImageRepository $imageRepository, CategoryRepository $categoryRepository)
     {
-        $this->repository = $repository;
+        $this->imageRepository = $imageRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -94,5 +97,12 @@ class ImageController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function category($slug)
+    {
+        $category = $this->categoryRepository->getBySlug ($slug);
+        $images = $this->imageRepository->getImagesForCategory ($slug);
+        return view ('home', compact ('category', 'images'));
     }
 }
