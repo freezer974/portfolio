@@ -11,9 +11,9 @@ class ImageRepository
     public function store($request)
     {
         // Save image
-        $path = basename ($request->image->store('images'));
+        $path = basename($request->image->store('image'));
         // Save thumb
-        $image = InterventionImage::make ($request->image)->widen (500)->encode ();
+        $image = InterventionImage::make($request->image)->widen (500)->encode();
         Storage::put ('thumbs/' . $path, $image);
         // Save in base
         $image = new Image;
