@@ -10,7 +10,7 @@ use App\Repositories\CategoryRepository;
 
 class ImageController extends Controller
 {
-    protected $repository;
+    protected $imageRepository;
     protected $categoryRepository;
 
     public function __construct(ImageRepository $imageRepository, CategoryRepository $categoryRepository)
@@ -52,7 +52,7 @@ class ImageController extends Controller
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string|max:255',
         ]);
-        $this->repository->store($request);
+        $this->imageRepository->store($request);
         return back()->with('ok', __("L'image a bien été enregistrée"));
     }
 
