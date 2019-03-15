@@ -23,4 +23,16 @@ class ImageRepository
         $image->name = $path;
         $request->user()->images()->save($image);
     }
+
+    public function getAllImages()
+    {
+        return Image::latestWithUser()->paginate (config ('app.pagination'));
+    }
+
+    public function getImagesForCategory($slug)
+    {
+        return Image::latestWithUser()->whereHas('category', function ($query) use ($slug) {
+            $query->whereSlug($slug);
+        })->paginate(config('app.pagination'));
+    }
 }
