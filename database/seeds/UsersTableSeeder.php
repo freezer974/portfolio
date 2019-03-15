@@ -19,18 +19,24 @@ class UsersTableSeeder extends Seeder
             'role' => 'admin',
             'password' => password_hash('SeRunIs*974', PASSWORD_DEFAULT),
             'email_verified_at' => Carbon::now(),
+            'settings' => '{"pagination": 8, "adult": true}',
+
         ]);
         User::create([
             'name' => 'demo',
             'email' => 'demo@societe.com',
             'password' => password_hash('user1', PASSWORD_DEFAULT),
             'email_verified_at' => Carbon::now(),
+            'settings' => '{"pagination": 8, "adult": true}',
+
         ]);
         User::create([
             'name' => 'User1',
             'email' => 'user1@societe.com',
             'password' => password_hash('user1', PASSWORD_DEFAULT),
             'email_verified_at' => Carbon::now(),
+            'settings' => '{"pagination": 8, "adult": true}',
+
         ]);
     }
 }
