@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Repositories\ImageRepository;
 use App\Repositories\CategoryRepository;
 
 class ImageController extends Controller
 {
-    protected $repository;
+    protected $imageRepository;
     protected $categoryRepository;
 
     public function __construct(ImageRepository $imageRepository, CategoryRepository $categoryRepository)
@@ -52,7 +53,7 @@ class ImageController extends Controller
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string|max:255',
         ]);
-        $this->repository->store($request);
+        $this->imageRepository->store($request);
         return back()->with('ok', __("L'image a bien été enregistrée"));
     }
 
@@ -102,8 +103,8 @@ class ImageController extends Controller
     public function destroy(Image $image)
     {
         $this->authorize ('manage', $image);
-        $image->delete ();
-        return back ();
+        $image->delete();
+        return back();
     }
 
     public function category($slug)
@@ -115,7 +116,7 @@ class ImageController extends Controller
 
     public function user(User $user)
     {
-        $images = $this->imageRepository->getImagesForUser ($user->id);
+        $images = $this->imageRepository->getImagesForUser($user->id);
         return view ('home', compact ('user', 'images'));
     }
 

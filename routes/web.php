@@ -22,7 +22,16 @@ Route::middleware('admin')->group(function () {
     ]);
 });
 
-Route::middleware ('auth', 'verified')->group (function () {
+Route::middleware ('auth', 'verified')->group(function () {
+
+    Route::resource ('album', 'AlbumController', [
+        'except' => 'show'
+    ]);
+
+    Route::resource ('profile', 'ProfileController', [
+        'only' => ['edit', 'update', 'destroy', 'show'],
+        'parameters' => ['profile' => 'user']
+    ]);
 
     Route::resource('image', 'ImageController', [
         'only' => ['create', 'store', 'destroy', 'update']
@@ -31,7 +40,7 @@ Route::middleware ('auth', 'verified')->group (function () {
     Route::name('image.')->middleware('ajax')->group(function () {
         Route::prefix('image')->group(function () {
             Route::name('description')->put('{image}/description', 'ImageController@descriptionUpdate');
-            Route::name ('adult')->put ('{image}/adult', 'ImageController@adultUpdate');
+            Route::name ('adult')->put('{image}/adult', 'ImageController@adultUpdate');
         });
     });
 
