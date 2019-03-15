@@ -18,6 +18,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany (Image::class);
     }
 
+    public function albums()
+    {
+        return $this->hasMany (Album::class);
+    }
+
     /**
      * User is admin.
      *
@@ -37,6 +42,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return json_decode ($value);
     }
+
+    public function getPaginationAttribute()
+{
+    return $this->settings->pagination;
+}
 
     /**
      * The attributes that are mass assignable.
