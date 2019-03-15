@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Repositories\ImageRepository;
 use App\Repositories\CategoryRepository;
@@ -83,9 +85,12 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Image $image)
     {
-        //
+        $this->authorize('manage', $image);
+        $image->category_id = $request->category_id;
+        $image->save();
+        return back()->with('updated', __('La catégorie a bien été changée !'));
     }
 
     /**
@@ -94,9 +99,11 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Image $image)
     {
-        //
+        $this->authorize ('manage', $image);
+        $image->delete ();
+        return back ();
     }
 
     public function category($slug)
@@ -104,5 +111,30 @@ class ImageController extends Controller
         $category = $this->categoryRepository->getBySlug ($slug);
         $images = $this->imageRepository->getImagesForCategory ($slug);
         return view ('home', compact ('category', 'images'));
+    }
+
+    public function user(User $user)
+    {
+        $images = $this->imageRepository->getImagesForUser ($user->id);
+        return view ('home', compact ('user', 'images'));
+    }
+
+    public function descriptionUpdate(Request $request, Image $image)
+    {
+        $this->authorize ('manage', $image);
+        $request->validate ([
+            'description' => 'nullable|string|max:255'
+        ]);
+        $image->description = $request->description;
+        $image->save();
+        return $image;
+    }
+
+    public function adultUpdate(Request $request, Image $image)
+    {
+        $this->authorize ('manage', $image);
+        $image->adult = $request->adult == 'true';
+        $image->save();
+        return response ()->json();
     }
 }
