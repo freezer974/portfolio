@@ -53,7 +53,10 @@
             @endadmin
             @auth
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle{{ currentRoute(route('image.create'))}}"
+                    <a class="nav-link dropdown-toggle{{ currentRoute(
+                                        route('album.create'),
+                                        route('image.create')
+                                    )}}"
                     href="#" id="navbarDropdownGestAlbum" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                         @lang('Gestion')
@@ -61,6 +64,9 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownGestAlbum">
                         <a class="dropdown-item" href="{{ route('image.create') }}">
                             <i class="fas fa-images fa-lg"></i> @lang('Ajouter une image')
+                        </a>
+                        <a class="dropdown-item" href="{{ route('album.create') }}">
+                            <i class="fas fa-folder-open fa-lg"></i> @lang('Ajouter un album')
                         </a>
                     </div>
                 </li>
@@ -71,6 +77,12 @@
                 <li class="nav-item{{ currentRoute(route('login')) }}"><a class="nav-link" href="{{ route('login') }}">@lang('Connexion')</a></li>
                 <li class="nav-item{{ currentRoute(route('register')) }}"><a class="nav-link" href="{{ route('register') }}">@lang('Inscription')</a></li>
             @else
+                <li class="nav-item{{ currentRoute(
+                    route('profile.edit', auth()->id()),
+                    route('profile.show', auth()->id())
+                )}}">
+                    <a class="nav-link" href="{{ route('profile.edit', auth()->id()) }}">@lang('Profil')</a>
+                </li>
                 <li class="nav-item">
                     <a id="logout" class="nav-link" href="{{ route('logout') }}">@lang('Déconnexion')</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hide">
