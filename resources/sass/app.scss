@@ -64,3 +64,12 @@
     .text-title, h1 {
         color: white;
     }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .star-rating {
+        direction: rtl;
+        display: block;
+    }

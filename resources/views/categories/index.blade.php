@@ -11,12 +11,12 @@
                     <td>{{ $category->name }}</td>
                     <td>
                         <a role="button" href="{{ route('category.edit', $category->id) }}"
-                            class="btn btn-warning btn-sm pull-right mr-2 invisible" data-toggle="tooltip"
+                            class="btn btn-warning btn-sm float-right mr-2 invisible" data-toggle="tooltip"
                             title="@lang('Modifier la catégorie') {{ $category->name }}">
                             <i class="fas fa-edit fa-lg"></i>
                         </a>
                         <a role="button" href="{{ route('category.destroy', $category->id) }}"
-                           class="btn btn-danger btn-sm pull-right invisible" data-toggle="tooltip"
+                           class="btn btn-danger btn-sm float-right invisible" data-toggle="tooltip"
                            title="@lang('Supprimer la catégorie') {{ $category->name }}">
                            <i class="fas fa-trash fa-lg"></i>
                         </a>
