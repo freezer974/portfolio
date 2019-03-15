@@ -16,6 +16,11 @@ class Image extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function albums()
+    {
+        return $this->belongsToMany (Album::class);
+    }
+
     public function scopeLatestWithUser($query)
     {
         $user = auth()->user();
