@@ -22,7 +22,7 @@ Route::middleware('admin')->group(function () {
     ]);
 });
 
-Route::middleware ('auth', 'verified')->group (function () {
+Route::middleware ('auth', 'verified')->group(function () {
 
     Route::resource('image', 'ImageController', [
         'only' => ['create', 'store', 'destroy', 'update']
