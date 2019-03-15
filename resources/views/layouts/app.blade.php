@@ -17,6 +17,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
+            @admin
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle{{ currentRoute(route('category.create'))}}" href="#" id="navbarDropdownGestCat" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    @lang('Administration')
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownGestCat">
+                    <a class="dropdown-item" href="{{ route('category.create') }}">
+                        <i class="fas fa-plus fa-lg"></i> @lang('Ajouter une catégorie')
+                    </a>
+                </div>
+            </li>
+            @endadmin
+        </ul>
+        <ul class="navbar-nav ml-auto">
             @guest
                 <li class="nav-item{{ currentRoute(route('login')) }}"><a class="nav-link" href="{{ route('login') }}">@lang('Connexion')</a></li>
                 <li class="nav-item{{ currentRoute(route('register')) }}"><a class="nav-link" href="{{ route('register') }}">@lang('Inscription')</a></li>

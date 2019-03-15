@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -9,6 +9,25 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+
+
+    /**
+     * Get the images.
+     */
+    public function images()
+    {
+        return $this->hasMany (Image::class);
+    }
+
+    /**
+     * User is admin.
+     *
+     * @return integer
+     */
+    public function getAdminAttribute()
+    {
+        return $this->role === 'admin';
+    }
 
     /**
      * The attributes that are mass assignable.
