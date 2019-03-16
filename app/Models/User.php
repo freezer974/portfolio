@@ -23,6 +23,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany (Album::class);
     }
 
+    public function imagesRated()
+    {
+        return $this->belongsToMany (Image::class);
+    }
+
     /**
      * User is admin.
      *
