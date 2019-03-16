@@ -13,19 +13,13 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         Category::create([
-            'name' => 'PhotoShop',
+            'name' => 'Print',
         ]);
         Category::create([
-            'name' => 'Illustrator',
+            'name' => 'Web',
         ]);
         Category::create([
-            'name' => 'Indesign',
-        ]);
-        Category::create([
-            'name' => 'Laravel',
-        ]);
-        Category::create([
-            'name' => 'Mysql',
+            'name' => 'Création',
         ]);
     }
 }
