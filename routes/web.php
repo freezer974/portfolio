@@ -59,6 +59,8 @@ Route::middleware ('auth', 'verified')->group(function () {
             Route::name('albums')->get('{image}/albums', 'ImageController@albums');
             Route::name ('albums.update')->put ('{image}/albums', 'ImageController@albumsUpdate');
         });
+        Route::name ('rating')->put ('rating/{image}', 'ImageController@rate');
+
     });
 
 
@@ -70,3 +72,6 @@ Route::name('category')->get('category/{slug}', 'ImageController@category');
 Route::name('user')->get ('user/{user}', 'ImageController@user');
 
 Route::name ('album')->get ('album/{slug}', 'ImageController@album');
+
+Route::middleware('ajax')->name('image.click')->patch('image/{image}/click', 'ImageController@click');
+
