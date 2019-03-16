@@ -42,4 +42,16 @@ class ImageRepository
             $query->whereId ($id);
         })->paginate(config('app.pagination'));
     }
+
+    public function isNotInAlbum($image, $album)
+    {
+        return $image->albums()->where('albums.id', $album->id)->doesntExist();
+    }
+
+    public function getImagesForAlbum($slug)
+    {
+        return Image::latestWithUser ()->whereHas ('albums', function ($query) use ($slug) {
+            $query->whereSlug ($slug);
+        })->paginate(config('app.pagination'));
+    }
 }

@@ -11,6 +11,9 @@
                 {{ session('updated') }}
             </div>
         @endif
+        @isset($album)
+            <h2 class="text-title mb-3">{{ $album->name }}</h2>
+        @endif
         @isset($category)
             <h2 class="text-title mb-3">{{ $category->name }}</h2>
         @endif
@@ -62,6 +65,12 @@
                                             data-toggle="tooltip"
                                             title="@lang('Gérer la description')">
                                             <i class="fa fa-comment"></i>
+                                        </a>
+                                        <a class="albums-manage"
+                                            href="{{ route('image.albums', $image->id) }}"
+                                            data-toggle="tooltip"
+                                            title="@lang('Gérer les albums')">
+                                            <i class="fa fa-folder-open"></i>
                                         </a>
                                         <a class="category-edit"
                                             data-id="{{ $image->category_id }}"
@@ -135,6 +144,24 @@
                                 @endforeach
                             </select>
                         </div>
+                        <button type="submit" class="btn btn-primary">@lang('Envoyer')</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editAlbums" tabindex="-1" role="dialog" aria-labelledby="albumLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="albumLabel">@lang("Gestion des albums pour l'image")</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="manageAlbums" action="" method="POST">
+                        <div class="form-group" id="listeAlbums"></div>
                         <button type="submit" class="btn btn-primary">@lang('Envoyer')</button>
                     </form>
                 </div>
@@ -270,6 +297,43 @@
             .fail(() => {
                 swallAlertServer()
             })
+        })
+        $('a.albums-manage').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            that.tooltip('hide')
+            that.children().removeClass('fa-folder-open').addClass('fa-cog fa-spin')
+            e.preventDefault()
+            $.get(that.attr('href'))
+            .done((data) => {
+                that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                $('#listeAlbums').html(data)
+                $('#manageAlbums').attr('action', that.attr('href'))
+                $('#editAlbums').modal('show')
+            })
+            .fail(() => {
+                that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                swallAlertServer()
+            })
+        })
+        $('#manageAlbums').submit((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            $.ajax({
+                method: 'put',
+                url: that.attr('action'),
+                data: that.serialize()
+            })
+                .done((data) => {
+                    if(data === 'reload') {
+                        location.reload();
+                    } else {
+                        $('#editAlbums').modal('hide')
+                    }
+                })
+                .fail(() => {
+                    swallAlertServer()
+                })
         })
     </script>
 @endsection
