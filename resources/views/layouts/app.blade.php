@@ -31,6 +31,23 @@
                     @endforeach
                 </div>
             </li>
+            @isset($albums)
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle
+                        @isset($album)
+                            {{ currentRoute(route('album', $album->slug))}}
+                        @endisset
+                        " href="#" id="navbarDropdownAlbum" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @lang('Albums')
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownAlbum">
+                        @foreach($albums as $album)
+                            <a class="dropdown-item"
+                            href="{{ route('album', $album->slug) }}">{{ $album->name }}</a>
+                        @endforeach
+                    </div>
+                </li>
+            @endisset
             @admin
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle{{ currentRoute(
@@ -55,7 +72,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle{{ currentRoute(
                                         route('album.create'),
-                                        route('image.create')
+                                        route('image.create'),
+                                        route('album.index')
                                     )}}"
                     href="#" id="navbarDropdownGestAlbum" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -67,6 +85,9 @@
                         </a>
                         <a class="dropdown-item" href="{{ route('album.create') }}">
                             <i class="fas fa-folder-open fa-lg"></i> @lang('Ajouter un album')
+                        </a>
+                        <a class="dropdown-item" href="{{ route('album.index') }}">
+                            <i class="fas fa-wrench fa-lg"></i> @lang('Gérer les albums')
                         </a>
                     </div>
                 </li>
