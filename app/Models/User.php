@@ -74,4 +74,18 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'email_verified_at',
+    ];
+
+    public function setAdultAttribute($value)
+    {
+        $this->attributes['settings'] = json_encode ([
+            'adult' => $value,
+            'pagination' => $this->settings->pagination
+        ]);
+    }
 }

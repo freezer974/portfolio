@@ -54,4 +54,22 @@ class ImageRepository
             $query->whereSlug ($slug);
         })->paginate(config('app.pagination'));
     }
+
+    public function getOrphans()
+    {
+        return collect (Storage::files ('images'))->transform(function ($item) {
+            return basename($item);
+        })->diff (Image::select ('name')->pluck ('name'));
+    }
+
+    public function destroyOrphans()
+    {
+        $orphans = $this->getOrphans ();
+        foreach ($orphans as $orphan) {
+            Storage::delete ([
+                'images/' . $orphan,
+                'thumbs/' . $orphan,
+            ]);
+        }
+    }
 }
