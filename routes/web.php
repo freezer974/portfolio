@@ -17,8 +17,23 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('admin')->group(function () {
+
     Route::resource ('category', 'CategoryController', [
         'except' => 'show'
+    ]);
+
+    Route::name ('orphans.')->prefix('orphans')->group(function () {
+        Route::name ('index')->get ('/', 'AdminController@orphans');
+        Route::name ('destroy')->delete ('/', 'AdminController@destroy');
+    });
+
+    Route::name ('maintenance.')->prefix('maintenance')->group(function () {
+        Route::name ('index')->get ('/', 'AdminController@edit');
+        Route::name ('update')->put ('/', 'AdminController@update');
+    });
+
+    Route::resource ('user', 'UserController', [
+        'only' => ['index', 'edit', 'update', 'destroy']
     ]);
 });
 
@@ -45,6 +60,8 @@ Route::middleware ('auth', 'verified')->group(function () {
             Route::name ('albums.update')->put ('{image}/albums', 'ImageController@albumsUpdate');
         });
     });
+
+
 
 });
 
