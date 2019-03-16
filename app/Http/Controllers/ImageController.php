@@ -170,4 +170,33 @@ class ImageController extends Controller
         }
         return response ()->json();
     }
+
+    public function rate(Request $request, Image $image)
+    {
+        $user = $request->user();
+        // Is user image owner ?
+        if($this->imageRepository->isOwner ($user, $image)) {
+            return response()->json(['status' => 'no']);
+        }
+        // Rating
+        $rate = $this->imageRepository->rateImage ($user, $image, $request->value);
+        $this->imageRepository->setImageRate ($image);
+        return [
+            'status' => 'ok',
+            'id' => $image->id,
+            'value' => $image->rate,
+            'count' => $image->users->count(),
+            'rate' => $rate
+        ];
+    }
+
+    public function click(Request $request, Image $image)
+    {
+        if ($request->session()->has('images') && in_array ($image->id, session ('images'))) {
+            return response ()->json (['increment' => false]);
+        }
+        $request->session()->push('images', $image->id);
+        $image->increment('clicks');
+        return ['increment' => true];
+    }
 }

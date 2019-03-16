@@ -21,6 +21,11 @@ class Image extends Model
         return $this->belongsToMany (Album::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany (User::class)->withPivot('rating');
+    }
+
     public function scopeLatestWithUser($query)
     {
         $user = auth()->user();
