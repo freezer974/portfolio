@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use Illuminate\Http\Request;
 use App\Http\Requests\AlbumRequest;
+use App\Http\Controllers\Controller;
 use App\Repositories\AlbumRepository;
 
 class AlbumController extends Controller
@@ -14,6 +16,7 @@ class AlbumController extends Controller
     public function __construct(AlbumRepository $repository)
     {
         $this->repository = $repository;
+        $this->middleware('ajax')->only('destroy');
     }
 
     /**
@@ -21,9 +24,10 @@ class AlbumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $userAlbums = $this->repository->getAlbums ($request->user ());
+        return view ('albums.index', compact('userAlbums'));
     }
 
     /**
@@ -65,9 +69,9 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Album $album)
     {
-        //
+        return view ('albums.edit', compact ('album'));
     }
 
     /**
@@ -77,9 +81,11 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AlbumRequest $request, Album $album)
     {
-        //
+        $this->authorize('manage', $album);
+        $album->update ($request->all ());
+        return redirect ()->route('album.index')->with ('ok', __ ("L'album a bien été modifié"));
     }
 
     /**
@@ -88,8 +94,10 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Album $album)
     {
-        //
+        $this->authorize('manage', $album);
+        $album->delete ();
+        return response ()->json();
     }
 }
