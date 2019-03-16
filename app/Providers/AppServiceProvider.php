@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\AlbumRepository;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\CategoryRepository;
@@ -32,6 +33,15 @@ class AppServiceProvider extends ServiceProvider
 
         if (request ()->server ("SCRIPT_NAME") !== 'artisan') {
             view ()->share ('categories', resolve(CategoryRepository::class)->getAll());
+            view ()->composer('layouts.app', function ($view)
+            {
+                if(auth()->check()) {
+                    $albums = resolve (AlbumRepository::class)->getByUser(auth()->id());
+                    if($albums->isNotEmpty()) {
+                        $view->with('albums', $albums);
+                    }
+                }
+            });
         }
 
         Blade::if ('adminOrOwner', function ($id) {
