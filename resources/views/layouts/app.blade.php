@@ -11,12 +11,19 @@
 </head>
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name', 'Album') }}</a>
+    <a class="navbar-brand" href="{{ route('home') }}" title="{{ config('app.name', 'Album') }}"><img src="{!! asset('images/logo/logo-tatoumi-creation.png') !!}" alt="" class="logo-navbar mb-2"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mr-auto">
+            @if(currentRoute(route('home')))
+                <li class="nav-item "><a class="nav-link" href="#about">À propos</a></li>
+                <li class="nav-item "><a class="nav-link" href="#service">Services</a></li>
+                <li class="nav-item "><a class="nav-link" href="#testimonial">Témoignages</a></li>
+                <li class="nav-item "><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                <li class="nav-item "><a class="nav-link" href="#contact">Contact</a></li>
+            @endif
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle
                     @isset($category)
@@ -106,32 +113,66 @@
             @endauth
         </ul>
         <ul class="navbar-nav ml-auto">
-                @guest
-                <li class="nav-item{{ currentRoute(route('login')) }}"><a class="nav-link" href="{{ route('login') }}">@lang('Connexion')</a></li>
-                <li class="nav-item{{ currentRoute(route('register')) }}"><a class="nav-link" href="{{ route('register') }}">@lang('Inscription')</a></li>
-                @else
-                    @maintenance
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('maintenance.index') }}" data-toggle="tooltip" title="@lang('Mode maintenance')">
-                                <span class="fas fa-exclamation-circle  fa-lg" style="color: red;">
-                                </span>
+            <li class="nav-item ">
+                <a class="nav-link" href="#" id="navbarDropdownFlag" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <img width="18" height="18" alt="{{ session('locale') }}"
+                            src="{!! asset('images/flags/' . session('locale') . '-flag.png') !!}"/>
+                </a>
+                <div id="flags" class="dropdown-menu" aria-labelledby="navbarDropdownFlag">
+                    @foreach(config('app.locales') as $locale)
+                        @if($locale != session('locale'))
+                            <a class="dropdown-item" href="{{ route('language', $locale) }}">
+                                <img width="18" height="18" alt="{{ session('locale') }}"
+                                        src="{!! asset('images/flags/' . $locale . '-flag.png') !!}"/>
                             </a>
-                        </li>
-                    @endmaintenance
-                    <li class="nav-item{{ currentRoute(
-                                route('profile.edit', auth()->id()),
-                                route('profile.show', auth()->id())
-                            )}}">
-                        <a class="nav-link" href="{{ route('profile.edit', auth()->id()) }}">@lang('Profil')</a>
-                    </li>
+                        @endif
+                    @endforeach
+                </div>
+            </li>
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/ChevalierTony"><i class="fab fa-twitter fa-lg"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.linkedin.com/in/tonychevalier974/"> <i class="fab fa-linkedin-in fa-lg"></i></a>
+                </li>
+            @else
+                @maintenance
                     <li class="nav-item">
-                        <a id="logout" class="nav-link" href="{{ route('logout') }}">@lang('Déconnexion')</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hide">
-                            {{ csrf_field() }}
-                        </form>
+                        <a class="nav-link" href="{{ route('maintenance.index') }}" data-toggle="tooltip" title="@lang('Mode maintenance')">
+                            <span class="fas fa-exclamation-circle  fa-lg" style="color: red;">
+                            </span>
+                        </a>
                     </li>
-                @endguest
-            </ul>
+                @endmaintenance
+                @unless(auth()->user()->unreadNotifications->isEmpty())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('notification.index') }}">
+                            <span class="fa-layers fa-fw">
+                                <span style="color: yellow" class="fas fa-bell fa-lg" data-fa-transform="grow-2"></span>
+                                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-4 up-2 left-1" style="color: black; font-weight:900">{{ auth()->user()->unreadNotifications->count() }}</span>
+                            </span>
+                        </a>
+                    </li>
+                @endunless
+                    <li class="nav-item{{ currentRoute(
+                            route('profile.edit', auth()->id()),
+                            route('profile.show', auth()->id())
+                        )}}">
+                    <a class="nav-link" href="{{ route('profile.edit', auth()->id()) }}">@lang('Profil')</a>
+                </li>
+                <li class="nav-item">
+                    <a id="logout" class="nav-link" href="{{ route('logout') }}">@lang('Déconnexion')</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hide">
+                        {{ csrf_field() }}
+                    </form>
+                </li>
+            @endguest
+        </ul>
     </div>
 </nav>
 @if (session('ok'))
