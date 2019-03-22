@@ -7,4 +7,7 @@ try {
     require('bootstrap');
     require('@fortawesome/fontawesome-free/js/all.js');
     require('magnific-popup');
+    require('jquery-animated-headlines');
+    require('counterup/jquery.counterup.js');
+
 } catch (e) {}
