@@ -1,16 +1,23 @@
-
 // Body
 $body-bg: #343a40;
 
+// Menu
+$dropdown-min-width: 5rem;
+
+// Typography
+$font-family-sans-serif: "Raleway", sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+$text-color: #636b6f;
+
 // Card
-$card-border-width: 2px;
+$card-border-width: 4px;
 $card-border-radius: .3rem;
 $card-border-color: rgba(255, 242, 242, .3);
 
-// Typography
-$font-family-sans-serif: "Nunito", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// Pagination
+$pagination-active-bg: grey;
+$pagination-active-border-color: grey;
 
 // Colors
 $blue: #3490dc;
@@ -23,3 +30,4 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$grey: #dddddd;
