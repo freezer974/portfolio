@@ -14,7 +14,7 @@
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@voir')->name('home');
 
 Route::middleware('admin')->group(function () {
 
@@ -63,8 +63,10 @@ Route::middleware ('auth', 'verified')->group(function () {
 
     });
 
-
-
+    Route::name ('notification.')->prefix('notification')->group(function () {
+        Route::name ('index')->get ('/', 'NotificationController@index');
+        Route::name ('update')->patch ('{notification}', 'NotificationController@update');
+    });
 });
 
 Route::name('category')->get('category/{slug}', 'ImageController@category');
@@ -75,3 +77,4 @@ Route::name ('album')->get ('album/{slug}', 'ImageController@album');
 
 Route::middleware('ajax')->name('image.click')->patch('image/{image}/click', 'ImageController@click');
 
+Route::name('language')->get('language/{lang}', 'HomeController@language');
