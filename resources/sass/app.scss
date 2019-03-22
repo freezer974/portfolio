@@ -142,6 +142,7 @@ a:hover {
 .star-rating div:hover ~ div {
     color: #f2b600
 }
+
 .hover_img a { position:relative; }
 .hover_img a span { position:absolute; display:none; z-index:99; }
 .hover_img a:hover span { display:block; }
@@ -159,8 +160,7 @@ a:hover {
 .service-icon i {
     color: #0cb4ce;
 }
-.service-content {
-}
+
 .service-content h4 {
     font-size: 19px;
     font-weight: 700;
