@@ -535,7 +535,7 @@
 
 
     <!--    Google Maps-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA_OExOl45j2UU6hzxZcOkvrvxvKa5sEs"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<?= GOOGLE_KEY; ?>" ></script>
 		<script>
 
             $('.site-wrapper').fadeOut(1000)
