@@ -8,11 +8,6 @@ class RatingsTableSeeder extends Seeder
     public function run()
     {
         DB::table('image_user')->insert([
-            0 => [
-                'image_id' => 39,
-                'user_id' => 3,
-                'rating' => 1,
-            ],
             1 => [
                 'image_id' => 40,
                 'user_id' => 3,
@@ -48,15 +43,20 @@ class RatingsTableSeeder extends Seeder
                 'user_id' => 2,
                 'rating' => 2,
             ],
-            7 => [
+            8 => [
                 'image_id' => 31,
                 'user_id' => 3,
                 'rating' => 3,
             ],
-            8 => [
+            9 => [
                 'image_id' => 32,
                 'user_id' => 3,
                 'rating' => 3,
+            ],
+            10 => [
+                'image_id' => 39,
+                'user_id' => 3,
+                'rating' => 1,
             ]
         ]);
     }
