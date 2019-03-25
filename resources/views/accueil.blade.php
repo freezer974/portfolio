@@ -576,6 +576,8 @@
     </script>
     <script>
 
+window.onload = function () {
+    // jQuery and everything else is loaded
     $(document).ready(function() {
 
         $('body').css('margin-top', 0);
@@ -890,6 +892,6 @@
                 }
             })
         })
-
+    }
     </script>
 @endsection
