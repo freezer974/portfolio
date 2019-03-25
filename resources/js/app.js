@@ -5,7 +5,6 @@ window.Popper = require('popper.js').default;
 try {
     window.$ = window.jQuery = require('jquery');
     require('isotope-layout/dist/isotope.pkgd.min.js');
-    require('bootstrap');
     require('magnific-popup');
     require('@fortawesome/fontawesome-free/js/all.js');
     require('jquery-animated-headlines');
@@ -15,5 +14,6 @@ try {
     require('startbootstrap-scrolling-nav/js/scrolling-nav.js');
     require('imagesloaded');
     require('scrollup');
+    require('bootstrap');
 
 } catch (e) {}
