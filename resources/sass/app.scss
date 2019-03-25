@@ -157,6 +157,7 @@ a:hover {
 .star-rating div:hover ~ div {
     color: #f2b600
 }
+
 .hover_img a { position:relative; }
 .hover_img a span { position:absolute; display:none; z-index:99; }
 .hover_img a:hover span { display:block; }
@@ -188,15 +189,12 @@ a:hover {
     margin: 0;
 }
 
-/*Testimonial area CSS*/
-
 .testimonial {
     background: rgba(0, 0, 0, 0) url("images/site/section-parallax.jpg") no-repeat fixed 50% 50% / cover ;
     padding-top: 80px;
     padding-bottom: 70px;
     position: relative;
 }
-
 .parallax-overlay {
     background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;
     bottom: 0;
@@ -217,7 +215,6 @@ a:hover {
     text-align: center;
     width: 100%;
 }
-
 .testimonial-section-title h4 {
     color: #fff;
     font-size: 25px;
@@ -225,12 +222,10 @@ a:hover {
     letter-spacing: 5px;
     text-align: center;
 }
-
 .single-testimonial {
     color: #fff;
     text-align: center;
 }
-
 .single-testimonial p {
     color: #ccc;
     margin: 15px auto;
