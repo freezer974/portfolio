@@ -8975,6 +8975,7 @@ module.exports = function(arr) {
 
 /***/ }),
 
+/***/ "./node_modules/component-clone/index.js":
 /*!***********************************************!*\
   !*** ./node_modules/component-clone/index.js ***!
   \***********************************************/
@@ -9554,6 +9555,12 @@ module.exports = function(val){
   !*** ./node_modules/counterup/jquery.counterup.min.js ***!
   \********************************************************/
 /*! no static exports found */
+/***/ (function(module, exports) {
+
+/*!
+* jquery.counterup.js 1.0
+*
+* Copyright 2013, Benjamin Intal http://gambit.ph @bfintal
 * Released under the GPL v2 License
 *
 * Date: Nov 26, 2013
@@ -10375,7 +10382,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_LO
 
             if(headline.hasClass('loading-bar')) {
                 duration = settings.barAnimationDelay;
-                setTimeout(function() {
+                setTimeout(function() { 
                     headline.find('.ah-words-wrapper').addClass('is-loading')
                 }, settings.barWaiting);
             } else if (headline.hasClass('clip')){
@@ -10415,18 +10422,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_LO
 
         function hideWord(word) {
         var nextWord = takeNext(word);
-
+        
         if(word.parents('.ah-headline').hasClass('type')) {
             var parentSpan = word.parent('.ah-words-wrapper');
-            parentSpan.addClass('selected').removeClass('waiting');
-            setTimeout(function(){
-                parentSpan.removeClass('selected');
+            parentSpan.addClass('selected').removeClass('waiting'); 
+            setTimeout(function(){ 
+                parentSpan.removeClass('selected'); 
                 word.removeClass('is-visible').addClass('is-hidden').children('i').removeClass('in').addClass('out');
             }, settings.selectionDuration);
             setTimeout(function(){
                 showWord(nextWord, settings.typeLettersDelay)
             }, settings.typeAnimationDelay);
-
+        
         } else if(word.parents('.ah-headline').hasClass('letters')) {
             var bool = (word.children('i').length >= nextWord.children('i').length) ? true : false;
             hideLetter(word.find('i').eq(0), word, bool, settings.lettersDelay);
@@ -10458,22 +10465,22 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_LO
             word.addClass('is-visible').removeClass('is-hidden');
 
         }  else if(word.parents('.ah-headline').hasClass('clip')) {
-            word.parents('.ah-words-wrapper').animate({ 'width' : word.width() + 10 }, settings.revealDuration, function(){
+            word.parents('.ah-words-wrapper').animate({ 'width' : word.width() + 10 }, settings.revealDuration, function(){ 
                 setTimeout(function(){
                     hideWord(word)
-                }, settings.revealAnimationDelay);
+                }, settings.revealAnimationDelay); 
             });
         }
     }
 
     function hideLetter(letter, word, bool, duration) {
         letter.removeClass('in').addClass('out');
-
+        
         if(!letter.is(':last-child')) {
             setTimeout(function(){
                 hideLetter(letter.next(), word, bool, duration);
-            }, duration);
-        } else if(bool) {
+            }, duration);  
+        } else if(bool) { 
             setTimeout(function(){
                 hideWord(takeNext(word))
             }, settings.animationDelay);
@@ -10482,17 +10489,17 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_LO
         if(letter.is(':last-child') && $('html').hasClass('no-csstransitions')) {
             var nextWord = takeNext(word);
             switchWord(word, nextWord);
-        }
+        } 
     }
 
     function showLetter(letter, word, bool, duration) {
         letter.addClass('in').removeClass('out');
-
-        if(!letter.is(':last-child')) {
+        
+        if(!letter.is(':last-child')) { 
             setTimeout(function(){
                 showLetter(letter.next(), word, bool, duration);
-            }, duration);
-        } else {
+            }, duration); 
+        } else { 
             if(word.parents('.ah-headline').hasClass('type')) {
                 setTimeout(function(){
                     word.parents('.ah-words-wrapper').addClass('waiting');
@@ -38192,21 +38199,21 @@ return jQuery;
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
-;(function (factory) {
-if (true) {
- // AMD. Register as an anonymous module.
+;(function (factory) { 
+if (true) { 
+ // AMD. Register as an anonymous module. 
  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
- } else {}
- }(function($) {
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); 
+ } else {} 
+ }(function($) { 
 
 /*>>core*/
 /**
- *
+ * 
  * Magnific Popup Core JS file
- *
+ * 
  */
 
 
@@ -38228,7 +38235,7 @@ var CLOSE_EVENT = 'Close',
 
 
 /**
- * Private vars
+ * Private vars 
  */
 /*jshint -W079 */
 var mfp, // As we have only one instance of MagnificPopup object, we define it locally to not to use 'this'
@@ -38297,15 +38304,15 @@ var _mfpOn = function(name, f) {
 			v = ['ms','O','Moz','Webkit']; // 'v' for vendor
 
 		if( s['transition'] !== undefined ) {
-			return true;
+			return true; 
 		}
-
+			
 		while( v.length ) {
 			if( v.pop() + 'Transition' in s ) {
 				return true;
 			}
 		}
-
+				
 		return false;
 	};
 
@@ -38319,7 +38326,7 @@ MagnificPopup.prototype = {
 	constructor: MagnificPopup,
 
 	/**
-	 * Initializes Magnific Popup plugin.
+	 * Initializes Magnific Popup plugin. 
 	 * This function is triggered only once when $.fn.magnificPopup or $.magnificPopup is executed
 	 */
 	init: function() {
@@ -38345,7 +38352,7 @@ MagnificPopup.prototype = {
 
 		var i;
 
-		if(data.isObj === false) {
+		if(data.isObj === false) { 
 			// convert jQuery collection to array to avoid conflicts later
 			mfp.items = data.items.toArray();
 
@@ -38372,8 +38379,8 @@ MagnificPopup.prototype = {
 			mfp.updateItemHTML();
 			return;
 		}
-
-		mfp.types = [];
+		
+		mfp.types = []; 
 		_wrapClasses = '';
 		if(data.mainEl && data.mainEl.length) {
 			mfp.ev = data.mainEl.eq(0);
@@ -38392,7 +38399,7 @@ MagnificPopup.prototype = {
 
 
 
-		mfp.st = $.extend(true, {}, $.magnificPopup.defaults, data );
+		mfp.st = $.extend(true, {}, $.magnificPopup.defaults, data ); 
 		mfp.fixedContentPos = mfp.st.fixedContentPos === 'auto' ? !mfp.probablyMobile : mfp.st.fixedContentPos;
 
 		if(mfp.st.modal) {
@@ -38401,7 +38408,7 @@ MagnificPopup.prototype = {
 			mfp.st.showCloseBtn = false;
 			mfp.st.enableEscapeKey = false;
 		}
-
+		
 
 		// Building markup
 		// main containers are created only once
@@ -38453,7 +38460,7 @@ MagnificPopup.prototype = {
 			_wrapClasses += ' mfp-align-top';
 		}
 
-
+	
 
 		if(mfp.fixedContentPos) {
 			mfp.wrap.css({
@@ -38462,7 +38469,7 @@ MagnificPopup.prototype = {
 				overflowY: mfp.st.overflowY
 			});
 		} else {
-			mfp.wrap.css({
+			mfp.wrap.css({ 
 				top: _window.scrollTop(),
 				position: 'absolute'
 			});
@@ -38474,7 +38481,7 @@ MagnificPopup.prototype = {
 			});
 		}
 
-
+		
 
 		if(mfp.st.enableEscapeKey) {
 			// Close on ESC key
@@ -38493,7 +38500,7 @@ MagnificPopup.prototype = {
 		if(!mfp.st.closeOnContentClick) {
 			_wrapClasses += ' mfp-auto-cursor';
 		}
-
+		
 		if(_wrapClasses)
 			mfp.wrap.addClass(_wrapClasses);
 
@@ -38501,7 +38508,7 @@ MagnificPopup.prototype = {
 		// this triggers recalculation of layout, so we get it once to not to trigger twice
 		var windowHeight = mfp.wH = _window.height();
 
-
+		
 		var windowStyles = {};
 
 		if( mfp.fixedContentPos ) {
@@ -38522,8 +38529,8 @@ MagnificPopup.prototype = {
 			}
 		}
 
-
-
+		
+		
 		var classesToadd = mfp.st.mainClass;
 		if(mfp.isIE7) {
 			classesToadd += ' mfp-ie7';
@@ -38539,16 +38546,16 @@ MagnificPopup.prototype = {
 
 		// remove scrollbar, add margin e.t.c
 		$('html').css(windowStyles);
-
+		
 		// add everything to DOM
 		mfp.bgOverlay.add(mfp.wrap).prependTo( mfp.st.prependTo || $(document.body) );
 
 		// Save last focused element
 		mfp._lastFocusedEl = document.activeElement;
-
+		
 		// Wait for next cycle to allow CSS transition
 		setTimeout(function() {
-
+			
 			if(mfp.content) {
 				mfp._addClassToMFP(READY_CLASS);
 				mfp._setFocus();
@@ -38556,7 +38563,7 @@ MagnificPopup.prototype = {
 				// if content is not defined (not loaded e.t.c) we add class only for BG
 				mfp.bgOverlay.addClass(READY_CLASS);
 			}
-
+			
 			// Trap the focus in popup
 			_document.on('focusin' + EVENT_NS, mfp._onFocusIn);
 
@@ -38615,7 +38622,7 @@ MagnificPopup.prototype = {
 			}
 			$('html').css(windowStyles);
 		}
-
+		
 		_document.off('keyup' + EVENT_NS + ' focusin' + EVENT_NS);
 		mfp.ev.off(EVENT_NS);
 
@@ -38635,14 +38642,14 @@ MagnificPopup.prototype = {
 		if(mfp.st.autoFocusLast && mfp._lastFocusedEl) {
 			$(mfp._lastFocusedEl).focus(); // put tab focus back
 		}
-		mfp.currItem = null;
+		mfp.currItem = null;	
 		mfp.content = null;
 		mfp.currTemplate = null;
 		mfp.prevHeight = 0;
 
 		_mfpTrigger(AFTER_CLOSE_EVENT);
 	},
-
+	
 	updateSize: function(winHeight) {
 
 		if(mfp.isIOS) {
@@ -43494,7 +43501,7 @@ function scrollTo(x, y, options) {
   }
 
   animate();
-
+  
   return tween;
 }
 
@@ -43532,7 +43539,7 @@ function ScrollUp(el, options){
 	if (el.length) {
 		//array or DOM collection
 		this.el = el[0];
-	}
+	} 
 	else if (el instanceof Element){
 		//selector or DOM element
 		this.el = q(el);
@@ -43562,7 +43569,7 @@ proto.scrollDistance = 900;
 proto.animateScrollDuration = 500;
 proto.text = "back to top";
 proto.ease =  "out-cube";
-
+	
 
 proto.hideShow = function(){
 	var pageY = window.pageYOffset || document.documentElement.scrollTop;
@@ -46727,7 +46734,6 @@ try {
 
   __webpack_require__(/*! jquery-animated-headlines */ "./node_modules/jquery-animated-headlines/dist/js/jquery.animatedheadline.js");
 
-<<<<<<< HEAD
   __webpack_require__(/*! waypoints/lib/jquery.waypoints.min.js */ "./node_modules/waypoints/lib/jquery.waypoints.min.js");
 
   __webpack_require__(/*! counterup/jquery.counterup.min.js */ "./node_modules/counterup/jquery.counterup.min.js");
@@ -46739,9 +46745,6 @@ try {
   __webpack_require__(/*! imagesloaded */ "./node_modules/imagesloaded/imagesloaded.js");
 
   __webpack_require__(/*! scrollup */ "./node_modules/scrollup/index.js");
-=======
-  __webpack_require__(/*! counterup/jquery.counterup.js */ "./node_modules/counterup/jquery.counterup.js");
->>>>>>> 5555c8bdfdbd43748214b70f149bbb3b72ebdefb
 } catch (e) {}
 
 /***/ }),
@@ -46753,7 +46756,7 @@ try {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleNotFoundError: Module not found: Error: Can't resolve './images/site/banner1.jpg' in '/var/www/html/tatoumi/resources/sass'\n    at factory.create (/var/www/html/tatoumi/node_modules/webpack/lib/Compilation.js:823:10)\n    at factory (/var/www/html/tatoumi/node_modules/webpack/lib/NormalModuleFactory.js:397:22)\n    at resolver (/var/www/html/tatoumi/node_modules/webpack/lib/NormalModuleFactory.js:130:21)\n    at asyncLib.parallel (/var/www/html/tatoumi/node_modules/webpack/lib/NormalModuleFactory.js:224:22)\n    at /var/www/html/tatoumi/node_modules/neo-async/async.js:2825:7\n    at /var/www/html/tatoumi/node_modules/neo-async/async.js:6886:13\n    at normalResolver.resolve (/var/www/html/tatoumi/node_modules/webpack/lib/NormalModuleFactory.js:214:25)\n    at doResolve (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/Resolver.js:184:12)\n    at hook.callAsync (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/Resolver.js:238:5)\n    at _fn0 (eval at create (/var/www/html/tatoumi/node_modules/tapable/lib/HookCodeFactory.js:32:10), <anonymous>:15:1)\n    at resolver.doResolve (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/UnsafeCachePlugin.js:37:5)\n    at hook.callAsync (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/Resolver.js:238:5)\n    at _fn0 (eval at create (/var/www/html/tatoumi/node_modules/tapable/lib/HookCodeFactory.js:32:10), <anonymous>:15:1)\n    at hook.callAsync (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/Resolver.js:238:5)\n    at _fn0 (eval at create (/var/www/html/tatoumi/node_modules/tapable/lib/HookCodeFactory.js:32:10), <anonymous>:12:1)\n    at resolver.doResolve (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:42:38)\n    at hook.callAsync (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/Resolver.js:238:5)\n    at _fn43 (eval at create (/var/www/html/tatoumi/node_modules/tapable/lib/HookCodeFactory.js:32:10), <anonymous>:402:1)\n    at hook.callAsync (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/Resolver.js:238:5)\n    at _fn0 (eval at create (/var/www/html/tatoumi/node_modules/tapable/lib/HookCodeFactory.js:32:10), <anonymous>:12:1)\n    at resolver.doResolve (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:42:38)\n    at hook.callAsync (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/Resolver.js:238:5)\n    at _fn1 (eval at create (/var/www/html/tatoumi/node_modules/tapable/lib/HookCodeFactory.js:32:10), <anonymous>:24:1)\n    at hook.callAsync (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/Resolver.js:238:5)\n    at _fn0 (eval at create (/var/www/html/tatoumi/node_modules/tapable/lib/HookCodeFactory.js:32:10), <anonymous>:15:1)\n    at fs.stat (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:22:13)\n    at process.nextTick (/var/www/html/tatoumi/node_modules/enhanced-resolve/lib/CachedInputFileSystem.js:73:15)\n    at _combinedTickCallback (internal/process/next_tick.js:131:7)\n    at process._tickCallback (internal/process/next_tick.js:180:9)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -46764,8 +46767,8 @@ throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/tatoumi/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/tatoumi/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
