@@ -2,6 +2,9 @@
 // Variables
 @import "variables";
 
+//font awesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
@@ -17,16 +20,28 @@
 // Headline
 @import "~jquery-animated-headlines/src/scss/jquery.animatedheadline.scss";
 
-//font awesome
-@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+//scrollup
+@import "~scrollup/scrollup.css";
+
+
 
 html, body {
-  height: 100%;
+    height: 100%;
+}
+
+body{
+    margin-top: 60px;
 }
 
 .logo-navbar{
     height: 16px;
 }
+
+.scroll-header {
+    position: fixed;
+    background: #303133;
+    transition: .4s;
+  }
 
 .single-slider {
     background: rgba(0, 0, 0, 0) url('images/site/banner1.jpg') repeat scroll center top;
@@ -44,15 +59,15 @@ html, body {
     opacity: 0.6;
     position: absolute;
     width: 100%;
-  }
+}
 
-  .slider-content {
+.slider-content {
     transform: translateY(-50%);
     position: absolute;
     top: 50%;
-  }
+}
 
-  .go-down {
+.go-down {
     border: 1px solid #fff;
     bottom: 40px;
     height: 35px;
@@ -64,8 +79,8 @@ html, body {
     transition: all 0.3s cubic-bezier(0.68, -0.07, 0.25, 0.93) 0s;
     width: 35px;
     z-index: 3;
-  }
-  .go-down i {
+}
+.go-down svg {
     animation: 1s linear 0s normal none infinite running plink;
     color: #fff;
     cursor: pointer;
@@ -73,151 +88,359 @@ html, body {
     font-size: 20px;
     transform: rotate(-45deg);
     transition: all 0.4s ease 0s;
-  }
-  .go-down:hover{
-      background: #0cb4ce;
-      color: #fff;
-      border: 1px solid #fff;
-  }
-  .go-down:hover i{
-      color: #fff;
-  }
+}
+.go-down:hover{
+    background: #0cb4ce;
+    color: #fff;
+    border: 1px solid #fff;
+}
+.go-down:hover svg{
+    color: #fff;
+}
 
 a:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .container-fluid {
-  padding-bottom: 70px;
+    padding-bottom: 70px;
 }
 
 .text-title, h1 {
-  color: white;
+    color: white;
 }
 
 .custom-file-label::after {
-  content: "Parcourir";
+    content: "Parcourir";
 }
 
 .fixed-bottom {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 
 .site-wrapper {
-  display: grid;
-  height: 100%;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "center";
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "center";
 }
 
 .site-wrapper-inner {
-  grid-area: center;
-  align-self: center;
+    grid-area: center;
+    align-self: center;
 }
 .card-columns {
-  @include media-breakpoint-only(sm) {
-    column-count: 2;
-  }
-  @include media-breakpoint-only(lg) {
-    column-count: 3;
-  }
-  @include media-breakpoint-only(xl) {
-    column-count: 4;
-  }
+    @include media-breakpoint-only(sm) {
+        column-count: 2;
+    }
+    @include media-breakpoint-only(lg) {
+        column-count: 3;
+    }
+    @include media-breakpoint-only(xl) {
+        column-count: 4;
+    }
 }
 .star-rating {
-  direction: rtl;
-  display: block;
+    direction: rtl;
+    display: block;
 }
 .star-rating div {
-  display: inline-block;
-  font-size: 15px;
-  -webkit-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-  cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
 }
 .star-yellow,
 .star-rating div:hover,
 .star-rating div:hover ~ div {
-  color: #f2b600
+    color: #f2b600
 }
 .hover_img a { position:relative; }
 .hover_img a span { position:absolute; display:none; z-index:99; }
 .hover_img a:hover span { display:block; }
 
 /*Services area CSS*/
-.services-area{}
-.service-wrapper{}
 .service-box {
-  padding-left: 55px;
-  position: relative;
+    padding-left: 55px;
+    position: relative;
 }
+
 .service-icon {
-  font-size: 30px;
-  left: 0;
-  position: absolute;
-  top: -5px;
+    font-size: 30px;
+    left: 0;
+    position: absolute;
+    top: -5px;
+    color: #0cb4ce;
+
 }
-.service-icon i {
-  color: #0cb4ce;
-}
-.service-content {
-}
+
 .service-content h4 {
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-  letter-spacing: .7px;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    letter-spacing: .7px;
 }
 .service-content p {
-  font-size: 13px;
-  margin: 0;
+    font-size: 13px;
+    margin: 0;
 }
 
 /*Testimonial area CSS*/
 
 .testimonial {
-    background: rgba(0, 0, 0, 0) url("img/section-parallax.jpg") no-repeat fixed 50% 50% / cover ;
+    background: rgba(0, 0, 0, 0) url("images/site/section-parallax.jpg") no-repeat fixed 50% 50% / cover ;
     padding-top: 80px;
     padding-bottom: 70px;
     position: relative;
-  }
-  .parallax-overlay {
+}
+
+.parallax-overlay {
     background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;
     bottom: 0;
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
-  }
-  .testimonial-section-title {
+}
+
+.testimonial-section-title {
     text-align: center;
-  }
-  .testimonial-section-title i {
+}
+
+.testimonial-section-title i {
     font-size: 45px;
     line-height: 45px;
     margin: 0 auto 15px;
     text-align: center;
     width: 100%;
-  }
-  .testimonial-section-title h4 {
+}
+
+.testimonial-section-title h4 {
     color: #fff;
     font-size: 25px;
     font-weight: 700;
     letter-spacing: 5px;
     text-align: center;
-  }
-  .single-testimonial {
+}
+
+.single-testimonial {
     color: #fff;
     text-align: center;
-  }
-  .single-testimonial p {
+}
+
+.single-testimonial p {
     color: #ccc;
     margin: 15px auto;
     width: 70%;
-  }
-  .single-testimonial h5{
+}
+
+.single-testimonial h5{
     color: #fff;
-  }
+}
+
+/*Portfolio area CSS*/
+.portfolio-box {
+    position: relative;
+}
+.portfolio-box::before {
+    background: #000 none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: all 0.4s ease 0s;
+    width: 100%;
+}
+.portfolio-box:hover::before{
+    background: #000 none repeat scroll 0 0;
+    opacity: 0.4;
+    cursor: pointer;
+}
+.portfolio-box .portfolio-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    right: 0;
+    transition: all 0.3s ease 0s;
+    visibility: hidden;
+    position: absolute;
+    background: rgba(255,255,255,0.8);
+    padding: 15px;
+}
+.portfolio-box:hover .portfolio-content{
+    visibility: visible;
+    opacity: 1;
+    z-index: 999;
+}
+.portfolio-box:hover .portfolio-content h4{
+    color: #fff;
+}
+.portfolio-box img {
+    width: 100%;
+}
+.portfolio-content h4 {
+    color: #f6f6f6;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+.portfolio-content p {
+    color: #fff;
+    font-size: 13px;
+    padding: 5px 0;
+}
+.portfolio-menu {
+    margin: 0 0 35px;
+    text-align: center;
+}
+.button-group.filter-button-group > button {
+    background: #303133 none repeat scroll 0 0;
+    border: #303133 solid 1px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 0 5px 10px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    transition: all 0.4s ease 0s;
+}
+.button-group.filter-button-group > button:hover{
+    color: #0cb4ce;
+}
+
+.button-group.filter-button-group > button.active{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #0cb4ce;
+    color: #0cb4ce;
+    cursor: pointer;
+}
+/*Contact Us CSS*/
+.contact-details div {
+    text-align: center;
+}
+.contact-details span.contact-icon {
+    background: #eee none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    color: #222;
+    font-size: 30px;
+    height: 60px;
+    line-height: 60px;
+    margin-bottom: 15px;
+    padding-bottom: 18px;
+    width: 60px;
+    transition: .4s;
+    display: inline-block;
+}
+.contact-box span.contact-icon:hover {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #0cb4ce;
+    color: #0cb4ce;
+    cursor: pointer;
+}
+.contact-details h3 {
+    font-size: 17px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.contact-box a {
+    color: #7e7e7e;
+}
+
+.form-control {
+    border: 1px solid #cccccc;
+    border-radius: 0;
+    box-shadow: none;
+    height: 50px;
+}
+.form-control:focus {
+    border-color: inherit;
+    box-shadow: none;
+}
+textarea.form-control {
+    height: auto;
+}
+.submit-btn {
+    border: 1px solid #000;
+    border-radius: 0;
+    color: #000;
+    font-weight: 600;
+    margin: 0;
+    padding: 10px 25px;
+}
+.submit-btn:hover {
+    color: #000;
+    background: #0cb4ce;
+}
+#map{
+    height: 330px;
+}
+
+/*Footer*/
+.gray-bg {
+    background: #f6f6f6 none repeat scroll 0 0;
+}
+.footer-logo {
+    display: inline-block;
+}
+.footer-logo a h5 {
+    font-weight: 600;
+    font-size: 25px;
+    letter-spacing: 5px;
+    transition: .4s;
+}
+.footer-logo:hover a h5{
+    color: #0cb4ce;
+}
+.footer-social-icon a {
+    background: #252525 none repeat scroll 0 0;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    height: 35px;
+    line-height: 34px;
+    margin: 0 5px;
+    text-align: center;
+    width: 35px;
+    transition: .4s;
+}
+.footer-social-icon a:hover{
+    color: #0cb4ce;
+}
+.copyright p {
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin: 0;
+}
+#scrollUp {
+    background: #555 none repeat scroll 0 0;
+    border-radius: 50px;
+    bottom: 20px;
+    font-size: 25px;
+    padding: 5px 15px;
+    right: 20px;
+    transition: all 0.4s ease 0s;
+}
+a#scrollUp i{
+    color: white;
+    transition: all 0.4s ease 0s;
+}
+a#scrollUp:hover i{
+    color: #0cb4ce;
+}
+.mobile-menu-area.hidden-sm.hidden-md.hidden-lg {
+    margin-top: 20px;
+}
+
+.image-source-link {
+	color: #98C3D1;
+}
