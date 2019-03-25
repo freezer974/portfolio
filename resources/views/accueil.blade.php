@@ -535,6 +535,327 @@
     </div>
 @endsection
 @section('script')
+
+    <script>
+
+    window.onload = function () {
+        // jQuery and everything else is loaded
+        $(document).ready(function() {
+
+            $('body').css('margin-top', 0);
+
+            $('.site-wrapper').fadeOut(1000)
+
+            $('[data-toggle="tooltip"]').tooltip()
+
+            $('a.toggleIcons').click((e) => {
+                e.preventDefault();
+                let that = $(e.currentTarget)
+                that.next().toggle('slow').end().children().toggleClass('fa-cog').toggleClass('fa-play')
+            })
+
+            $('a.form-delete').click((e) => {
+                e.preventDefault();
+                let href = $(e.currentTarget).attr('href')
+                swal.fire({
+                    title: '@lang('Vraiment supprimer cette photo ?')',
+                    type: 'error',
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: '@lang('Oui')',
+                    cancelButtonText: '@lang('Non')'
+                }).then((result) => {
+                    if (result.value) {
+                        $("form[action='" + href + "'").submit()
+                    }
+                })
+            })
+
+            $('.clip').animatedHeadline()
+        })
+
+        $(window).on('scroll', function () {
+            var scroll = $(window).scrollTop();
+            if (scroll < 15) {
+                $("nav.navbar").removeClass("scroll-header");
+            } else {
+                $("nav.navbar").addClass("scroll-header");
+            }
+        });
+
+            const swallAlertServer = () => {
+                swal.fire({
+                    title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
+                    type: 'warning'
+                })
+            }
+
+            $.ajaxSetup({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+            })
+
+            $('a.description-manage').click((e) => {
+                e.preventDefault()
+                let that = $(e.currentTarget)
+                let text = that.parents('.card').find('.card-text').text()
+                $('#description').val(text)
+                $('#descriptionForm').attr('action', that.attr('href')).find('input').removeClass('is-invalid').next().text()
+                $('#changeDescription').modal('show')
+            })
+
+            $('#descriptionForm').submit((e) => {
+                e.preventDefault()
+                let that = $(e.currentTarget)
+                $.ajax({
+                    method: 'put',
+                    url: that.attr('action'),
+                    data: that.serialize()
+                })
+                .done((data) => {
+                    let card = $('#image' + data.id)
+                    let body = card.find('.card-body')
+                    if(body.length) {
+                        body.children().text(data.description)
+                    } else {
+                        card.children('a').after('<div class="card-body"><p class="card-text">' + data.description + '</p></div>')
+                    }
+                    $('#changeDescription').modal('hide')
+                })
+                .fail((data) => {
+                    if(data.status === 422) {
+                        $.each(data.responseJSON.errors, function (key, value) {
+                            $('#descriptionForm input[name=' + key + ']').addClass('is-invalid').next().text(value)
+                        })
+                    } else {
+                        swallAlertServer()
+                    }
+                })
+            })
+
+            $('a.category-edit').click((e) => {
+                e.preventDefault()
+                let that = $(e.currentTarget)
+                $('select').val(that.attr('data-id'))
+                $('#editForm').attr('action', that.attr('href'))
+                $('#changeCategory').modal('show')
+            })
+
+            $('a.adult-edit').click((e) => {
+                e.preventDefault()
+                let that = $(e.currentTarget)
+                let icon = that.children()
+                let adult = icon.hasClass('fa-graduation-cap')
+                if(adult) {
+                    icon.removeClass('fa-graduation-cap')
+                } else {
+                    icon.removeClass('fa-child')
+                }
+                icon.addClass('fa-cog fa-spin')
+                adult = !adult
+                $.ajax({
+                    method: 'put',
+                    url: that.attr('href'),
+                    data: { adult: adult }
+                })
+                .done(() => {
+                    that.tooltip('hide')
+                    let icon = that.children()
+                    icon.removeClass('fa-cog fa-spin')
+                    let card = that.parents('.card')
+                    if(adult) {
+                        icon.addClass('fa-graduation-cap')
+                        card.addClass('border-danger')
+                    } else {
+                        icon.addClass('fa-child')
+                        card.removeClass('border-danger')
+                    }
+                })
+                .fail(() => {
+                    swallAlertServer()
+                })
+            })
+
+            $('a.albums-manage').click((e) => {
+                e.preventDefault()
+                let that = $(e.currentTarget)
+                that.tooltip('hide')
+                that.children().removeClass('fa-folder-open').addClass('fa-cog fa-spin')
+                e.preventDefault()
+                $.get(that.attr('href'))
+                .done((data) => {
+                    that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                    $('#listeAlbums').html(data)
+                    $('#manageAlbums').attr('action', that.attr('href'))
+                    $('#editAlbums').modal('show')
+                })
+                .fail(() => {
+                    that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                    swallAlertServer()
+                })
+            })
+
+            $('#manageAlbums').submit((e) => {
+                e.preventDefault()
+                let that = $(e.currentTarget)
+                $.ajax({
+                    method: 'put',
+                    url: that.attr('action'),
+                    data: that.serialize()
+                })
+                    .done((data) => {
+                        if(data === 'reload') {
+                            location.reload();
+                        } else {
+                            $('#editAlbums').modal('hide')
+                        }
+                    })
+                    .fail(() => {
+                        swallAlertServer()
+                    })
+            })
+
+            let memoStars = []
+            $('.star-rating div').click((e) => {
+                @auth
+                    let element = $(e.currentTarget)
+                    let values = element.attr('id').split('.')
+                    element.addClass('fa-spin')
+                    $.ajax({
+                        url: "{{ url('rating') }}" + '/' + values[0],
+                        type: 'PUT',
+                        data: {value: values[1]}
+                    })
+                    .done((data) => {
+                        if (data.status === 'ok') {
+                            let image = $('#' + data.id)
+                            memoStars = []
+                            image.children('div')
+                                .removeClass('star-yellow')
+                                .each(function (index, element) {
+                                    if (data.value > 4 - index) {
+                                        $(element).addClass('star-yellow')
+                                        memoStars.push(true)
+                                    }
+                                    memoStars.push(false)
+                                })
+                                .end()
+                                .find('span.count-number')
+                                .text('(' + data.count + ')')
+                            if(data.rate) {
+                                if(data.rate == values[1]) {
+                                    title = '@lang("Vous avez déjà donné cette note !")'
+                                } else {
+                                    title = '@lang("Votre vote a été modifié !")'
+                                }
+                            } else {
+                                title = '@lang("Merci pour votre vote !")'
+                            }
+                            swal.fire({
+                                title: title,
+                                type: 'warning'
+                            })
+                        } else {
+                            swal.fire({
+                                title: '@lang('Vous ne pouvez pas voter pour vos photos !')',
+                                type: 'error'
+                            })
+                        }
+                        element.removeClass('fa-spin')
+                    })
+                    .fail(() => {
+                        swallAlertServer()
+                        element.removeClass('fa-spin')
+                    })
+                @else
+                    swal.fire({
+                        title: '@lang('Vous devez être connecté pour pouvoir voter !')',
+                        type: 'error'
+                    })
+                @endauth
+            })
+
+            $('.star-rating').hover(
+                (e) => {
+                    memoStars = []
+                    $(e.currentTarget).children('div')
+                        .each((index, element) => {
+                            memoStars.push($(element).hasClass('star-yellow'))
+                        })
+                        .removeClass('star-yellow')
+                }, (e) => {
+                $.each(memoStars, (index, value) => {
+                    if(value) {
+                        $(e.currentTarget).children('div:eq(' + index + ')').addClass('star-yellow')
+                    }
+                })
+            })
+
+            $(".go-down").on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - $("nav.navbar").height()
+                    }, 800, function(){
+                        window.location.hash = hash;
+                    });
+                }
+            })
+
+            $('.counter').counterUp({
+                delay: .8,
+                time: 150
+            })
+
+            $('.carousel').carousel();
+
+            $('.grid').imagesLoaded( function() {
+                var $grid = $('.grid').isotope({
+                    itemSelector: '.grid-item',
+                    percentPosition: true,
+                    masonry: {
+                    // use outer width of grid-sizer for columnWidth
+                    columnWidth: '.grid-item'
+                    }
+                });
+                // filter items on button click
+                $('.filter-button-group').on( 'click', 'button', function() {
+                    $('.button-group > button').removeClass('active');
+                    $(this).addClass('active');
+
+                    var filterValue = $(this).attr('data-filter');
+                    $grid.isotope({ filter: filterValue });
+                });
+            });
+
+            $('.gallery').magnificPopup({
+                delegate: ':not(.isotope-hidden) a.img-link',
+                type: 'image',
+                mainClass: 'mfp-fade',
+                removalDelay: 160,
+                preloader: false,
+                fixedContentPos: false,
+                gallery: {
+                    enabled:true
+                }
+            })
+
+            $('a.image-link').click((e) => {
+                e.preventDefault()
+                let that = $(e.currentTarget)
+                console.log(that)
+                $.ajax({
+                    method: 'patch',
+                    url: that.attr('data-link')
+                }).done((data) => {
+                    if(data.increment) {
+                        let numberElement = that.siblings('div.portfolio-content').find('.image-click')
+                        numberElement.text(parseInt(numberElement.text()) + 1)
+                    }
+                })
+            })
+        }
+    </script>
     <!--    Google Maps-->
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_KEY') }}" ></script>
     <script>
@@ -574,324 +895,5 @@
             });
         }
     </script>
-    <script>
 
-window.onload = function () {
-    // jQuery and everything else is loaded
-    $(document).ready(function() {
-
-        $('body').css('margin-top', 0);
-
-        $('.site-wrapper').fadeOut(1000)
-
-        $('[data-toggle="tooltip"]').tooltip()
-
-        $('a.toggleIcons').click((e) => {
-            e.preventDefault();
-            let that = $(e.currentTarget)
-            that.next().toggle('slow').end().children().toggleClass('fa-cog').toggleClass('fa-play')
-        })
-
-        $('a.form-delete').click((e) => {
-            e.preventDefault();
-            let href = $(e.currentTarget).attr('href')
-            swal.fire({
-                title: '@lang('Vraiment supprimer cette photo ?')',
-                type: 'error',
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: '@lang('Oui')',
-                cancelButtonText: '@lang('Non')'
-            }).then((result) => {
-                if (result.value) {
-                    $("form[action='" + href + "'").submit()
-                }
-            })
-        })
-
-        $('.clip').animatedHeadline()
-    })
-
-    $(window).on('scroll', function () {
-        var scroll = $(window).scrollTop();
-        if (scroll < 15) {
-            $("nav.navbar").removeClass("scroll-header");
-        } else {
-            $("nav.navbar").addClass("scroll-header");
-        }
-    });
-
-        const swallAlertServer = () => {
-            swal.fire({
-                title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
-                type: 'warning'
-            })
-        }
-
-        $.ajaxSetup({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-        })
-
-        $('a.description-manage').click((e) => {
-            e.preventDefault()
-            let that = $(e.currentTarget)
-            let text = that.parents('.card').find('.card-text').text()
-            $('#description').val(text)
-            $('#descriptionForm').attr('action', that.attr('href')).find('input').removeClass('is-invalid').next().text()
-            $('#changeDescription').modal('show')
-        })
-
-        $('#descriptionForm').submit((e) => {
-            e.preventDefault()
-            let that = $(e.currentTarget)
-            $.ajax({
-                method: 'put',
-                url: that.attr('action'),
-                data: that.serialize()
-            })
-            .done((data) => {
-                let card = $('#image' + data.id)
-                let body = card.find('.card-body')
-                if(body.length) {
-                    body.children().text(data.description)
-                } else {
-                    card.children('a').after('<div class="card-body"><p class="card-text">' + data.description + '</p></div>')
-                }
-                $('#changeDescription').modal('hide')
-            })
-            .fail((data) => {
-                if(data.status === 422) {
-                    $.each(data.responseJSON.errors, function (key, value) {
-                        $('#descriptionForm input[name=' + key + ']').addClass('is-invalid').next().text(value)
-                    })
-                } else {
-                    swallAlertServer()
-                }
-            })
-        })
-
-        $('a.category-edit').click((e) => {
-            e.preventDefault()
-            let that = $(e.currentTarget)
-            $('select').val(that.attr('data-id'))
-            $('#editForm').attr('action', that.attr('href'))
-            $('#changeCategory').modal('show')
-        })
-
-        $('a.adult-edit').click((e) => {
-            e.preventDefault()
-            let that = $(e.currentTarget)
-            let icon = that.children()
-            let adult = icon.hasClass('fa-graduation-cap')
-            if(adult) {
-                icon.removeClass('fa-graduation-cap')
-            } else {
-                icon.removeClass('fa-child')
-            }
-            icon.addClass('fa-cog fa-spin')
-            adult = !adult
-            $.ajax({
-                method: 'put',
-                url: that.attr('href'),
-                data: { adult: adult }
-            })
-            .done(() => {
-                that.tooltip('hide')
-                let icon = that.children()
-                icon.removeClass('fa-cog fa-spin')
-                let card = that.parents('.card')
-                if(adult) {
-                    icon.addClass('fa-graduation-cap')
-                    card.addClass('border-danger')
-                } else {
-                    icon.addClass('fa-child')
-                    card.removeClass('border-danger')
-                }
-            })
-            .fail(() => {
-                swallAlertServer()
-            })
-        })
-
-        $('a.albums-manage').click((e) => {
-            e.preventDefault()
-            let that = $(e.currentTarget)
-            that.tooltip('hide')
-            that.children().removeClass('fa-folder-open').addClass('fa-cog fa-spin')
-            e.preventDefault()
-            $.get(that.attr('href'))
-            .done((data) => {
-                that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
-                $('#listeAlbums').html(data)
-                $('#manageAlbums').attr('action', that.attr('href'))
-                $('#editAlbums').modal('show')
-            })
-            .fail(() => {
-                that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
-                swallAlertServer()
-            })
-        })
-
-        $('#manageAlbums').submit((e) => {
-            e.preventDefault()
-            let that = $(e.currentTarget)
-            $.ajax({
-                method: 'put',
-                url: that.attr('action'),
-                data: that.serialize()
-            })
-                .done((data) => {
-                    if(data === 'reload') {
-                        location.reload();
-                    } else {
-                        $('#editAlbums').modal('hide')
-                    }
-                })
-                .fail(() => {
-                    swallAlertServer()
-                })
-        })
-
-        let memoStars = []
-        $('.star-rating div').click((e) => {
-            @auth
-                let element = $(e.currentTarget)
-                let values = element.attr('id').split('.')
-                element.addClass('fa-spin')
-                $.ajax({
-                    url: "{{ url('rating') }}" + '/' + values[0],
-                    type: 'PUT',
-                    data: {value: values[1]}
-                })
-                .done((data) => {
-                    if (data.status === 'ok') {
-                        let image = $('#' + data.id)
-                        memoStars = []
-                        image.children('div')
-                            .removeClass('star-yellow')
-                            .each(function (index, element) {
-                                if (data.value > 4 - index) {
-                                    $(element).addClass('star-yellow')
-                                    memoStars.push(true)
-                                }
-                                memoStars.push(false)
-                            })
-                            .end()
-                            .find('span.count-number')
-                            .text('(' + data.count + ')')
-                        if(data.rate) {
-                            if(data.rate == values[1]) {
-                                title = '@lang("Vous avez déjà donné cette note !")'
-                            } else {
-                                title = '@lang("Votre vote a été modifié !")'
-                            }
-                        } else {
-                            title = '@lang("Merci pour votre vote !")'
-                        }
-                        swal.fire({
-                            title: title,
-                            type: 'warning'
-                        })
-                    } else {
-                        swal.fire({
-                            title: '@lang('Vous ne pouvez pas voter pour vos photos !')',
-                            type: 'error'
-                        })
-                    }
-                    element.removeClass('fa-spin')
-                })
-                .fail(() => {
-                    swallAlertServer()
-                    element.removeClass('fa-spin')
-                })
-            @else
-                swal.fire({
-                    title: '@lang('Vous devez être connecté pour pouvoir voter !')',
-                    type: 'error'
-                })
-            @endauth
-        })
-
-        $('.star-rating').hover(
-            (e) => {
-                memoStars = []
-                $(e.currentTarget).children('div')
-                    .each((index, element) => {
-                        memoStars.push($(element).hasClass('star-yellow'))
-                    })
-                    .removeClass('star-yellow')
-            }, (e) => {
-            $.each(memoStars, (index, value) => {
-                if(value) {
-                    $(e.currentTarget).children('div:eq(' + index + ')').addClass('star-yellow')
-                }
-            })
-        })
-
-        $(".go-down").on('click', function(event) {
-            if (this.hash !== "") {
-                event.preventDefault();
-                var hash = this.hash;
-                $('html, body').animate({
-                    scrollTop: $(hash).offset().top - $("nav.navbar").height()
-                }, 800, function(){
-                    window.location.hash = hash;
-                });
-            }
-        })
-
-        $('.counter').counterUp({
-            delay: .8,
-            time: 150
-        })
-
-        $('.carousel').carousel();
-
-        $('.grid').imagesLoaded( function() {
-            var $grid = $('.grid').isotope({
-                itemSelector: '.grid-item',
-                percentPosition: true,
-                masonry: {
-                // use outer width of grid-sizer for columnWidth
-                columnWidth: '.grid-item'
-                }
-            });
-            // filter items on button click
-            $('.filter-button-group').on( 'click', 'button', function() {
-                $('.button-group > button').removeClass('active');
-                $(this).addClass('active');
-
-                var filterValue = $(this).attr('data-filter');
-                $grid.isotope({ filter: filterValue });
-            });
-        });
-
-        $('.gallery').magnificPopup({
-            delegate: ':not(.isotope-hidden) a.img-link',
-            type: 'image',
-            mainClass: 'mfp-fade',
-            removalDelay: 160,
-            preloader: false,
-            fixedContentPos: false,
-            gallery: {
-                enabled:true
-            }
-        })
-
-        $('a.image-link').click((e) => {
-            e.preventDefault()
-            let that = $(e.currentTarget)
-            console.log(that)
-            $.ajax({
-                method: 'patch',
-                url: that.attr('data-link')
-            }).done((data) => {
-                if(data.increment) {
-                    let numberElement = that.siblings('div.portfolio-content').find('.image-click')
-                    numberElement.text(parseInt(numberElement.text()) + 1)
-                }
-            })
-        })
-    }
-    </script>
 @endsection
