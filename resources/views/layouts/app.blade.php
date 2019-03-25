@@ -10,19 +10,19 @@
     @yield('css')
 </head>
 <body>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ route('home') }}" title="{{ config('app.name', 'Album') }}"><img src="{!! asset('images/logo/logo-tatoumi-creation.png') !!}" alt="" class="logo-navbar mb-2"></a>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="{{ route('home') }}" title="{{ config('app.name', 'Album') }}"><img src="{!! asset('images/logo/logo-tatoumi-creation.png') !!}" alt="" class="logo-navbar mb-2 js-scroll-trigger"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             @if(currentRoute(route('home')))
-                <li class="nav-item "><a class="nav-link" href="#about">À propos</a></li>
-                <li class="nav-item "><a class="nav-link" href="#service">Services</a></li>
-                <li class="nav-item "><a class="nav-link" href="#testimonial">Témoignages</a></li>
-                <li class="nav-item "><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                <li class="nav-item "><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#about">À propos</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#service">Services</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#testimonial">Témoignages</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
             @endif
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle
