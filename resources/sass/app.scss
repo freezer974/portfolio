@@ -41,7 +41,7 @@ body{
   }
 
 .single-slider {
-    background: rgba(0, 0, 0, 0) url('images/site/banner1.jpg') repeat scroll center top;
+    background: rgba(0, 0, 0, 0) url('/images/site/banner1.jpg') repeat scroll center top;
     background-position: center top;
     background-size: cover!important;
     height: 100vh;
@@ -187,7 +187,7 @@ a:hover {
 }
 
 .testimonial {
-    background: rgba(0, 0, 0, 0) url("images/site/section-parallax.jpg") no-repeat fixed 50% 50% / cover ;
+    background: rgba(0, 0, 0, 0) url("/images/site/section-parallax.jpg") no-repeat fixed 50% 50% / cover ;
     padding-top: 80px;
     padding-bottom: 70px;
     position: relative;
