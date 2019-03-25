@@ -20,7 +20,7 @@
                 <br>
             </div>
             <div class="form-group">
-                <img id="preview" class="img-fluid" src="#" alt="">
+                <img id="preview" class="img-fluid d-none" src="#" alt="">
             </div>
             <div class="form-group">
                 <label for="category_id">@lang('Catégorie')</label>
@@ -57,7 +57,7 @@
                     $(that).next('.custom-file-label').html(that.files[0].name)
                     let reader = new FileReader()
                     reader.onload = (e) => {
-                        $('#preview').attr('src', e.target.result)
+                        $('#preview').attr('src', e.target.result).removeClass('d-none');
                     }
                     reader.readAsDataURL(that.files[0])
                 }

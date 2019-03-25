@@ -25,7 +25,7 @@
                             <b>Coaching</b>
                         </span>
                     </h2>
-                    <button type="button" class="btn btn-outline-light">Contactez-moi</button>
+                    <a href="#contact" role="button" class="btn btn-outline-light js-scroll-trigger">Contactez-moi</a>
                 </div>
                 <div>
                     <ul class="navigation">
@@ -53,7 +53,7 @@
                     <div class="success-story">
                         <h2>Nous avons quelques Success Story</h2>
                         <p>Fort de 15 ans d'expériences dans l'infographie et le web, j'ai su mettre mes compétences aux services d'entreprises, de professionnels et de particuliers, afin de réaliser des produits pour promouvoir leur image et prestations au sein de la société réunionnaise et francophone.</p>
-						<p class="hidden-sm hidden-sm">Je souhaites vous faire profiter de ses années d'expériences en réalisant vos projets par un suivi rigoureux, des conseils judicieux, un excécution rapide afin de vous fournir dans les meilleurs délais vos travaux graphiques ou web. Je suis aussi engagé pour le respect de l'environnement pour cela vos travaux et sites internet que j'héberges sont stockés sur des serveurs écologiques.</p>
+						<p class="hidden-sm">Je souhaite vous faire profiter de ses années d'expériences en réalisant vos projets par un suivi rigoureux, des conseils judicieux, une exécution rapide afin de vous fournir dans les meilleurs délais vos travaux graphiques ou web. Je suis aussi engagé pour le respect de l'environnement pour cela vos travaux et sites internet que j'héberge sont stockés sur des serveurs écologiques.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
@@ -105,8 +105,8 @@
                 <h3>Nous sommes prêts pour vos projets.</h3>
             </div>
             <div class="mt-3">
-                <a href="#contact" class="btn btn-outline-light mx-2">Demandez un devis</a>
-                <a class="btn btn-outline-light mx-2" href="#contact">Contactez-moi</a>
+                <a href="#contact" class="btn btn-outline-light mx-2 js-scroll-trigger">Demandez un devis</a>
+                <a href="#contact" class="btn btn-outline-light mx-2 js-scroll-trigger">Contactez-moi</a>
             </div>
         </div>
     </div>
@@ -118,9 +118,7 @@
 				<div class="col-md-3 col-sm-12 mb-3">
 					<div class="text-left">
 							<h2>Le processus</h2>
-							<div class="devider">
-								<hr>
-							</div>
+							<hr>
 							<p>Pour un meilleur rapport qualité / prix, et une meilleure rapidité d'exécution, voici comment nous travaillons avec vous.</p>
 					</div>
 				</div>
@@ -166,9 +164,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
-                    <div class="pb-5 text-white">
+                    <div class="text-white">
                         <h2>Facteurs intéressants</h2>
                         <p class="para">La synergie de création utilise un capital intellectuel initiant des clics et du matériel performant.</p>
+                        <hr class="mx-auto col-4 my-5 bg-light">
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 mb-3">
@@ -204,7 +203,7 @@
     </div>
     <!--counter area start-->
     <!--  Services Area start-->
-    <div id="service" class="services-area pt-5 pb-2 bg-light">
+    <div id="service" class="services-area py-5 bg-light">
         <div class="container">
            <div class="section-title text-center upcase">
                <h2>Services</h2>
@@ -212,7 +211,7 @@
                <hr class="mx-auto col-4 my-5">
            </div>
             <div class="row">
-                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4 mb-3">
+                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-6 mb-3">
                     <div class="service-box">
                         <div class="service-icon">
                             <i class="fa fa-desktop"></i>
@@ -223,7 +222,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4 mb-3">
+                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-6 mb-3">
                     <div class="service-box">
                         <div class="service-icon">
                             <i class="fa fa-code"></i>
@@ -234,7 +233,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4 mb-3">
+                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-6 mb-3">
                     <div class="service-box">
                         <div class="service-icon">
                             <i class="fa fa-user"></i>
@@ -245,7 +244,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4 mb-3">
+                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-6 mb-3">
                     <div class="service-box">
                         <div class="service-icon">
                             <i class="fa fa-mobile-alt"></i>
@@ -256,7 +255,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4 mb-3">
+                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-6 mb-3">
                     <div class="service-box">
                         <div class="service-icon">
                             <i class="fa fa-pen-square"></i>
@@ -267,7 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4 mb-3">
+                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-6 mb-3">
                     <div class="service-box">
                         <div class="service-icon">
                             <i class="fa fa-chart-pie"></i>
@@ -278,7 +277,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4 mb-3">
+                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-6 mb-3">
                     <div class="service-box">
                         <div class="service-icon">
                             <i class="fa fa-envelope-open"></i>
@@ -289,7 +288,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4 mb-3">
+                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-6 mb-3">
                     <div class="service-box">
                         <div class="service-icon">
                             <i class="fa fa-umbrella"></i>
@@ -300,7 +299,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
+                <div class="col-lg-4 col-sm-6 col-xs-12 col-md-6 mb-3">
                     <div class="service-box">
                         <div class="service-icon">
                             <i class="fab fa-weixin"></i>
@@ -316,21 +315,22 @@
     </div>
     <!--  Services Area End-->
     <!--  Testimonial Area start-->
-    <div id="testimonial" class="testimonial">
+    <div id="testimonial" class="testimonial bd-grey">
         <div class="parallax-overlay"></div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
                     <div class="testimonial-section-title">
-                        <i class="fa fa-quote-right"></i>
+                        <i class="fa fa-quote-right fa-3x text-info"></i>
                         <h4>Ce que les gens disent</h4>
+                        <hr class="mx-auto col-4 my-5 bg-light">
                     </div>
-                    <div class="testimonial-active owl-carousel">
-                        <div class="single-testimonial">
+                    <div class="testimonial-active carousel slide" data-ride="carousel">
+                        <div class="single-testimonial carousel-item active">
                             <p>Beau travail, rapide et éfficace. A l'écoute dans la demande du client, suivi de la demande du client et de ses exigences, force de propositions et de créativité.</p>
                             <h5> par <strong>Mme Marie-France Ah-sing</strong></h5>
                         </div>
-                        <div class="single-testimonial">
+                        <div class="single-testimonial carousel-item">
                             <p>De bon conseil, généreux, patient. Respectieux de mes exgigences, vous avez su fournir un travail remarquable, votre professionnalisme à permis de structurer ma demande.</p>
                             <h5> par <strong>Mme Annick Veloupoullé </strong></h5>
                         </div>
@@ -341,7 +341,7 @@
     </div>
     <!--  Testimonial Area end-->
     <!--Home Portfolio Start -->
-    <div id="portfolio" class="portfolio-area pt-5">
+    <div id="portfolio" class="portfolio-area pt-5 bg-light">
         <div class="container-fluid">
             <div class="section-title text-center upcase">
                 <h2>Portfolio</h2>
@@ -351,90 +351,102 @@
                <div class="portfolio-menu">
                    <div class="button-group filter-button-group">
                       <button data-filter="*">Tout</button>
-                      <button data-filter=".cat1">Conception graphique</button>
-                      <button data-filter=".cat2">Photoshop</button>
-                      <button data-filter=".cat3">Développement web</button>
-                      <button data-filter=".cat4">Photographie</button>
-                      <button data-filter=".cat5">Entrepreneur</button>
+                        @foreach($categories as $category)
+                            <button data-filter=".cat{{ $category->id }}">{{ $category->name }}</button>
+                        @endforeach
                     </div>
                </div>
-            <div class="row">
-                <div class="portfolio-wrapper">
-                    <div class="grid">
-                        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 cat1 cat5 cat3 cat2 grid-item p-0">
+            <div class="grid gallery row">
+                @foreach($images as $image)
+                    <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 cat{{ $image->category_id }} grid-item p-0">
                         <div class="portfolio-box">
                             <div class="portfolio-img">
-                                <a href="#"><img src="img/portfolio/1.jpg" alt=""></a>
+                                <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}"><img src="{{ url('thumbs/' . $image->name) }}" alt="image"></a>
                             </div>
                             <div class="portfolio-content">
-                                <a href=""><h4>Calendrier souple A4</h4></a>
-                                <a href=""><p>fait par TC</p></a>
+                                <a href="{{ url('images/' . $image->name) }}"><h4>{{ $image->description }}</h4></a>
+                                @isset($image->description)
+                                        <p class="text-muted">{{ $image->description }}</p>
+                                @endisset
+                                <em>fait par <a href="{{ route('user', $image->user->id) }}" data-toggle="tooltip" title="{{ __('Voir les photos de ') . $image->user->name }}">{{ $image->user->name }}</a></em>
+                                <div class="float-right">
+                                    <em>
+                                        (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }}) {{ $image->created_at->formatLocalized('%x') }}
+                                    </em>
+                                </div>
+                                <div class="star-rating" id="{{ $image->id }}">
+                                    <span class="count-number">({{ $image->users->count() }})</span>
+                                    <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div id="{{ $image->id . '.4' }}" data-toggle="tooltip" title="4" @if($image->rate > 3) class="star-yellow" @endif>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div id="{{ $image->id . '.3' }}" data-toggle="tooltip" title="3" @if($image->rate > 2) class="star-yellow" @endif>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div id="{{ $image->id . '.2' }}" data-toggle="tooltip" title="2" @if($image->rate > 1) class="star-yellow" @endif>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div id="{{ $image->id . '.1' }}" data-toggle="tooltip" title="1" @if($image->rate > 0) class="star-yellow" @endif>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="float-right">
+                                        @adminOrOwner($image->user_id)
+                                        <a class="toggleIcons"
+                                            href="#">
+                                        <i class="fa fa-cog"></i>
+                                        </a>
+                                        <span class="menuIcons" style="display: none">
+                                            <a class="form-delete text-danger"
+                                                href="{{ route('image.destroy', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Supprimer cette photo')">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <a class="description-manage"
+                                                href="{{ route('image.description', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Gérer la description')">
+                                                <i class="fa fa-comment"></i>
+                                            </a>
+                                            <a class="albums-manage"
+                                                href="{{ route('image.albums', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Gérer les albums')">
+                                                <i class="fa fa-folder-open"></i>
+                                            </a>
+                                            <a class="category-edit"
+                                                data-id="{{ $image->category_id }}"
+                                                href="{{ route('image.update', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Changer de catégorie')">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="adult-edit"
+                                                href="{{ route('image.adult', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Changer de statut')">
+                                                <i class="fa @if($image->adult) fa-graduation-cap @else fa-child @endif"></i>
+                                            </a>
+                                        </span>
+                                        <form action="{{ route('image.destroy', $image->id) }}" method="POST" class="hide">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                        @endadminOrOwner
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 cat1 grid-item p-0">
-                        <div class="portfolio-box">
-                            <div class="portfolio-img">
-                                <a href="#"><img src="img/portfolio/2.jpg?=" alt=""></a>
-                            </div>
-                            <div class="portfolio-content">
-                                <a href=""><h4>Calendrier carton A4</h4></a>
-                                <a href=""><p>fait par TC</p></a>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 cat2 cat5 cat4 grid-item p-0">
-                        <div class="portfolio-box">
-                            <div class="portfolio-img">
-                                <a href="#"><img src="img/portfolio/3.jpg" alt=""></a>
-                            </div>
-                            <div class="portfolio-content">
-                                <a href=""><h4>Déplaint en Z A4</h4></a>
-                                <a href=""><p>fait par TC</p></a>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 cat1 cat3 grid-item p-0">
-                        <div class="portfolio-box">
-                            <div class="portfolio-img">
-                                <a href="#"><img src="img/portfolio/4.jpg" alt=""></a>
-                            </div>
-                            <div class="portfolio-content">
-                                <a href=""><h4>Dépliant roulé 150x210mm</h4></a>
-                                <a href=""><p>fait par TC</p></a>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 cat3 cat5 grid-item p-0">
-                        <div class="portfolio-box">
-                            <div class="portfolio-img">
-                                <a href="#"><img src="img/portfolio/5.jpg" alt=""></a>
-                            </div>
-                            <div class="portfolio-content">
-                                <a href=""><h4>Brochure A4</h4></a>
-                                <a href=""><p>fait par TC</p></a>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 cat1 cat4 cat2 grid-item p-0">
-                        <div class="portfolio-box">
-                            <div class="portfolio-img">
-                                <a href="#"><img src="img/portfolio/6.jpg" alt=""></a>
-                            </div>
-                            <div class="portfolio-content">
-                                <a href=""><h4>Etiquette 50x50</h4></a>
-                                <a href=""><p>retouché par TC</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
     <!--Portfolio end-->
     <!--Contact Us area-->
-    <div id="contact" class="contact-area pt-5 pb-3">
+    <div id="contact" class="contact-area pt-5 pb-3 bg-white">
         <div class="container">
             <div class="section-title text-center upcase">
                 <h2>Contactez Moi</h2>
@@ -443,63 +455,54 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
-                    <div class="contact-details">
-                        <div class="col-sm-3 mb-3">
+                    <div class="contact-details d-flex">
+                        <div class="col-sm-4 mb-5">
                             <div class="contact-box">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <h3>Addresse</h3>
-                                <p>220, chemin valentin, Saint-André</p>
+                                <span class="contact-icon">
+                                    <i class="fa fa-map-marker" aria-hidden="true" class="p-3"></i>
+                                </span>
+                                <h3>Adresse</h3>
+                                <p>574 rocade sud, 97440, Saint-André</p>
                             </div>
                         </div>
-                        <div class="col-sm-3 mb-3">
+                        <div class="col-sm-4 mb-5">
                             <div class="contact-box">
-                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                <span class="contact-icon">
+                                    <i class="fa fa-envelope" aria-hidden="true"  class="p-3"></i>
+                                </span>
                                 <h3>Email</h3>
-                                <p><a href="mailto:support@dbuggers.com">contact@tatoumi.com</a></p>
+                                <p><a href="mailto:contact@tatoumi.com">contact@tatoumi.com</a></p>
                             </div>
                         </div>
-                        <div class="col-sm-3 mb-3">
+                        <div class="col-sm-4 mb-5">
                             <div class="contact-box">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                <h3>Numéro de contact</h3>
-                                <p>(+262) 692 24 84 33</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 mb-3">
-                            <div class="contact-box">
-                                <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+                                <span class="contact-icon">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </span>
                                 <h3>Service Client</h3>
-                                <p>(+262) ‭262 83 27 54‬</p>
+                                <p>(+262) 692 24 84 33</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
                     <form action="#">
-                        <div class="contact-form">
-						  <div class="form-group">
-							<div class="col-sm-6 mb-30">
-							  <input type="text" class="form-control" placeholder="Votre nom">
-							</div>
-							<div class="col-sm-6 mb-30">
-							  <input type="email" class="form-control" placeholder="Votre email">
-							</div>
-						  </div>
-						  <div class="form-group">
-							<div class="col-sm-12 mb-30">
-							  <input type="text" class="form-control" placeholder="Numéro de téléphone">
-							</div>
-						  </div>
-						  <div class="form-group">
-							<div class="col-sm-12 mb-30">
-							  <textarea class="form-control" rows="3" placeholder="Votre message"></textarea>
-							</div>
-						  </div>
-						  <div class="form-group">
-							<div class="col-sm-12">
-								<button class="btn default-btn submit-btn" type="submit">Envoyer</button>
-							</div>
-						  </div>
+                        <div class="form-row">
+                            <div class="col-sm-6 mb-3 form-group">
+                                <input type="text" class="form-control" placeholder="Votre nom">
+                            </div>
+                            <div class="col-sm-6 mb-3 form-group">
+                                <input type="email" class="form-control" placeholder="Votre email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Numéro de téléphone">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" placeholder="Votre message"></textarea>
+                        </div>
+                        <div class="form-group col-6 mx-auto">
+                            <button class="btn submit-btn col" type="submit">Envoyer</button>
                         </div>
                     </form>
                 </div>
@@ -511,19 +514,19 @@
     </div>
     <!--Contact US end-->
     <!-- Footer start-->
-    <div class="foter-area">
+    <div class="footer-area">
         <footer>
-			<div class="basic-footer text-center gray-bg ptb-20">
+			<div class="basic-footer text-center gray-bg py-2">
 				<div class="container">
 					<div class="footer-logo">
 						<a href="index.html"><h5>Tatoumi Création</h5></a>
 					</div>
                     <div class="footer-social-icon">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"> <i class="fa fa-google-plus"></i></a>
+                                    <a href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                    <a href="https://twitter.com/ChevalierTony"><i class="fab fa-twitter fa-lg"></i></a>
+                                    <a href="https://www.linkedin.com/in/tonychevalier974/"> <i class="fab fa-linkedin-in fa-lg"></i></a>
                     </div>
-					<div class="copyright mt-10">
+					<div class="copyright mt-2">
 						<p>&copy; Tous droits réservés par <a href="tatoumi.com">Tatoumi Création</a> 2018</p>
 					</div>
 				</div>
@@ -532,63 +535,379 @@
     </div>
 @endsection
 @section('script')
-
-
     <!--    Google Maps-->
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_KEY') }}" ></script>
-		<script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_KEY') }}" ></script>
+    <script>
 
-            $('.site-wrapper').fadeOut(1000)
+        // When the window has finished loading create our google map below
+        google.maps.event.addDomListener(window, 'load', init);
 
-            $(".go-down").on('click', function(event) {
-                if (this.hash !== "") {
+        function init() {
+            // Basic options for a simple Google Map
+            // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+            var mapOptions = {
+                // How zoomed in you want the map to start at (always required)
+                zoom: 11,
+
+                scrollwheel: false,
+
+                // The latitude and longitude to center the map (always required)
+                center: new google.maps.LatLng(-20.9549613, 55.6725596), // New York
+
+                // How you would like to style the map.
+                // This is where you would paste any style found on Snazzy Maps.
+                    styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
+            };
+
+            // Get the HTML DOM element that will contain your map
+            // We are using a div with id="map" seen below in the <body>
+            var mapElement = document.getElementById('map');
+
+            // Create the Google Map using our element and options defined above
+            var map = new google.maps.Map(mapElement, mapOptions);
+
+            // Let's also add a marker while we're at it
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(-20.9549613, 55.6725596),
+                map: map,
+                title: 'Snazzy!'
+            });
+        }
+    </script>
+    <script>
+
+
+(function ($) {
+    "use strict";
+
+    $(document).ready(function() {
+
+        $('body').css('margin-top', 0);
+
+        $('.site-wrapper').fadeOut(1000)
+
+        $('[data-toggle="tooltip"]').tooltip()
+
+        $('a.toggleIcons').click((e) => {
+            e.preventDefault();
+            let that = $(e.currentTarget)
+            that.next().toggle('slow').end().children().toggleClass('fa-cog').toggleClass('fa-play')
+        })
+
+        $('a.form-delete').click((e) => {
+            e.preventDefault();
+            let href = $(e.currentTarget).attr('href')
+            swal.fire({
+                title: '@lang('Vraiment supprimer cette photo ?')',
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: '@lang('Oui')',
+                cancelButtonText: '@lang('Non')'
+            }).then((result) => {
+                if (result.value) {
+                    $("form[action='" + href + "'").submit()
+                }
+            })
+        })
+
+        $('.clip').animatedHeadline()
+    })
+
+    $(window).on('scroll', function () {
+        var scroll = $(window).scrollTop();
+        if (scroll < 15) {
+            $("nav.navbar").removeClass("scroll-header");
+        } else {
+            $("nav.navbar").addClass("scroll-header");
+        }
+    });
+
+        const swallAlertServer = () => {
+            swal.fire({
+                title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
+                type: 'warning'
+            })
+        }
+
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        })
+
+        $('a.description-manage').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            let text = that.parents('.card').find('.card-text').text()
+            $('#description').val(text)
+            $('#descriptionForm').attr('action', that.attr('href')).find('input').removeClass('is-invalid').next().text()
+            $('#changeDescription').modal('show')
+        })
+
+        $('#descriptionForm').submit((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            $.ajax({
+                method: 'put',
+                url: that.attr('action'),
+                data: that.serialize()
+            })
+            .done((data) => {
+                let card = $('#image' + data.id)
+                let body = card.find('.card-body')
+                if(body.length) {
+                    body.children().text(data.description)
+                } else {
+                    card.children('a').after('<div class="card-body"><p class="card-text">' + data.description + '</p></div>')
+                }
+                $('#changeDescription').modal('hide')
+            })
+            .fail((data) => {
+                if(data.status === 422) {
+                    $.each(data.responseJSON.errors, function (key, value) {
+                        $('#descriptionForm input[name=' + key + ']').addClass('is-invalid').next().text(value)
+                    })
+                } else {
+                    swallAlertServer()
+                }
+            })
+        })
+
+        $('a.category-edit').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            $('select').val(that.attr('data-id'))
+            $('#editForm').attr('action', that.attr('href'))
+            $('#changeCategory').modal('show')
+        })
+
+        $('a.adult-edit').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            let icon = that.children()
+            let adult = icon.hasClass('fa-graduation-cap')
+            if(adult) {
+                icon.removeClass('fa-graduation-cap')
+            } else {
+                icon.removeClass('fa-child')
+            }
+            icon.addClass('fa-cog fa-spin')
+            adult = !adult
+            $.ajax({
+                method: 'put',
+                url: that.attr('href'),
+                data: { adult: adult }
+            })
+            .done(() => {
+                that.tooltip('hide')
+                let icon = that.children()
+                icon.removeClass('fa-cog fa-spin')
+                let card = that.parents('.card')
+                if(adult) {
+                    icon.addClass('fa-graduation-cap')
+                    card.addClass('border-danger')
+                } else {
+                    icon.addClass('fa-child')
+                    card.removeClass('border-danger')
+                }
+            })
+            .fail(() => {
+                swallAlertServer()
+            })
+        })
+
+        $('a.albums-manage').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            that.tooltip('hide')
+            that.children().removeClass('fa-folder-open').addClass('fa-cog fa-spin')
+            e.preventDefault()
+            $.get(that.attr('href'))
+            .done((data) => {
+                that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                $('#listeAlbums').html(data)
+                $('#manageAlbums').attr('action', that.attr('href'))
+                $('#editAlbums').modal('show')
+            })
+            .fail(() => {
+                that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                swallAlertServer()
+            })
+        })
+
+        $('#manageAlbums').submit((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            $.ajax({
+                method: 'put',
+                url: that.attr('action'),
+                data: that.serialize()
+            })
+                .done((data) => {
+                    if(data === 'reload') {
+                        location.reload();
+                    } else {
+                        $('#editAlbums').modal('hide')
+                    }
+                })
+                .fail(() => {
+                    swallAlertServer()
+                })
+        })
+
+        let memoStars = []
+        $('.star-rating div').click((e) => {
+            @auth
+                let element = $(e.currentTarget)
+                let values = element.attr('id').split('.')
+                element.addClass('fa-spin')
+                $.ajax({
+                    url: "{{ url('rating') }}" + '/' + values[0],
+                    type: 'PUT',
+                    data: {value: values[1]}
+                })
+                .done((data) => {
+                    if (data.status === 'ok') {
+                        let image = $('#' + data.id)
+                        memoStars = []
+                        image.children('div')
+                            .removeClass('star-yellow')
+                            .each(function (index, element) {
+                                if (data.value > 4 - index) {
+                                    $(element).addClass('star-yellow')
+                                    memoStars.push(true)
+                                }
+                                memoStars.push(false)
+                            })
+                            .end()
+                            .find('span.count-number')
+                            .text('(' + data.count + ')')
+                        if(data.rate) {
+                            if(data.rate == values[1]) {
+                                title = '@lang("Vous avez déjà donné cette note !")'
+                            } else {
+                                title = '@lang("Votre vote a été modifié !")'
+                            }
+                        } else {
+                            title = '@lang("Merci pour votre vote !")'
+                        }
+                        swal.fire({
+                            title: title,
+                            type: 'warning'
+                        })
+                    } else {
+                        swal.fire({
+                            title: '@lang('Vous ne pouvez pas voter pour vos photos !')',
+                            type: 'error'
+                        })
+                    }
+                    element.removeClass('fa-spin')
+                })
+                .fail(() => {
+                    swallAlertServer()
+                    element.removeClass('fa-spin')
+                })
+            @else
+                swal.fire({
+                    title: '@lang('Vous devez être connecté pour pouvoir voter !')',
+                    type: 'error'
+                })
+            @endauth
+        })
+
+        $('.star-rating').hover(
+            (e) => {
+                memoStars = []
+                $(e.currentTarget).children('div')
+                    .each((index, element) => {
+                        memoStars.push($(element).hasClass('star-yellow'))
+                    })
+                    .removeClass('star-yellow')
+            }, (e) => {
+            $.each(memoStars, (index, value) => {
+                if(value) {
+                    $(e.currentTarget).children('div:eq(' + index + ')').addClass('star-yellow')
+                }
+            })
+        })
+
+        $(".go-down").on('click', function(event) {
+            if (this.hash !== "") {
                 event.preventDefault();
                 var hash = this.hash;
                 $('html, body').animate({
-                    scrollTop: $(hash).offset().top
+                    scrollTop: $(hash).offset().top - $("nav.navbar").height()
                 }, 800, function(){
                     window.location.hash = hash;
                 });
+            }
+        })
+
+        $('.counter').counterUp({
+            delay: .8,
+            time: 150
+        })
+
+        $('.carousel').carousel();
+
+        $('.grid').imagesLoaded( function() {
+            var $grid = $('.grid').isotope({
+                itemSelector: '.grid-item',
+                percentPosition: true,
+                masonry: {
+                // use outer width of grid-sizer for columnWidth
+                columnWidth: '.grid-item'
                 }
             });
+            // filter items on button click
+            $('.filter-button-group').on( 'click', 'button', function() {
+                $('.button-group > button').removeClass('active');
+                $(this).addClass('active');
 
-            $(function() {
-                $('.clip').animatedHeadline();
-            })
+                var filterValue = $(this).attr('data-filter');
+                $grid.isotope({ filter: filterValue });
+            });
+        });
 
-            // When the window has finished loading create our google map below
-            google.maps.event.addDomListener(window, 'load', init);
-
-            function init() {
-                // Basic options for a simple Google Map
-                // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-                var mapOptions = {
-                    // How zoomed in you want the map to start at (always required)
-                    zoom: 11,
-
-                    scrollwheel: false,
-
-                    // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(-20.9549613, 55.6725596), // New York
-
-                    // How you would like to style the map.
-                    // This is where you would paste any style found on Snazzy Maps.
-					 styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
-                };
-
-                // Get the HTML DOM element that will contain your map
-                // We are using a div with id="map" seen below in the <body>
-                var mapElement = document.getElementById('map');
-
-                // Create the Google Map using our element and options defined above
-                var map = new google.maps.Map(mapElement, mapOptions);
-
-                // Let's also add a marker while we're at it
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(-20.9549613, 55.6725596),
-                    map: map,
-                    title: 'Snazzy!'
-                });
+        $('.gallery').magnificPopup({
+            delegate: ':not(.isotope-hidden) a.img-link',
+            type: 'image',
+            mainClass: 'mfp-fade',
+            removalDelay: 160,
+            preloader: false,
+            fixedContentPos: false,
+            gallery: {
+                enabled:true
             }
-		</script>
+        })
+
+        $('a.image-link').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            console.log(that)
+            $.ajax({
+                method: 'patch',
+                url: that.attr('data-link')
+            }).done((data) => {
+                if(data.increment) {
+                    let numberElement = that.siblings('div.portfolio-content').find('.image-click')
+                    numberElement.text(parseInt(numberElement.text()) + 1)
+                }
+            })
+        })
+
+        $(function () {
+            $.scrollUp({
+                scrollName: 'scrollUp', // Element ID
+                topDistance: '300', // Distance from top before showing element (px)
+                topSpeed: 300, // Speed back to top (ms)
+                animation: 'fade', // Fade, slide, none
+                animationInSpeed: 200, // Animation in speed (ms)
+                animationOutSpeed: 200, // Animation out speed (ms)
+                scrollText: '<i class="fa fa-angle-up" aria-hidden="true"></i>', // Text for element
+                activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            })
+        })
+
+    })(jQuery);
+    </script>
 @endsection
