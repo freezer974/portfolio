@@ -364,9 +364,14 @@
                                 <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}"><img src="{{ url('thumbs/' . $image->name) }}" alt="image"></a>
                             </div>
                             <div class="portfolio-content">
-                                <a href="{{ url('images/' . $image->name) }}"><h4>{{ $image->description }}</h4></a>
+                                @isset($image->title)
+                                    <a href="{{ url($image->url) }}"><h4 class="text-dark">{{ $image->title }}</h4></a>
+                                @endisset
                                 @isset($image->description)
-                                        <p class="text-muted">{{ $image->description }}</p>
+                                    <span class="text-muted">{{ $image->description }}</span>
+                                @endisset
+                                @isset($image->url)
+                                    <em class="d-block"><a href="{{ url($image->url) }}">Site web</a></em>
                                 @endisset
                                 <em>fait par <a href="{{ route('user', $image->user->id) }}" data-toggle="tooltip" title="{{ __('Voir les photos de ') . $image->user->name }}">{{ $image->user->name }}</a></em>
                                 <div class="float-right">
