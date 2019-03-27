@@ -1,133 +1,125 @@
-@extends('layouts.app')
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="site-wrapper">
         <div class="site-wrapper-inner text-white text-center">
             <i class="fas fa-spinner fa-pulse fa-4x"></i>
         </div>
     </div>
     <main class="container-fluid">
-        @if(session('updated'))
+        <?php if(session('updated')): ?>
             <div class="alert alert-dark" role="alert">
-                {{ session('updated') }}
+                <?php echo e(session('updated')); ?>
+
             </div>
-        @endif
+        <?php endif; ?>
         <h2 class="text-title mb-3">Mes travaux</h2>
-        @isset($album)
-            <h2 class="text-title mb-3">{{ $album->name }}</h2>
-        @endif
-        @isset($category)
-            <h2 class="text-title mb-3">{{ $category->name }}</h2>
-        @endif
-        @isset($user)
-            <h2 class="text-title mb-3">{{ __('Photos de ') . $user->name }}</h2>
-        @endif
+        <?php if(isset($album)): ?>
+            <h2 class="text-title mb-3"><?php echo e($album->name); ?></h2>
+        <?php endif; ?>
+        <?php if(isset($category)): ?>
+            <h2 class="text-title mb-3"><?php echo e($category->name); ?></h2>
+        <?php endif; ?>
+        <?php if(isset($user)): ?>
+            <h2 class="text-title mb-3"><?php echo e(__('Photos de ') . $user->name); ?></h2>
+        <?php endif; ?>
         <div class="d-flex justify-content-center">
-            {{ $images->links() }}
+            <?php echo e($images->links()); ?>
+
         </div>
         <div class="card-columns">
-            @foreach($images as $image)
-                <div class="card @if($image->adult) border-danger @endif" id="image{{ $image->id }}">
-                    <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}">
+            <?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="card <?php if($image->adult): ?> border-danger <?php endif; ?>" id="image<?php echo e($image->id); ?>">
+                    <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-link="<?php echo e(route('image.click', $image->id)); ?>">
                         <img class="card-img-top"
-                             src="{{ url('thumbs/' . $image->name) }}"
+                             src="<?php echo e(url('thumbs/' . $image->name)); ?>"
                              alt="image">
                     </a>
-                    @isset($image->description)
+                    <?php if(isset($image->description)): ?>
                         <div class="card-body">
-
-                            <p class="card-text">
-                                @isset($image->title)
-                                    <a href="{{$image->url}}"><h4 class="text-dark">{{ $image->title }}</h4></a>
-                                @endisset
-                                {{ $image->description }}
-                                @isset($image->url)
-                                    <em class="d-block"><a href="{{ $image->url}}">Site web</a></em>
-                                @endisset
-                            </p>
-
+                            <p class="card-text"><?php echo e($image->description); ?></p>
                         </div>
-
-                    @endisset
+                    <?php endif; ?>
                     <div class="card-footer text-muted">
                         <em>
-                            <a href="{{ route('user', $image->user->id) }}" data-toggle="tooltip"
-                                title="{{ __('Voir les photos de ') . $image->user->name }}">{{ $image->user->name }}</a>
+                            <a href="<?php echo e(route('user', $image->user->id)); ?>" data-toggle="tooltip"
+                                title="<?php echo e(__('Voir les photos de ') . $image->user->name); ?>"><?php echo e($image->user->name); ?></a>
                         </em>
                         <div class="float-right">
                             <em>
-                                (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }}) {{ $image->created_at->formatLocalized('%x') }}
+                                (<span class="image-click"><?php echo e($image->clicks); ?></span> <?php echo e(trans_choice(__('vue|vues'), $image->clicks)); ?>) <?php echo e($image->created_at->formatLocalized('%x')); ?>
+
                             </em>
                         </div>
-                        <div class="star-rating" id="{{ $image->id }}">
-                            <span class="count-number">({{ $image->users->count() }})</span>
-                            <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
+                        <div class="star-rating" id="<?php echo e($image->id); ?>">
+                            <span class="count-number">(<?php echo e($image->users->count()); ?>)</span>
+                            <div id="<?php echo e($image->id . '.5'); ?>" data-toggle="tooltip" title="5" <?php if($image->rate > 4): ?> class="star-yellow" <?php endif; ?>>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div id="{{ $image->id . '.4' }}" data-toggle="tooltip" title="4" @if($image->rate > 3) class="star-yellow" @endif>
+                            <div id="<?php echo e($image->id . '.4'); ?>" data-toggle="tooltip" title="4" <?php if($image->rate > 3): ?> class="star-yellow" <?php endif; ?>>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div id="{{ $image->id . '.3' }}" data-toggle="tooltip" title="3" @if($image->rate > 2) class="star-yellow" @endif>
+                            <div id="<?php echo e($image->id . '.3'); ?>" data-toggle="tooltip" title="3" <?php if($image->rate > 2): ?> class="star-yellow" <?php endif; ?>>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div id="{{ $image->id . '.2' }}" data-toggle="tooltip" title="2" @if($image->rate > 1) class="star-yellow" @endif>
+                            <div id="<?php echo e($image->id . '.2'); ?>" data-toggle="tooltip" title="2" <?php if($image->rate > 1): ?> class="star-yellow" <?php endif; ?>>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div id="{{ $image->id . '.1' }}" data-toggle="tooltip" title="1" @if($image->rate > 0) class="star-yellow" @endif>
+                            <div id="<?php echo e($image->id . '.1'); ?>" data-toggle="tooltip" title="1" <?php if($image->rate > 0): ?> class="star-yellow" <?php endif; ?>>
                                 <i class="fas fa-star"></i>
                             </div>
                             <span class="float-right">
-                                @adminOrOwner($image->user_id)
+                                <?php if (\Illuminate\Support\Facades\Blade::check('adminOrOwner', $image->user_id)): ?>
                                 <a class="toggleIcons"
                                     href="#">
                                 <i class="fa fa-cog"></i>
                                 </a>
                                 <span class="menuIcons" style="display: none">
                                     <a class="form-delete text-danger"
-                                        href="{{ route('image.destroy', $image->id) }}"
+                                        href="<?php echo e(route('image.destroy', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Supprimer cette photo')">
+                                        title="<?php echo app('translator')->getFromJson('Supprimer cette photo'); ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     <a class="description-manage"
-                                        href="{{ route('image.description', $image->id) }}"
+                                        href="<?php echo e(route('image.description', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Gérer la description')">
+                                        title="<?php echo app('translator')->getFromJson('Gérer la description'); ?>">
                                         <i class="fa fa-comment"></i>
                                     </a>
                                     <a class="albums-manage"
-                                        href="{{ route('image.albums', $image->id) }}"
+                                        href="<?php echo e(route('image.albums', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Gérer les albums')">
+                                        title="<?php echo app('translator')->getFromJson('Gérer les albums'); ?>">
                                         <i class="fa fa-folder-open"></i>
                                     </a>
                                     <a class="category-edit"
-                                        data-id="{{ $image->category_id }}"
-                                        href="{{ route('image.update', $image->id) }}"
+                                        data-id="<?php echo e($image->category_id); ?>"
+                                        href="<?php echo e(route('image.update', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Changer de catégorie')">
+                                        title="<?php echo app('translator')->getFromJson('Changer de catégorie'); ?>">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a class="adult-edit"
-                                        href="{{ route('image.adult', $image->id) }}"
+                                        href="<?php echo e(route('image.adult', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Changer de statut')">
-                                        <i class="fa @if($image->adult) fa-graduation-cap @else fa-child @endif"></i>
+                                        title="<?php echo app('translator')->getFromJson('Changer de statut'); ?>">
+                                        <i class="fa <?php if($image->adult): ?> fa-graduation-cap <?php else: ?> fa-child <?php endif; ?>"></i>
                                     </a>
                                 </span>
-                                <form action="{{ route('image.destroy', $image->id) }}" method="POST" class="hide">
-                                    @csrf
-                                    @method('DELETE')
+                                <form action="<?php echo e(route('image.destroy', $image->id)); ?>" method="POST" class="hide">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>
                                 </form>
-                                @endadminOrOwner
+                                <?php endif; ?>
                             </span>
                         </div>
                     </div>
 
                 </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
         <div class="d-flex justify-content-center">
-            {{ $images->links() }}
+            <?php echo e($images->links()); ?>
+
         </div>
     </main>
     <div class="modal fade" id="changeDescription" tabindex="-1" role="dialog" aria-labelledby="descriptionLabel"
@@ -135,7 +127,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="descriptionLabel">@lang('Changement de la description')</h5>
+                    <h5 class="modal-title" id="descriptionLabel"><?php echo app('translator')->getFromJson('Changement de la description'); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -146,7 +138,7 @@
                             <input type="text" class="form-control" name="description" id="description">
                             <small class="invalid-feedback"></small>
                         </div>
-                        <button type="submit" class="btn btn-primary">@lang('Envoyer')</button>
+                        <button type="submit" class="btn btn-primary"><?php echo app('translator')->getFromJson('Envoyer'); ?></button>
                     </form>
                 </div>
             </div>
@@ -156,23 +148,23 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="categoryLabel">@lang('Changement de la catégorie')</h5>
+                    <h5 class="modal-title" id="categoryLabel"><?php echo app('translator')->getFromJson('Changement de la catégorie'); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form id="editForm" action="" method="POST">
-                        @method('PUT')
-                        @csrf
+                        <?php echo method_field('PUT'); ?>
+                        <?php echo csrf_field(); ?>
                         <div class="form-group">
                             <select class="form-control" name="category_id">
-                                @foreach($categories as $cat)
-                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($cat->id); ?>"><?php echo e($cat->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">@lang('Envoyer')</button>
+                        <button type="submit" class="btn btn-primary"><?php echo app('translator')->getFromJson('Envoyer'); ?></button>
                     </form>
                 </div>
             </div>
@@ -182,7 +174,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="albumLabel">@lang("Gestion des albums pour l'image")</h5>
+                    <h5 class="modal-title" id="albumLabel"><?php echo app('translator')->getFromJson("Gestion des albums pour l'image"); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -190,18 +182,18 @@
                 <div class="modal-body">
                     <form id="manageAlbums" action="" method="POST">
                         <div class="form-group" id="listeAlbums"></div>
-                        <button type="submit" class="btn btn-primary">@lang('Envoyer')</button>
+                        <button type="submit" class="btn btn-primary"><?php echo app('translator')->getFromJson('Envoyer'); ?></button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
     <script>
         const swallAlertServer = () => {
                 swal.fire({
-                    title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
+                    title: '<?php echo app('translator')->getFromJson('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...'); ?>',
                     type: 'warning'
                 })
             }
@@ -325,12 +317,12 @@
 
         let memoStars = []
         $('.star-rating div').click((e) => {
-            @auth
+            <?php if(auth()->guard()->check()): ?>
                 let element = $(e.currentTarget)
                 let values = element.attr('id').split('.')
                 element.addClass('fa-spin')
                 $.ajax({
-                    url: "{{ url('rating') }}" + '/' + values[0],
+                    url: "<?php echo e(url('rating')); ?>" + '/' + values[0],
                     type: 'PUT',
                     data: {value: values[1]}
                 })
@@ -352,12 +344,12 @@
                             .text('(' + data.count + ')')
                         if(data.rate) {
                             if(data.rate == values[1]) {
-                                title = '@lang("Vous avez déjà donné cette note !")'
+                                title = '<?php echo app('translator')->getFromJson("Vous avez déjà donné cette note !"); ?>'
                             } else {
-                                title = '@lang("Votre vote a été modifié !")'
+                                title = '<?php echo app('translator')->getFromJson("Votre vote a été modifié !"); ?>'
                             }
                         } else {
-                            title = '@lang("Merci pour votre vote !")'
+                            title = '<?php echo app('translator')->getFromJson("Merci pour votre vote !"); ?>'
                         }
                         swal.fire({
                             title: title,
@@ -365,7 +357,7 @@
                         })
                     } else {
                         swal.fire({
-                            title: '@lang('Vous ne pouvez pas voter pour vos photos !')',
+                            title: '<?php echo app('translator')->getFromJson('Vous ne pouvez pas voter pour vos photos !'); ?>',
                             type: 'error'
                         })
                     }
@@ -375,12 +367,12 @@
                     swallAlertServer()
                     element.removeClass('fa-spin')
                 })
-            @else
+            <?php else: ?>
                 swal.fire({
-                    title: '@lang('Vous devez être connecté pour pouvoir voter !')',
+                    title: '<?php echo app('translator')->getFromJson('Vous devez être connecté pour pouvoir voter !'); ?>',
                     type: 'error'
                 })
-            @endauth
+            <?php endif; ?>
         })
         $('.star-rating').hover(
             (e) => {
@@ -418,17 +410,17 @@
             $('.card-columns').magnificPopup({
                 delegate: 'a.image-link',
                 type: 'image',
-                tClose: '@lang("Fermer (Esc)")'@if($images->count() > 1),
+                tClose: '<?php echo app('translator')->getFromJson("Fermer (Esc)"); ?>'<?php if($images->count() > 1): ?>,
                 gallery: {
                     enabled: true,
-                    tPrev: '@lang("Précédent (Flèche gauche)")',
-                    tNext: '@lang("Suivant (Flèche droite)")'
+                    tPrev: '<?php echo app('translator')->getFromJson("Précédent (Flèche gauche)"); ?>',
+                    tNext: '<?php echo app('translator')->getFromJson("Suivant (Flèche droite)"); ?>'
                 },
                 callbacks: {
                     buildControls: function () {
                         this.contentContainer.append(this.arrowLeft.add(this.arrowRight))
                     }
-                }@endif
+                }<?php endif; ?>
             })
             $('a.toggleIcons').click((e) => {
                 e.preventDefault();
@@ -439,12 +431,12 @@
                 e.preventDefault();
                 let href = $(e.currentTarget).attr('href')
                 swal.fire({
-                    title: '@lang('Vraiment supprimer cette photo ?')',
+                    title: '<?php echo app('translator')->getFromJson('Vraiment supprimer cette photo ?'); ?>',
                     type: 'error',
                     showCancelButton: true,
                     confirmButtonColor: '#DD6B55',
-                    confirmButtonText: '@lang('Oui')',
-                    cancelButtonText: '@lang('Non')'
+                    confirmButtonText: '<?php echo app('translator')->getFromJson('Oui'); ?>',
+                    cancelButtonText: '<?php echo app('translator')->getFromJson('Non'); ?>'
                 }).then((result) => {
                     if (result.value) {
                         $("form[action='" + href + "'").submit()
@@ -453,4 +445,7 @@
             })
         })
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php /* /homepages/25/d350060631/htdocs/tatoumicreation/resources/views/home.blade.php */ ?>
