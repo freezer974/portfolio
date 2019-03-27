@@ -365,13 +365,13 @@
                             </div>
                             <div class="portfolio-content">
                                 @isset($image->title)
-                                    <a href="{{ url($image->url) }}"><h4 class="text-dark">{{ $image->title }}</h4></a>
+                                    <a href="{{$image->url }}"><h4 class="text-dark">{{ $image->title }}</h4></a>
                                 @endisset
                                 @isset($image->description)
                                     <span class="text-muted">{{ $image->description }}</span>
                                 @endisset
                                 @isset($image->url)
-                                    <em class="d-block"><a href="{{ url($image->url) }}">Site web</a></em>
+                                    <em class="d-block"><a href="{{ $image->url }}">Site web</a></em>
                                 @endisset
                                 <em>fait par <a href="{{ route('user', $image->user->id) }}" data-toggle="tooltip" title="{{ __('Voir les photos de ') . $image->user->name }}">{{ $image->user->name }}</a></em>
                                 <div class="float-right">
@@ -551,8 +551,6 @@
 
             $('.site-wrapper').fadeOut(1000)
 
-            $('[data-toggle="tooltip"]').tooltip()
-
             $('a.toggleIcons').click((e) => {
                 e.preventDefault();
                 let that = $(e.currentTarget)
@@ -579,14 +577,7 @@
             $('.clip').animatedHeadline()
         })
 
-        $(window).on('scroll', function () {
-            var scroll = $(window).scrollTop();
-            if (scroll < 15) {
-                $("nav.navbar").removeClass("scroll-header");
-            } else {
-                $("nav.navbar").addClass("scroll-header");
-            }
-        });
+
 
             const swallAlertServer = () => {
                 swal.fire({
