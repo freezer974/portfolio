@@ -15,6 +15,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@voir')->name('home');
+Route::get('/travaux', 'HomeController@index')->name('all');
 
 Route::middleware('admin')->group(function () {
 
