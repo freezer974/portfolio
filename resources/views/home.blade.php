@@ -11,18 +11,20 @@
                 {{ session('updated') }}
             </div>
         @endif
-        <h2 class="text-title mb-3">Mes travaux
+        @isset($user)
+            <h2 class="text-title mb-3">{{ __('Photos de ') . $user->name }}</h2>
+        @else
+            <h2 class="text-title mb-3">Mes travaux
             @isset($category)
                 • <span class="text-title mb-3 text-info"> {{ $category->name }}</span>
             @endif
-        </h2>
-        @isset($album)
-            <h2 class="text-title mb-3">{{ $album->name }}</h2>
+            @isset($album)
+            • <span class="text-title mb-3 text-info"> {{ $album->name }} </span>
+            @endif
+            </h2>
         @endif
 
-        @isset($user)
-            <h2 class="text-title mb-3">{{ __('Photos de ') . $user->name }}</h2>
-        @endif
+
         <div class="d-flex justify-content-center">
             {{ $images->links() }}
         </div>
@@ -39,7 +41,7 @@
 
                             <p class="card-text">
                                 @isset($image->title)
-                                    <a href="{{$image->url}}"><h4 class="text-dark">{{ $image->title }}</h4></a>
+                                    <h4 class="text-dark">{{ $image->title }}</h4>
                                 @endisset
                                 {{ $image->description }}
                                 @isset($image->url)
