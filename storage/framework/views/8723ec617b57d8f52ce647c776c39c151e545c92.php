@@ -12,18 +12,20 @@
 
             </div>
         <?php endif; ?>
-        <h2 class="text-title mb-3">Mes travaux
+        <?php if(isset($user)): ?>
+            <h2 class="text-title mb-3"><?php echo e(__('Photos de ') . $user->name); ?></h2>
+        <?php else: ?>
+            <h2 class="text-title mb-3">Mes travaux
             <?php if(isset($category)): ?>
                 • <span class="text-title mb-3 text-info"> <?php echo e($category->name); ?></span>
             <?php endif; ?>
-        </h2>
-        <?php if(isset($album)): ?>
-            <h2 class="text-title mb-3"><?php echo e($album->name); ?></h2>
+            <?php if(isset($album)): ?>
+            • <span class="text-title mb-3 text-info"> <?php echo e($album->name); ?> </span>
+            <?php endif; ?>
+            </h2>
         <?php endif; ?>
 
-        <?php if(isset($user)): ?>
-            <h2 class="text-title mb-3"><?php echo e(__('Photos de ') . $user->name); ?></h2>
-        <?php endif; ?>
+
         <div class="d-flex justify-content-center">
             <?php echo e($images->links()); ?>
 
@@ -41,7 +43,7 @@
 
                             <p class="card-text">
                                 <?php if(isset($image->title)): ?>
-                                    <a href="<?php echo e($image->url); ?>"><h4 class="text-dark"><?php echo e($image->title); ?></h4></a>
+                                    <h4 class="text-dark"><?php echo e($image->title); ?></h4>
                                 <?php endif; ?>
                                 <?php echo e($image->description); ?>
 

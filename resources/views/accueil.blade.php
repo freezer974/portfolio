@@ -365,13 +365,13 @@
                             </div>
                             <div class="portfolio-content">
                                 @isset($image->title)
-                                    <a href="{{$image->url }}"><h4 class="text-dark">{{ $image->title }}</h4></a>
+                                    <h4 class="text-dark">{{ $image->title }}</h4>
                                 @endisset
                                 @isset($image->description)
                                     <span class="text-muted">{{ $image->description }}</span>
                                 @endisset
                                 @isset($image->url)
-                                    <em class="d-block"><a href="{{ $image->url }}">Site web</a></em>
+                                    <em class="d-block"><a href="{{ $image->url }}" data-toggle="tooltip" title="{{ __('Voir le site web') }}">Site web</a></em>
                                 @endisset
                                 <em>fait par <a href="{{ route('user', $image->user->id) }}" data-toggle="tooltip" title="{{ __('Voir les photos de ') . $image->user->name }}">{{ $image->user->name }}</a></em>
                                 <div class="float-right">
