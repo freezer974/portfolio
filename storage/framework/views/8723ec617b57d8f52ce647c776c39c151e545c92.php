@@ -36,8 +36,20 @@
                     </a>
                     <?php if(isset($image->description)): ?>
                         <div class="card-body">
-                            <p class="card-text"><?php echo e($image->description); ?></p>
+
+                            <p class="card-text">
+                                <?php if(isset($image->title)): ?>
+                                    <a href="<?php echo e($image->url); ?>"><h4 class="text-dark"><?php echo e($image->title); ?></h4></a>
+                                <?php endif; ?>
+                                <?php echo e($image->description); ?>
+
+                                <?php if(isset($image->url)): ?>
+                                    <em class="d-block"><a href="<?php echo e($image->url); ?>">Site web</a></em>
+                                <?php endif; ?>
+                            </p>
+
                         </div>
+
                     <?php endif; ?>
                     <div class="card-footer text-muted">
                         <em>
