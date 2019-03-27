@@ -25,21 +25,6 @@
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
             <?php endif; ?>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle
-                    <?php if(isset($category)): ?>
-                        <?php echo e(currentRoute(route('category', $category->slug))); ?>
-
-                    <?php endif; ?>
-                        " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php echo app('translator')->getFromJson('Catégories'); ?>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
-                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <a class="dropdown-item" href="<?php echo e(route('category', $category->slug)); ?>"><?php echo e($category->name); ?></a>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </div>
-            </li>
             <?php if(isset($albums)): ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle
@@ -199,8 +184,20 @@
             e.preventDefault()
             $('#logout-form').submit()
         })
+
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+
+    $(window).on('scroll', function () {
+        var scroll = $(window).scrollTop();
+        if (scroll < 15) {
+            $("nav.navbar").removeClass("scroll-header");
+        } else {
+            $("nav.navbar").addClass("scroll-header");
+        }
+    });
+
 </script>
 </body>
 </html>
