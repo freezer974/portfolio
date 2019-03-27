@@ -350,7 +350,7 @@
             </div>
                <div class="portfolio-menu">
                    <div class="button-group filter-button-group">
-                      <button data-filter="*">Tout</button>
+                        <a class="button" href="{{ route('all') }}">Voir tous</a>
                         @foreach($categories as $category)
                             <button data-filter=".cat{{ $category->id }}">{{ $category->name }}</button>
                         @endforeach
@@ -788,13 +788,13 @@
 
             $(".go-down").on('click', function(event) {
                 if (this.hash !== "") {
-                    event.preventDefault();
+                    event.preventDefault()
                     var hash = this.hash;
                     $('html, body').animate({
                         scrollTop: $(hash).offset().top - $("nav.navbar").height()
                     }, 800, function(){
                         window.location.hash = hash;
-                    });
+                    })
                 }
             })
 
@@ -803,7 +803,7 @@
                 time: 150
             })
 
-            $('.carousel').carousel();
+            $('.carousel').carousel()
 
             $('.grid').imagesLoaded( function() {
                 var $grid = $('.grid').isotope({
@@ -813,7 +813,7 @@
                     // use outer width of grid-sizer for columnWidth
                     columnWidth: '.grid-item'
                     }
-                });
+                })
                 // filter items on button click
                 $('.filter-button-group').on( 'click', 'button', function() {
                     $('.button-group > button').removeClass('active');
@@ -821,8 +821,8 @@
 
                     var filterValue = $(this).attr('data-filter');
                     $grid.isotope({ filter: filterValue });
-                });
-            });
+                })
+            })
 
             $('.gallery').magnificPopup({
                 delegate: ':not(.isotope-hidden) a.img-link',
