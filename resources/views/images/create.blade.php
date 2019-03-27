@@ -31,11 +31,23 @@
                 </select>
             </div>
             @include('partials.form-group', [
-                'title' => __('Description (optionnelle)'),
+                'title' => __('Titre (optionnelle)'),
                 'type' => 'text',
-                'name' => 'description',
+                'name' => 'title',
                 'required' => false,
                 ])
+            @include('partials.form-group', [
+            'title' => __('Description (optionnelle)'),
+            'type' => 'text',
+            'name' => 'description',
+            'required' => false,
+            ])
+            @include('partials.form-group', [
+            'title' => __('Url (optionnelle)'),
+            'type' => 'text',
+            'name' => 'url',
+            'required' => false,
+            ])
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="adult" name="adult">
