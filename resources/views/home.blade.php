@@ -11,6 +11,7 @@
                 {{ session('updated') }}
             </div>
         @endif
+        <h2 class="text-title mb-3">Mes travaux</h2>
         @isset($album)
             <h2 class="text-title mb-3">{{ $album->name }}</h2>
         @endif
