@@ -24,22 +24,23 @@
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
             @endif
-            @if(currentRoute(route('all')) || currentRoute(route('category', $category->slug)))
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle
-                        @isset($category)
-                            {{ currentRoute(route('category', $category->slug)) }}
-                        @endisset
-                            " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @lang('Catégories')
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
-                        @foreach($categories as $category)
-                            <a class="dropdown-item" href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
-                        @endforeach
-                    </div>
-                </li>
-            @endif
+            @isset($category)
+                @if(currentRoute(route('all')))
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle
+                                {{ currentRoute(route('category', $category->slug)) }}
+                                " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @lang('Catégories')
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
+                            @foreach($categories as $category)
+                                <a class="dropdown-item" href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
+                            @endforeach
+                        </div>
+                    </li>
+                @endif
+            @endisset
+
             @isset($albums)
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle
