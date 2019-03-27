@@ -20,6 +20,6 @@ class NotificationsTableSeeder extends Seeder
                 'notifiable_id' => '2',
                 'data' => '{"image":"RvlsdZqwNw6fIWoQCsb13uFw1W4DiDRHuU4tZONT.jpeg","image_id":32,"rate":5,"user":3}'
             ],
-        ]);
+	    ]);
     }
 }
