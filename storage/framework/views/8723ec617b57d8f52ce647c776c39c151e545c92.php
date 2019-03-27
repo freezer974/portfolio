@@ -12,6 +12,7 @@
 
             </div>
         <?php endif; ?>
+        <h2 class="text-title mb-3">Mes travaux</h2>
         <?php if(isset($album)): ?>
             <h2 class="text-title mb-3"><?php echo e($album->name); ?></h2>
         <?php endif; ?>
