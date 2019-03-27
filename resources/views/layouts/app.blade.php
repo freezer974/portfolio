@@ -24,20 +24,6 @@
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
             @endif
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle
-                    @isset($category)
-                        {{ currentRoute(route('category', $category->slug)) }}
-                    @endisset
-                        " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    @lang('Catégories')
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
-                    @foreach($categories as $category)
-                        <a class="dropdown-item" href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
-                    @endforeach
-                </div>
-            </li>
             @isset($albums)
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle
@@ -194,8 +180,20 @@
             e.preventDefault()
             $('#logout-form').submit()
         })
+
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+
+    $(window).on('scroll', function () {
+        var scroll = $(window).scrollTop();
+        if (scroll < 15) {
+            $("nav.navbar").removeClass("scroll-header");
+        } else {
+            $("nav.navbar").addClass("scroll-header");
+        }
+    });
+
 </script>
 </body>
 </html>
