@@ -18,6 +18,8 @@ class CreateImagesTable extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->string('name');
+            $table->string('title')->nullable();
+            $table->string('url')->nullable();
             $table->string('description')->nullable();
             $table->boolean('adult')->default(false);
             $table->integer ('clicks')->unsigned()->default(0);
