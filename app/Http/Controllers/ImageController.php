@@ -106,7 +106,9 @@ class ImageController extends Controller
         $this->authorize ('manage', $image);
 
         $request->validate ([
-            'description' => 'nullable|string|max:255'
+            'description' => 'nullable|string|max:255',
+            'title' => 'nullable|string|max:255',
+            'url' => 'nullable|string|max:255'
         ]);
 
         $image->description = $request->description;
@@ -154,6 +156,8 @@ class ImageController extends Controller
             'image' => 'required|image|max:2000',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string|max:255',
+            'title' => 'nullable|string|max:255',
+            'url' => 'nullable|string|max:255',
         ]);
 
         $this->imageRepository->store ($request);
