@@ -34,8 +34,19 @@
                     </a>
                     @isset($image->description)
                         <div class="card-body">
-                            <p class="card-text">{{ $image->description }}</p>
+
+                            <p class="card-text">
+                                @isset($image->title)
+                                    <a href="{{$image->url}}"><h4 class="text-dark">{{ $image->title }}</h4></a>
+                                @endisset
+                                {{ $image->description }}
+                                @isset($image->url)
+                                    <em class="d-block"><a href="{{ $image->url}}">Site web</a></em>
+                                @endisset
+                            </p>
+
                         </div>
+
                     @endisset
                     <div class="card-footer text-muted">
                         <em>
