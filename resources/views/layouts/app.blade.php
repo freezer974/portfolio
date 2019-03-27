@@ -24,7 +24,7 @@
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
             @endif
-            @if(currentRoute(route('all')))
+            @if(currentRoute(route('all')) || currentRoute(route('category', $category->slug)))
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle
                         @isset($category)
