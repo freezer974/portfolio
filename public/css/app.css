@@ -18549,9 +18549,9 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   opacity: 1;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xrotate-1 
+xrotate-1
 
 -------------------------------- */
 
@@ -18679,9 +18679,9 @@ xrotate-1
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xtype 
+xtype
 
 -------------------------------- */
 
@@ -18779,9 +18779,9 @@ xtype
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xrotate-2 
+xrotate-2
 
 -------------------------------- */
 
@@ -18923,9 +18923,9 @@ xrotate-2
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xloading-bar 
+xloading-bar
 
 -------------------------------- */
 
@@ -18968,9 +18968,9 @@ xloading-bar
   top: 0;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xslide 
+xslide
 
 -------------------------------- */
 
@@ -19081,9 +19081,9 @@ xslide
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xclip 
+xclip
 
 -------------------------------- */
 
@@ -19116,9 +19116,9 @@ xclip
   opacity: 1;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xzoom 
+xzoom
 
 -------------------------------- */
 
@@ -19198,9 +19198,9 @@ xzoom
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xrotate-3 
+xrotate-3
 
 -------------------------------- */
 
@@ -19294,9 +19294,9 @@ xrotate-3
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xscale 
+xscale
 
 -------------------------------- */
 
@@ -19403,9 +19403,9 @@ xscale
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xpush 
+xpush
 
 -------------------------------- */
 
@@ -19821,7 +19821,8 @@ h1 {
   text-align: center;
 }
 
-.button-group.filter-button-group > button {
+.button-group.filter-button-group > button,
+.button-group.filter-button-group > a {
   background: #303133 none repeat scroll 0 0;
   border: #303133 solid 1px;
   border-radius: 50px;
@@ -19835,11 +19836,13 @@ h1 {
   transition: all 0.4s ease 0s;
 }
 
-.button-group.filter-button-group > button:hover {
+.button-group.filter-button-group > button:hover,
+.button-group.filter-button-group > a:hover {
   color: #0cb4ce;
 }
 
-.button-group.filter-button-group > button.active {
+.button-group.filter-button-group > button.active,
+.button-group.filter-button-group > a.active {
   background: #fff none repeat scroll 0 0;
   border: 1px solid #0cb4ce;
   color: #0cb4ce;
