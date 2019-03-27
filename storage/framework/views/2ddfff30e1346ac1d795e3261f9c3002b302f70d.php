@@ -350,7 +350,7 @@
             </div>
                <div class="portfolio-menu">
                    <div class="button-group filter-button-group">
-                      <button data-filter="*">Tout</button>
+                        <a class="button" href="<?php echo e(route('all')); ?>">Voir tous</a>
                         <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <button data-filter=".cat<?php echo e($category->id); ?>"><?php echo e($category->name); ?></button>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -789,13 +789,13 @@
 
             $(".go-down").on('click', function(event) {
                 if (this.hash !== "") {
-                    event.preventDefault();
+                    event.preventDefault()
                     var hash = this.hash;
                     $('html, body').animate({
                         scrollTop: $(hash).offset().top - $("nav.navbar").height()
                     }, 800, function(){
                         window.location.hash = hash;
-                    });
+                    })
                 }
             })
 
@@ -804,7 +804,7 @@
                 time: 150
             })
 
-            $('.carousel').carousel();
+            $('.carousel').carousel()
 
             $('.grid').imagesLoaded( function() {
                 var $grid = $('.grid').isotope({
@@ -814,7 +814,7 @@
                     // use outer width of grid-sizer for columnWidth
                     columnWidth: '.grid-item'
                     }
-                });
+                })
                 // filter items on button click
                 $('.filter-button-group').on( 'click', 'button', function() {
                     $('.button-group > button').removeClass('active');
@@ -822,8 +822,8 @@
 
                     var filterValue = $(this).attr('data-filter');
                     $grid.isotope({ filter: filterValue });
-                });
-            });
+                })
+            })
 
             $('.gallery').magnificPopup({
                 delegate: ':not(.isotope-hidden) a.img-link',
