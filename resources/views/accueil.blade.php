@@ -491,24 +491,39 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
-                    <form action="#">
+                    <form method="POST" action="{{ route('contactus.store') }}">
+                        @csrf
                         <div class="form-row">
-                            <div class="col-sm-6 mb-3 form-group">
-                                <input type="text" class="form-control" placeholder="Votre nom">
-                            </div>
-                            <div class="col-sm-6 mb-3 form-group">
-                                <input type="email" class="form-control" placeholder="Votre email">
-                            </div>
+                            @include('partials.form-group', [
+                                'title' => __('Votre nom'),
+                                'type' => 'text',
+                                'class' => ' col-sm-6',
+                                'name' => 'name',
+                                'required' => true,
+                            ])
+                            @include('partials.form-group', [
+                                'title' => __('Votre email'),
+                                'type' => 'email',
+                                'class' => ' col-sm-6',
+                                'name' => 'email',
+                                'required' => true,
+                            ])
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Numéro de téléphone">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Votre message"></textarea>
-                        </div>
-                        <div class="form-group col-6 mx-auto">
-                            <button class="btn submit-btn col" type="submit">Envoyer</button>
-                        </div>
+                        @include('partials.form-group', [
+                            'title' => __('Numéro de téléphone'),
+                            'type' => 'text',
+                            'name' => 'phone',
+                            'required' => true,
+                        ])
+                        @include('partials.form-group', [
+                            'title' => __('Votre message'),
+                            'type' => 'text',
+                            'name' => 'message',
+                            'required' => true,
+                        ])
+                        @component('components.button')
+                            @lang('Envoyer')
+                        @endcomponent
                     </form>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
@@ -547,7 +562,7 @@
         // jQuery and everything else is loaded
         $(document).ready(function() {
 
-            $('body').css('margin-top', 0);
+            $('body').css('margin-top', 0)
 
             $('.site-wrapper').fadeOut(1000)
 
