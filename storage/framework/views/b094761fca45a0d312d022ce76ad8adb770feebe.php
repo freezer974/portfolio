@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         <div class="skill py-2">
-                            <h5>Illustrator <span>85%</span></h5>
+                            <h5>Conception de packaging <span>85%</span></h5>
                             <div class="progress" style="height: 5px;">
                                 <div class="progress-bar bg-info wow slideInLeft" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 85%;" data-wow-duration="1s" data-wow-delay="1s">
                                 </div>
@@ -172,15 +172,15 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 mb-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-tasks fa-2x pb-2 text-dark"></i>
-                        <h1 class="counter text-info">69</h1>
-                        <p>Projets fait</p>
+                        <h1 class="counter text-info">169</h1>
+                        <p>Projets réalisés</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 mb-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-users fa-2x pb-2 text-dark"></i>
                         <h1 class="counter text-info">95</h1>
-                        <p>Client heureux</p>
+                        <p>clients heureux</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 mb-3">
