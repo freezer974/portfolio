@@ -137,5 +137,17 @@
     "vue|vues": "view|views",
     "Whoops!": "",
     "Mes travaux": "My work",
-    "Création": "Creation"
+    "Création": "Creation",
+    "Travaux de ": "Work of ",
+    "À propos" : "About",
+    "Services" : "Services",
+    "Témoignages" : "Testimonials",
+    "Portfolio" : "Portfolio",
+    "Contact" :"Contact",
+    "Salut, Je suis" : "Hello, I am",
+    "Un auto-entrepreneur dans le domaine du " : "An self-entrepreneur in the field of",
+    "Site web" : "Website",
+    "Coaching" : "Coaching",
+    "Graphisme" : "Infographics",
+    "Contactez-moi" : "Contact me"
 }

@@ -18,11 +18,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             @if(currentRoute(route('home')))
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#about">À propos</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#service">Services</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#testimonial">Témoignages</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#about">@lang('À propos')</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#service">@lang('Services')</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#testimonial">@lang('Témoignages')</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">@lang('Portfolio')</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">@lang('Contact')</a></li>
             @endif
 
             @if(!currentRoute(route('home')))
@@ -34,7 +34,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
                         @foreach($categories as $category)
-                            <a class="dropdown-item" href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
+                            <a class="dropdown-item" href="{{ route('category', $category->slug) }}">@lang($category->name)</a>
                         @endforeach
                     </div>
                 </li>

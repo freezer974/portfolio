@@ -12,14 +12,14 @@
             </div>
         @endif
         @isset($user)
-            <h2 class="text-title mb-3">{{ __('Photos de ') . $user->name }}</h2>
+            <h2 class="text-title mb-3">{{ __('Travaux de ') . $user->name }}</h2>
         @else
             <h2 class="text-title mb-3">@lang('Mes travaux')
             @isset($category)
-                • <span class="text-title mb-3 text-info"> {{ $category->name }}</span>
+                • <span class="text-title mb-3 text-info">@lang($category->name)</span>
             @endif
             @isset($album)
-            • <span class="text-title mb-3 text-info"> {{ $album->name }} </span>
+            • <span class="text-title mb-3 text-info">@lang($album->name)</span>
             @endif
             </h2>
         @endif

@@ -16,16 +16,16 @@
         <div class="single-slider justify-content-center d-flex">
             <div class="container">
                 <div class="slider-content my-auto clip text-light">
-                    <h2>Salut, Je suis Tony</h2>
+                    <h2>@lang('Salut, Je suis') Tony Chevalier</h2>
                     <h2 class="ah-headline">
-                        <span>Un auto-entrepreneur dans le domaine du </span>
+                        <span>@lang('Un auto-entrepreneur dans le domaine du ')</span>
                         <span class="ah-words-wrapper">
-                            <b class="is-visible">Graphisme</b>
-                            <b>Site web</b>
-                            <b>Coaching</b>
+                            <b class="is-visible">@lang('Graphisme')</b>
+                            <b>@lang('Site web')</b>
+                            <b>@lang('Coaching')</b>
                         </span>
                     </h2>
-                    <a href="#contact" role="button" class="btn btn-outline-light js-scroll-trigger">Contactez-moi</a>
+                    <a href="#contact" role="button" class="btn btn-outline-light js-scroll-trigger">@lang('Contactez-moi')</a>
                 </div>
                 <div>
                     <ul class="navigation">
