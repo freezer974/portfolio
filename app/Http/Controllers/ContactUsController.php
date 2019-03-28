@@ -30,6 +30,7 @@ class ContactUsController extends Controller
             'message' => 'required'
         ]);
         ContactUs::create($request->all());
+
         Mail::send('email',
         array(
         'name' => $request->get('name'),
