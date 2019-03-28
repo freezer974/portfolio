@@ -78,3 +78,8 @@ Route::name ('album')->get ('album/{slug}', 'ImageController@album');
 Route::middleware('ajax')->name('image.click')->patch('image/{image}/click', 'ImageController@click');
 
 Route::name('language')->get('language/{lang}', 'HomeController@language');
+
+Route::post('contact-us',[
+'as'=>'contactus.store',
+'uses'=>'ContactUsController@contactUsPost'
+]);
