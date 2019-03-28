@@ -115,7 +115,7 @@
             @endauth
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item ">
+            <li class="nav-item dropdown">
                 <a class="nav-link" href="#" id="navbarDropdownFlag" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <img width="18" height="18" alt="{{ session('locale') }}"
