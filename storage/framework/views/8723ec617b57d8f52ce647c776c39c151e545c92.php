@@ -15,7 +15,7 @@
         <?php if(isset($user)): ?>
             <h2 class="text-title mb-3"><?php echo e(__('Photos de ') . $user->name); ?></h2>
         <?php else: ?>
-            <h2 class="text-title mb-3">Mes travaux
+            <h2 class="text-title mb-3"><?php echo app('translator')->getFromJson('Mes travaux'); ?>
             <?php if(isset($category)): ?>
                 • <span class="text-title mb-3 text-info"> <?php echo e($category->name); ?></span>
             <?php endif; ?>
