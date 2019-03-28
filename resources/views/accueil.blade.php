@@ -322,7 +322,7 @@
                 <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
                     <div class="testimonial-section-title">
                         <i class="fa fa-quote-right fa-3x text-info"></i>
-                        <h4>Ce que les gens disent</h4>
+                        <h4>Ce que les clients disent</h4>
                         <hr class="mx-auto col-4 my-5 bg-light">
                     </div>
                     <div class="testimonial-active carousel slide" data-ride="carousel">
@@ -890,6 +890,6 @@
 
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_KEY') }}&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key={{ $googleKey }}&callback=initMap" async defer></script>
 
 @endsection
