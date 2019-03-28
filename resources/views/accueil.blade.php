@@ -473,7 +473,7 @@
                         <div class="col-sm-4 mb-5">
                             <div class="contact-box">
                                 <span class="contact-icon">
-                                    <i class="fa fa-envelope" aria-hidden="true"  class="p-3"></i>
+                                    <a href="mailto:contact@tatoumi.com"><i class="fa fa-envelope" aria-hidden="true"  class="p-3"></i></a>
                                 </span>
                                 <h3>Email</h3>
                                 <p><a href="mailto:contact@tatoumi.com">contact@tatoumi.com</a></p>
@@ -490,7 +490,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
+<?php /*                <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
                     <form method="POST" action="{{ url('/contact') }}">
                         @csrf
                         <div class="form-row">
@@ -525,8 +525,8 @@
                             @lang('Envoyer')
                         @endcomponent
                     </form>
-                </div>
-                <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
+                </div> */ ?>
+                <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 mb-3">
                     <div id="map"></div>
                 </div>
             </div>
