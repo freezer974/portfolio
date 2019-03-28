@@ -19,11 +19,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <?php if(currentRoute(route('home'))): ?>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#about">À propos</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#service">Services</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#testimonial">Témoignages</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#about"><?php echo app('translator')->getFromJson('À propos'); ?></a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#service"><?php echo app('translator')->getFromJson('Services'); ?></a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#testimonial"><?php echo app('translator')->getFromJson('Témoignages'); ?></a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio"><?php echo app('translator')->getFromJson('Portfolio'); ?></a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact"><?php echo app('translator')->getFromJson('Contact'); ?></a></li>
             <?php endif; ?>
 
             <?php if(!currentRoute(route('home'))): ?>
@@ -35,7 +35,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
                         <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <a class="dropdown-item" href="<?php echo e(route('category', $category->slug)); ?>"><?php echo e($category->name); ?></a>
+                            <a class="dropdown-item" href="<?php echo e(route('category', $category->slug)); ?>"><?php echo app('translator')->getFromJson($category->name); ?></a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </li>
