@@ -39,7 +39,7 @@ class ContactUsController extends Controller
         ), function($message)
         {
             $message->from('contact@tatoumi.com');
-            $message->to('tony@tatoumi.com', 'Admin')
+            $message->to('noreply@tatoumi.com', 'Admin')
             ->subject('Contact sur le site Tatoumi Création');
         });
         return redirect()->route('home')->with('ok',  __('Merci de nous avoir contacté, vous recevrez une réponse dans moins de 24h.'));
