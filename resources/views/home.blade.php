@@ -468,7 +468,7 @@
                     percentPosition: true,
                     masonry: {
                     // use outer width of grid-sizer for columnWidth
-                    columnWidth: '.card',
+                    columnWidth: '.card' - 10,
                     gutter: 10
                     }
                 })
