@@ -23,21 +23,14 @@
             @endif
             </h2>
         @endif
-        <div class="portfolio-menu">
-            <div class="button-group filter-button-group">
-                 <a class="button" href="*">Tous</a>
-                 @foreach($categories as $category)
-                     <button data-filter=".cat{{ $category->id }}">{{ $category->name }}</button>
-                 @endforeach
-             </div>
-        </div>
+
 
         <div class="d-flex justify-content-center">
             {{ $images->links() }}
         </div>
         <div class="card-columns">
             @foreach($images as $image)
-                <div class="card col-md-4 col-sm-2 col-ld-4 @if($image->adult) border-danger @endif cat{{ $image->category_id }}" id="image{{ $image->id }}">
+                <div class="card @if($image->adult) border-danger @endif" id="image{{ $image->id }}">
                     <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}">
                         <img class="card-img-top"
                              src="{{ url('thumbs/' . $image->name) }}"
@@ -460,25 +453,6 @@
                     if (result.value) {
                         $("form[action='" + href + "'").submit()
                     }
-                })
-            })
-            $('.card-columns').imagesLoaded( function() {
-                var $grid = $('.card-columns').isotope({
-                    itemSelector: '.card',
-                    percentPosition: true,
-                    masonry: {
-                    // use outer width of grid-sizer for columnWidth
-                    columnWidth: '.card' - 10,
-                    gutter: 10
-                    }
-                })
-                // filter items on button click
-                $('.filter-button-group').on( 'click', 'button', function() {
-                    $('.button-group > button').removeClass('active');
-                    $(this).addClass('active');
-
-                    var filterValue = $(this).attr('data-filter');
-                    $grid.isotope({ filter: filterValue });
                 })
             })
         })
