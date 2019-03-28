@@ -26,7 +26,7 @@
         <?php endif; ?>
         <div class="portfolio-menu">
             <div class="button-group filter-button-group">
-                 <a class="button" href="#">Tous</a>
+                 <a class="button" href="*">Tous</a>
                  <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                      <button data-filter=".cat<?php echo e($category->id); ?>"><?php echo e($category->name); ?></button>
                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -473,7 +473,7 @@
                     percentPosition: true,
                     masonry: {
                     // use outer width of grid-sizer for columnWidth
-                    columnWidth: '.card',
+                    columnWidth: '.card' - 10,
                     gutter: 10
                     }
                 })
