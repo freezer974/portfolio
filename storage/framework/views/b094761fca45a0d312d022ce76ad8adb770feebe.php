@@ -364,13 +364,13 @@
                             </div>
                             <div class="portfolio-content">
                                 <?php if(isset($image->title)): ?>
-                                    <a href="<?php echo e($image->url); ?>"><h4 class="text-dark"><?php echo e($image->title); ?></h4></a>
+                                    <h4 class="text-dark"><?php echo e($image->title); ?></h4>
                                 <?php endif; ?>
                                 <?php if(isset($image->description)): ?>
                                     <span class="text-muted"><?php echo e($image->description); ?></span>
                                 <?php endif; ?>
                                 <?php if(isset($image->url)): ?>
-                                    <em class="d-block"><a href="<?php echo e($image->url); ?>">Site web</a></em>
+                                    <em class="d-block"><a href="<?php echo e($image->url); ?>" data-toggle="tooltip" title="<?php echo e(__('Voir le site web')); ?>">Site web</a></em>
                                 <?php endif; ?>
                                 <em>fait par <a href="<?php echo e(route('user', $image->user->id)); ?>" data-toggle="tooltip" title="<?php echo e(__('Voir les photos de ') . $image->user->name); ?>"><?php echo e($image->user->name); ?></a></em>
                                 <div class="float-right">
@@ -491,24 +491,39 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
-                    <form action="#">
+                    <form method="POST" action="<?php echo e(route('contactus.store')); ?>">
+                        <?php echo csrf_field(); ?>
                         <div class="form-row">
-                            <div class="col-sm-6 mb-3 form-group">
-                                <input type="text" class="form-control" placeholder="Votre nom">
-                            </div>
-                            <div class="col-sm-6 mb-3 form-group">
-                                <input type="email" class="form-control" placeholder="Votre email">
-                            </div>
+                            <?php echo $__env->make('partials.form-group', [
+                                'title' => __('Votre nom'),
+                                'type' => 'text',
+                                'class' => ' col-sm-6',
+                                'name' => 'name',
+                                'required' => true,
+                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php echo $__env->make('partials.form-group', [
+                                'title' => __('Votre email'),
+                                'type' => 'email',
+                                'class' => ' col-sm-6',
+                                'name' => 'email',
+                                'required' => true,
+                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Numéro de téléphone">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Votre message"></textarea>
-                        </div>
-                        <div class="form-group col-6 mx-auto">
-                            <button class="btn submit-btn col" type="submit">Envoyer</button>
-                        </div>
+                        <?php echo $__env->make('partials.form-group', [
+                            'title' => __('Numéro de téléphone'),
+                            'type' => 'text',
+                            'name' => 'phone',
+                            'required' => true,
+                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php echo $__env->make('partials.form-group', [
+                            'title' => __('Votre message'),
+                            'type' => 'text',
+                            'name' => 'message',
+                            'required' => true,
+                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php $__env->startComponent('components.button'); ?>
+                            <?php echo app('translator')->getFromJson('Envoyer'); ?>
+                        <?php echo $__env->renderComponent(); ?>
                     </form>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
@@ -547,7 +562,7 @@
         // jQuery and everything else is loaded
         $(document).ready(function() {
 
-            $('body').css('margin-top', 0);
+            $('body').css('margin-top', 0)
 
             $('.site-wrapper').fadeOut(1000)
 

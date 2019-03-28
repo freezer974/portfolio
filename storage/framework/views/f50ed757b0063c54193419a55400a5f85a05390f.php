@@ -25,23 +25,24 @@
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
             <?php endif; ?>
-            <?php if(currentRoute(route('all')) || currentRoute(route('category', $category->slug))): ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle
-                        <?php if(isset($category)): ?>
-                            <?php echo e(currentRoute(route('category', $category->slug))); ?>
+            <?php if(isset($category)): ?>
+                <?php if(currentRoute(route('all'))): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle
+                                <?php echo e(currentRoute(route('category', $category->slug))); ?>
 
-                        <?php endif; ?>
-                            " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo app('translator')->getFromJson('Catégories'); ?>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
-                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <a class="dropdown-item" href="<?php echo e(route('category', $category->slug)); ?>"><?php echo e($category->name); ?></a>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </div>
-                </li>
+                                " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php echo app('translator')->getFromJson('Catégories'); ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
+                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <a class="dropdown-item" href="<?php echo e(route('category', $category->slug)); ?>"><?php echo e($category->name); ?></a>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+                    </li>
+                <?php endif; ?>
             <?php endif; ?>
+
             <?php if(isset($albums)): ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle
@@ -182,8 +183,8 @@
     </div>
 </nav>
 <?php if(session('ok')): ?>
-    <div class="container">
-        <div class="alert alert-dismissible alert-success fade show" role="alert">
+    <div id="message_flash" class="container <?php echo e((currentRoute(route('home'))) ? 'position-absolute mt-5' : ''); ?>" <?php echo e((currentRoute(route('home'))) ? 'style=z-index:1080;' : ''); ?>>
+        <div class="alert alert-dismissible alert-success fade show " role="alert">
             <?php echo e(session('ok')); ?>
 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -203,6 +204,10 @@
         })
 
         $('[data-toggle="tooltip"]').tooltip()
+
+        $("#message_flash").fadeTo(3000, 500).slideUp(500, function(){
+            $("#message_flash").slideUp(500);
+        });
     })
 
 

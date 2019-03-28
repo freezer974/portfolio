@@ -24,22 +24,23 @@
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
             @endif
-            @if(currentRoute(route('all')) || currentRoute(route('category', $category->slug)))
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle
-                        @isset($category)
-                            {{ currentRoute(route('category', $category->slug)) }}
-                        @endisset
-                            " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @lang('Catégories')
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
-                        @foreach($categories as $category)
-                            <a class="dropdown-item" href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
-                        @endforeach
-                    </div>
-                </li>
-            @endif
+            @isset($category)
+                @if(currentRoute(route('all')))
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle
+                                {{ currentRoute(route('category', $category->slug)) }}
+                                " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @lang('Catégories')
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
+                            @foreach($categories as $category)
+                                <a class="dropdown-item" href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
+                            @endforeach
+                        </div>
+                    </li>
+                @endif
+            @endisset
+
             @isset($albums)
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle
@@ -178,8 +179,8 @@
     </div>
 </nav>
 @if (session('ok'))
-    <div class="container">
-        <div class="alert alert-dismissible alert-success fade show" role="alert">
+    <div id="message_flash" class="container {{ (currentRoute(route('home'))) ? 'position-absolute mt-5' : '' }}" {{ (currentRoute(route('home'))) ? 'style=z-index:1080;' : '' }}>
+        <div class="alert alert-dismissible alert-success fade show " role="alert">
             {{ session('ok') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -198,6 +199,10 @@
         })
 
         $('[data-toggle="tooltip"]').tooltip()
+
+        $("#message_flash").fadeTo(3000, 500).slideUp(500, function(){
+            $("#message_flash").slideUp(500);
+        });
     })
 
 
