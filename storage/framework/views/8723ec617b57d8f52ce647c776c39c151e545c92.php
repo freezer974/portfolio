@@ -24,7 +24,14 @@
             <?php endif; ?>
             </h2>
         <?php endif; ?>
-
+        <div class="portfolio-menu">
+            <div class="button-group filter-button-group">
+                 <a class="button" href="#">Tous</a>
+                 <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                     <button data-filter=".cat<?php echo e($category->id); ?>"><?php echo e($category->name); ?></button>
+                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+             </div>
+        </div>
 
         <div class="d-flex justify-content-center">
             <?php echo e($images->links()); ?>
@@ -32,7 +39,7 @@
         </div>
         <div class="card-columns">
             <?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="card <?php if($image->adult): ?> border-danger <?php endif; ?>" id="image<?php echo e($image->id); ?>">
+                <div class="card col-md-4 col-sm-2 col-ld-4 <?php if($image->adult): ?> border-danger <?php endif; ?> cat<?php echo e($image->category_id); ?>" id="image<?php echo e($image->id); ?>">
                     <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-link="<?php echo e(route('image.click', $image->id)); ?>">
                         <img class="card-img-top"
                              src="<?php echo e(url('thumbs/' . $image->name)); ?>"
@@ -458,6 +465,25 @@
                     if (result.value) {
                         $("form[action='" + href + "'").submit()
                     }
+                })
+            })
+            $('.card-columns').imagesLoaded( function() {
+                var $grid = $('.card-columns').isotope({
+                    itemSelector: '.card',
+                    percentPosition: true,
+                    masonry: {
+                    // use outer width of grid-sizer for columnWidth
+                    columnWidth: '.card',
+                    gutter: 10
+                    }
+                })
+                // filter items on button click
+                $('.filter-button-group').on( 'click', 'button', function() {
+                    $('.button-group > button').removeClass('active');
+                    $(this).addClass('active');
+
+                    var filterValue = $(this).attr('data-filter');
+                    $grid.isotope({ filter: filterValue });
                 })
             })
         })
