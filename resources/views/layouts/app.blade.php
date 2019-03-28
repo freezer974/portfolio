@@ -179,8 +179,8 @@
     </div>
 </nav>
 @if (session('ok'))
-    <div class="container">
-        <div class="alert alert-dismissible alert-success fade show" role="alert">
+    <div id="message_flash" class="container {{ (currentRoute(route('home'))) ? 'position-absolute mt-5' : '' }}" {{ (currentRoute(route('home'))) ? 'style=z-index:1080;' : '' }}>
+        <div class="alert alert-dismissible alert-success fade show " role="alert">
             {{ session('ok') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -199,6 +199,10 @@
         })
 
         $('[data-toggle="tooltip"]').tooltip()
+
+        $("#message_flash").fadeTo(3000, 500).slideUp(500, function(){
+            $("#message_flash").slideUp(500);
+        });
     })
 
 
