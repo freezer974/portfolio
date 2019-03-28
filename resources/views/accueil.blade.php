@@ -491,7 +491,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
-                    <form method="POST" action="{{ route('contactus.store') }}">
+                    <form method="POST" action="{{ url('/contact') }}">
                         @csrf
                         <div class="form-row">
                             @include('partials.form-group', [
