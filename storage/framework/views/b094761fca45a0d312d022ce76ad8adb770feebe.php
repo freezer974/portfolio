@@ -179,7 +179,7 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 mb-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-users fa-2x pb-2 text-dark"></i>
-                        <h1 class="counter text-info">95</h1>
+                        <h1 class="counter text-info">43</h1>
                         <p>clients heureux</p>
                     </div>
                 </div>
@@ -193,8 +193,8 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-glass-martini fa-2x pb-2 text-dark" aria-hidden="true"></i>
-                        <h1 class="counter text-info">104</h1>
-                        <p>jus de fruit énergétique</p>
+                        <h1 class="counter text-info">475</h1>
+                        <p>Jus frais consommés</p>
                     </div>
                 </div>
             </div>
@@ -250,7 +250,7 @@
                         </div>
                         <div class="service-content">
                             <h4>App & iOS</h4>
-                            <p>Nullam fermentum nisl diam, ut faucibus justo aliquam id. Sed volutpat est id ligula eu vari massa pretium something like.</p>
+                            <p>Évoluer votre entreprise vers le monde du digital, en la connectant aux clients par une interaction mobile</p>
                         </div>
                     </div>
                 </div>
@@ -321,7 +321,7 @@
                 <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
                     <div class="testimonial-section-title">
                         <i class="fa fa-quote-right fa-3x text-info"></i>
-                        <h4>Ce que les gens disent</h4>
+                        <h4>Ce que les clients disent</h4>
                         <hr class="mx-auto col-4 my-5 bg-light">
                     </div>
                     <div class="testimonial-active carousel slide" data-ride="carousel">
@@ -890,7 +890,7 @@
 
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo e(env('GOOGLE_KEY')); ?>&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo e($googleKey); ?>&callback=initMap" async defer></script>
 
 <?php $__env->stopSection(); ?>
 
