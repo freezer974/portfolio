@@ -26,7 +26,7 @@
                 <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
             <?php endif; ?>
 
-            <?php if(currentRoute(route('all')) || currentRoute(route('category', $category->slug))): ?>
+            <?php if(!currentRoute(route('home'))): ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle
                     <?php if(isset($category->slug)): ?> <?php echo e(currentRoute(route('category', $category->slug))); ?> <?php endif; ?>
