@@ -474,7 +474,7 @@
                         <div class="col-sm-4 mb-5">
                             <div class="contact-box">
                                 <span class="contact-icon">
-                                    <i class="fa fa-envelope" aria-hidden="true"  class="p-3"></i>
+                                    <a href="mailto:contact@tatoumi.com"><i class="fa fa-envelope" aria-hidden="true"  class="p-3"></i></a>
                                 </span>
                                 <h3>Email</h3>
                                 <p><a href="mailto:contact@tatoumi.com">contact@tatoumi.com</a></p>
@@ -491,43 +491,43 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
-                    <form method="POST" action="<?php echo e(url('/contact')); ?>">
-                        <?php echo csrf_field(); ?>
+<?php /*                <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
+                    <form method="POST" action="{{ url('/contact') }}">
+                        @csrf
                         <div class="form-row">
-                            <?php echo $__env->make('partials.form-group', [
+                            @include('partials.form-group', [
                                 'title' => __('Votre nom'),
                                 'type' => 'text',
                                 'class' => ' col-sm-6',
                                 'name' => 'name',
                                 'required' => true,
-                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                            <?php echo $__env->make('partials.form-group', [
+                            ])
+                            @include('partials.form-group', [
                                 'title' => __('Votre email'),
                                 'type' => 'email',
                                 'class' => ' col-sm-6',
                                 'name' => 'email',
                                 'required' => true,
-                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            ])
                         </div>
-                        <?php echo $__env->make('partials.form-group', [
+                        @include('partials.form-group', [
                             'title' => __('Numéro de téléphone'),
                             'type' => 'text',
                             'name' => 'phone',
                             'required' => true,
-                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        <?php echo $__env->make('partials.form-group', [
+                        ])
+                        @include('partials.form-group', [
                             'title' => __('Votre message'),
                             'type' => 'text',
                             'name' => 'message',
                             'required' => true,
-                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        <?php $__env->startComponent('components.button'); ?>
-                            <?php echo app('translator')->getFromJson('Envoyer'); ?>
-                        <?php echo $__env->renderComponent(); ?>
+                        ])
+                        @component('components.button')
+                            @lang('Envoyer')
+                        @endcomponent
                     </form>
-                </div>
-                <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
+                </div> */ ?>
+                <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 mb-3">
                     <div id="map"></div>
                 </div>
             </div>
