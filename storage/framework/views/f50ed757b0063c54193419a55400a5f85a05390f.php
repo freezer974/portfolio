@@ -183,8 +183,8 @@
     </div>
 </nav>
 <?php if(session('ok')): ?>
-    <div class="container">
-        <div class="alert alert-dismissible alert-success fade show" role="alert">
+    <div id="message_flash" class="container <?php echo e((currentRoute(route('home'))) ? 'position-absolute mt-5' : ''); ?>" <?php echo e((currentRoute(route('home'))) ? 'style=z-index:1080;' : ''); ?>>
+        <div class="alert alert-dismissible alert-success fade show " role="alert">
             <?php echo e(session('ok')); ?>
 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -204,6 +204,10 @@
         })
 
         $('[data-toggle="tooltip"]').tooltip()
+
+        $("#message_flash").fadeTo(3000, 500).slideUp(500, function(){
+            $("#message_flash").slideUp(500);
+        });
     })
 
 
