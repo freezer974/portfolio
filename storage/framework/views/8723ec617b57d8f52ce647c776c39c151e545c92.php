@@ -13,14 +13,14 @@
             </div>
         <?php endif; ?>
         <?php if(isset($user)): ?>
-            <h2 class="text-title mb-3"><?php echo e(__('Photos de ') . $user->name); ?></h2>
+            <h2 class="text-title mb-3"><?php echo e(__('Travaux de ') . $user->name); ?></h2>
         <?php else: ?>
             <h2 class="text-title mb-3"><?php echo app('translator')->getFromJson('Mes travaux'); ?>
             <?php if(isset($category)): ?>
-                • <span class="text-title mb-3 text-info"> <?php echo e($category->name); ?></span>
+                • <span class="text-title mb-3 text-info"><?php echo app('translator')->getFromJson($category->name); ?></span>
             <?php endif; ?>
             <?php if(isset($album)): ?>
-            • <span class="text-title mb-3 text-info"> <?php echo e($album->name); ?> </span>
+            • <span class="text-title mb-3 text-info"><?php echo app('translator')->getFromJson($album->name); ?></span>
             <?php endif; ?>
             </h2>
         <?php endif; ?>
