@@ -36,22 +36,17 @@
                              src="{{ url('thumbs/' . $image->name) }}"
                              alt="image">
                     </a>
-                    @isset($image->description)
-                        <div class="card-body">
-
-                            <p class="card-text">
-                                @isset($image->title)
-                                    <h4 class="text-dark">{{ $image->title }}</h4>
-                                @endisset
-                                {{ $image->description }}
-                                @isset($image->url)
-                                    <em class="d-block"><a href="{{ $image->url}}">Site web</a></em>
-                                @endisset
-                            </p>
-
-                        </div>
-
-                    @endisset
+                    <div class="card-body">
+                        @isset($image->title)
+                            <h5 class="card-title">{{ $image->title }}</h5>
+                        @endisset
+                        <p class="card-text">
+                            {{ $image->description }}
+                            @isset($image->url)
+                                <em class="d-block"><a href="{{ $image->url}}">Site web</a></em>
+                            @endisset
+                        </p>
+                    </div>
                     <div class="card-footer text-muted">
                         <em>
                             <a href="{{ route('user', $image->user->id) }}" data-toggle="tooltip"
@@ -81,9 +76,8 @@
                             </div>
                             <span class="float-right">
                                 @adminOrOwner($image->user_id)
-                                <a class="toggleIcons"
-                                    href="#">
-                                <i class="fa fa-cog"></i>
+                                <a class="toggleIcons" href="#">
+                                    <i class="fa fa-cog"></i>
                                 </a>
                                 <span class="menuIcons" style="display: none">
                                     <a class="form-delete text-danger"
@@ -126,7 +120,6 @@
                             </span>
                         </div>
                     </div>
-
                 </div>
             @endforeach
         </div>
