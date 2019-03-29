@@ -1,9 +1,10 @@
 window._ = require('lodash');
 window.swal = require('sweetalert2');
-window.Popper = require('popper.js').default;
 
 try {
     window.$ = window.jQuery = require('jquery');
+    window.Popper = require('popper.js').default; // default is very important.
+
     require('bootstrap');
     require('isotope-layout/dist/isotope.pkgd.min.js');
     require('magnific-popup');
