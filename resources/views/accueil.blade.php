@@ -119,7 +119,7 @@
 					<div class="text-left">
 							<h2>Le processus</h2>
 							<hr>
-							<p>Pour un meilleur rapport qualité / prix, et une meilleure rapidité d'exécution, voici comment nous travaillons avec vous.</p>
+							<p>Pour un meilleur rapport qualité / prix et une meilleure rapidité d'exécution, voici comment nous travaillons avec vous.</p>
 					</div>
 				</div>
 				<div class="col-md-3 mb-3 col-sm-4 col-xs-12">
@@ -207,7 +207,7 @@
         <div class="container">
            <div class="section-title text-center upcase">
                <h2>Services</h2>
-               <p>Des clients satisfaits du service à la carte, permettant d'être au plus proche de leurs exigences</p>
+               <p>Des clients satisfaits du service à la carte, permettant d'être au plus proche de leurs exigences.</p>
                <hr class="mx-auto col-4 my-5">
            </div>
             <div class="row">
@@ -229,7 +229,7 @@
                         </div>
                         <div class="service-content">
                             <h4>Développement web</h4>
-                            <p>Donner de la visibilité à votre entreprise sur internet en lui offrant la meilleur stratégie.</p>
+                            <p>Donner de la visibilité à votre entreprise sur internet en lui offrant la meilleure stratégie.</p>
                         </div>
                     </div>
                 </div>
@@ -251,7 +251,7 @@
                         </div>
                         <div class="service-content">
                             <h4>App & iOS</h4>
-                            <p>Évoluer votre entreprise vers le monde du digital, en la connectant aux clients par une interaction mobile</p>
+                            <p>Évoluer votre entreprise vers le monde du numérique, en la connectant aux clients par une interaction mobile.</p>
                         </div>
                     </div>
                 </div>
@@ -262,7 +262,7 @@
                         </div>
                         <div class="service-content">
                             <h4>Design Graphique</h4>
-                            <p>Plébicité votre entreprise et ses produits pour une communication visuelle impactante avec des produits publitaires.</p>
+                            <p>Plébiscité votre entreprise et ses produits pour une communication visuelle impactante avec des produits publicitaires.</p>
                         </div>
                     </div>
                 </div>
@@ -273,7 +273,7 @@
                         </div>
                         <div class="service-content">
                             <h4>Résultat fiable</h4>
-                            <p>Garantissez-vous des résultats performants avec une communication à plusieurs niveau et sur de multiples supports.</p>
+                            <p>Garantissez-vous des résultats performants avec une communication à plusieurs niveaux et sur de multiples supports.</p>
                         </div>
                     </div>
                 </div>
@@ -283,8 +283,8 @@
                             <i class="fa fa-envelope-open"></i>
                         </div>
                         <div class="service-content">
-                            <h4>Email Marketing</h4>
-                            <p>Communiquer sur vos projets, vos produits, votre image en lancant des campagne d'emailing et fidélisez votre clientèle.</p>
+                            <h4>Mail Marketing</h4>
+                            <p>Communiquer sur vos projets, vos produits, votre image en lançant des campagnes de mailing et fidélisez votre clientèle.</p>
                         </div>
                     </div>
                 </div>
@@ -345,7 +345,7 @@
         <div class="container-fluid">
             <div class="section-title text-center upcase">
                 <h2>Portfolio</h2>
-                <p>Nous répondrons à toute les exigences de vos demandes dans les meilleurs délais</p>
+                <p>Nous répondrons à toutes les exigences dans les meilleurs délais</p>
                 <hr class="mx-auto col-4 my-5">
             </div>
                <div class="portfolio-menu">
