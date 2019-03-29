@@ -891,7 +891,7 @@
 
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo e($googleKey); ?>&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo e(Config::get('app.googlekey')); ?>&callback=initMap" async defer></script>
 
 <?php $__env->stopSection(); ?>
 
