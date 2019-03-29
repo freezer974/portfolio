@@ -117,23 +117,25 @@
             <?php endif; ?>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <?php /*
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" id="navbarDropdownFlag" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <img width="18" height="18" alt="<?php echo e(session('locale')); ?>"
-                            src="<?php echo asset('images/flags/' . session('locale') . '-flag.png'); ?>"/>
+                    <img width="18" height="18" alt="{{ session('locale') }}"
+                            src="{!! asset('images/flags/' . session('locale') . '-flag.png') !!}"/>
                 </a>
                 <div id="flags" class="dropdown-menu" aria-labelledby="navbarDropdownFlag">
-                    <?php $__currentLoopData = config('app.locales'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $locale): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($locale != session('locale')): ?>
-                            <a class="dropdown-item" href="<?php echo e(route('language', $locale)); ?>">
-                                <img width="18" height="18" alt="<?php echo e(session('locale')); ?>"
-                                        src="<?php echo asset('images/flags/' . $locale . '-flag.png'); ?>"/>
+                    @foreach(config('app.locales') as $locale)
+                        @if($locale != session('locale'))
+                            <a class="dropdown-item" href="{{ route('language', $locale) }}">
+                                <img width="18" height="18" alt="{{ session('locale') }}"
+                                        src="{!! asset('images/flags/' . $locale . '-flag.png') !!}"/>
                             </a>
-                        <?php endif; ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        @endif
+                    @endforeach
                 </div>
             </li>
+            */ ?>
             <?php if(auth()->guard()->guest()): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
