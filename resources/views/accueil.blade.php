@@ -890,6 +890,6 @@
 
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key={{ $googleKey }}&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key={{ Config::get('app.googlekey') }}&callback=initMap" async defer></script>
 
 @endsection
