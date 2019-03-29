@@ -39,11 +39,10 @@
                              alt="image">
                     </a>
                     <div class="card-body">
-                            <?php if(isset($image->title)): ?>
+                        <?php if(isset($image->title)): ?>
                             <h5 class="card-title"><?php echo e($image->title); ?></h5>
                         <?php endif; ?>
                         <p class="card-text">
-
                             <?php echo e($image->description); ?>
 
                             <?php if(isset($image->url)): ?>
