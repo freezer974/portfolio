@@ -38,23 +38,19 @@
                              src="<?php echo e(url('thumbs/' . $image->name)); ?>"
                              alt="image">
                     </a>
-                    <?php if(isset($image->description)): ?>
-                        <div class="card-body">
+                    <div class="card-body">
+                            <?php if(isset($image->title)): ?>
+                            <h5 class="card-title"><?php echo e($image->title); ?></h5>
+                        <?php endif; ?>
+                        <p class="card-text">
 
-                            <p class="card-text">
-                                <?php if(isset($image->title)): ?>
-                                    <h4 class="text-dark"><?php echo e($image->title); ?></h4>
-                                <?php endif; ?>
-                                <?php echo e($image->description); ?>
+                            <?php echo e($image->description); ?>
 
-                                <?php if(isset($image->url)): ?>
-                                    <em class="d-block"><a href="<?php echo e($image->url); ?>">Site web</a></em>
-                                <?php endif; ?>
-                            </p>
-
-                        </div>
-
-                    <?php endif; ?>
+                            <?php if(isset($image->url)): ?>
+                                <em class="d-block"><a href="<?php echo e($image->url); ?>">Site web</a></em>
+                            <?php endif; ?>
+                        </p>
+                    </div>
                     <div class="card-footer text-muted">
                         <em>
                             <a href="<?php echo e(route('user', $image->user->id)); ?>" data-toggle="tooltip"
@@ -85,9 +81,8 @@
                             </div>
                             <span class="float-right">
                                 <?php if (\Illuminate\Support\Facades\Blade::check('adminOrOwner', $image->user_id)): ?>
-                                <a class="toggleIcons"
-                                    href="#">
-                                <i class="fa fa-cog"></i>
+                                <a class="toggleIcons" href="#">
+                                    <i class="fa fa-cog"></i>
                                 </a>
                                 <span class="menuIcons" style="display: none">
                                     <a class="form-delete text-danger"
@@ -130,7 +125,6 @@
                             </span>
                         </div>
                     </div>
-
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
