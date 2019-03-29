@@ -539,7 +539,7 @@
 			<div class="basic-footer text-center gray-bg py-2">
 				<div class="container">
 					<div class="footer-logo">
-						<a href="index.html"><h5>Tatoumi Création</h5></a>
+						<a href="{{ route('home') }}"><h5>Tatoumi Création</h5></a>
 					</div>
                     <div class="footer-social-icon">
                                     <a href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
@@ -547,7 +547,7 @@
                                     <a href="https://www.linkedin.com/in/tonychevalier974/"> <i class="fab fa-linkedin-in fa-lg"></i></a>
                     </div>
 					<div class="copyright mt-2">
-						<p>&copy; Tous droits réservés par <a href="tatoumi.com">Tatoumi Création</a> 2018</p>
+						<p>&copy; Tous droits réservés par <a href="{{ route('home') }}">Tatoumi Création</a> 2018-2019</p>
 					</div>
 				</div>
 			</div>
