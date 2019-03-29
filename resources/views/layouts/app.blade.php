@@ -115,6 +115,7 @@
             @endauth
         </ul>
         <ul class="navbar-nav ml-auto">
+            <?php /*
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" id="navbarDropdownFlag" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -132,6 +133,7 @@
                     @endforeach
                 </div>
             </li>
+            */ ?>
             @guest
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
