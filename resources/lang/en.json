@@ -152,5 +152,6 @@
     "Contactez-moi" : "Contact me",
     "sur": "of",
     "de": "of",
-    "L'image #%curr%</a> n'a pas pu être chargée." : "The image #%curr%</a> could not be loaded."
+    "L'image #%curr%</a> n'a pas pu être chargée." : "The image #%curr%</a> could not be loaded.",
+    "Chargement...": "Loading..."
 }
