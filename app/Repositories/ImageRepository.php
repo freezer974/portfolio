@@ -13,8 +13,8 @@ class ImageRepository
         // Save image
         $path = basename($request->image->store('images'));
         // Save thumb
-        $image = InterventionImage::make ($request->image)->widen(500)->encode();
-        Storage::put ('thumbs/' . $path, $image);
+        $image = InterventionImage::make($request->image)->widen(500)->encode();
+        Storage::put('thumbs/' . $path, $image);
         // Save in base
         $image = new Image;
         $image->description = $request->description;
@@ -28,23 +28,23 @@ class ImageRepository
 
     public function getAllImages()
     {
-        return $this->paginateAndRate (Image::latestWithUser());
+        return $this->paginateAndRate(Image::latestWithUser());
     }
 
     public function getImagesForCategory($slug)
     {
-        $query = Image::latestWithUser ()->whereHas ('category', function ($query) use ($slug) {
-            $query->whereSlug ($slug);
+        $query = Image::latestWithUser()->whereHas('category', function($query) use($slug) {
+            $query->whereSlug($slug);
         });
-        return $this->paginateAndRate ($query);
+        return $this->paginateAndRate($query);
     }
 
     public function getImagesForUser($id)
     {
-        $query = Image::latestWithUser ()->whereHas ('user', function ($query) use ($id) {
-            $query->whereId ($id);
+        $query = Image::latestWithUser()->whereHas('user', function($query) use($id) {
+            $query->whereId($id);
         });
-        return $this->paginateAndRate ($query);
+        return $this->paginateAndRate($query);
     }
 
     public function isNotInAlbum($image, $album)
@@ -54,24 +54,24 @@ class ImageRepository
 
     public function getImagesForAlbum($slug)
     {
-        $query = Image::latestWithUser ()->whereHas ('albums', function ($query) use ($slug) {
-            $query->whereSlug ($slug);
+        $query = Image::latestWithUser()->whereHas('albums', function($query) use($slug) {
+            $query->whereSlug($slug);
         });
-        return $this->paginateAndRate ($query);
+        return $this->paginateAndRate($query);
     }
 
     public function getOrphans()
     {
-        return collect (Storage::files ('images'))->transform(function ($item) {
+        return collect(Storage::files('images'))->transform(function($item) {
             return basename($item);
-        })->diff (Image::select ('name')->pluck ('name'));
+        })->diff(Image::select('name')->pluck('name'));
     }
 
     public function destroyOrphans()
     {
-        $orphans = $this->getOrphans ();
-        foreach ($orphans as $orphan) {
-            Storage::delete ([
+        $orphans = $this->getOrphans();
+        foreach($orphans as $orphan) {
+            Storage::delete([
                 'images/' . $orphan,
                 'thumbs/' . $orphan,
             ]);
@@ -83,10 +83,10 @@ class ImageRepository
         $rate = $image->users()->where('users.id', $user->id)->pluck('rating')->first();
         if($rate) {
             if($rate !== $value) {
-                $image->users ()->updateExistingPivot ($user->id, ['rating' => $value]);
+                $image->users()->updateExistingPivot($user->id, ['rating' => $value]);
             }
         } else {
-            $image->users ()->attach ($user->id, ['rating' => $value]);
+            $image->users()->attach($user->id, ['rating' => $value]);
         }
         return $rate;
     }
@@ -98,14 +98,14 @@ class ImageRepository
 
     public function paginateAndRate($query)
     {
-        $images = $query->paginate (config ('app.pagination'));
-        return $this->setRating ($images);
+        $images = $query->paginate(config('app.pagination'));
+        return $this->setRating($images);
     }
 
     public function setRating($images)
     {
-        $images->transform(function ($image) {
-            $this->setImageRate ($image);
+        $images->transform(function($image) {
+            $this->setImageRate($image);
             return $image;
         });
         return $images;
@@ -114,6 +114,6 @@ class ImageRepository
     public function setImageRate($image)
     {
         $number = $image->users->count();
-        $image->rate = $number ? $image->users->pluck ('pivot.rating')->sum () / $number : 0;
+        $image->rate = $number ? $image->users->pluck('pivot.rating')->sum() / $number : 0;
     }
 }

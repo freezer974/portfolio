@@ -60,11 +60,11 @@ class ImageController extends Controller
      */
     public function albums(Request $request,  Image $image)
     {
-        $this->authorize ('manage', $image);
+        $this->authorize('manage', $image);
 
-        $albums = $this->albumRepository->getAlbumsWithImages ($request->user ());
+        $albums = $this->albumRepository->getAlbumsWithImages($request->user());
 
-        return view ('images.albums', compact('albums', 'image'));
+        return view('images.albums', compact('albums', 'image'));
     }
 
     /**
@@ -76,22 +76,22 @@ class ImageController extends Controller
      */
     public function albumsUpdate(Request $request, Image $image)
     {
-        $this->authorize ('manage', $image);
+        $this->authorize('manage', $image);
 
         $image->albums()->sync($request->albums);
 
-        $path = pathinfo (parse_url(url()->previous())['path']);
+        $path = pathinfo(parse_url(url()->previous())['path']);
 
         if($path['dirname'] === '/album') {
 
-            $album = $this->albumRepository->getBySlug ($path['basename']);
+            $album = $this->albumRepository->getBySlug($path['basename']);
 
-            if($this->imageRepository->isNotInAlbum ($image, $album)) {
-                return response ()->json('reload');
+            if($this->imageRepository->isNotInAlbum($image, $album)) {
+                return response()->json('reload');
             }
         }
 
-        return response ()->json();
+        return response()->json();
     }
 
     /**
@@ -103,9 +103,9 @@ class ImageController extends Controller
      */
     public function descriptionUpdate(Request $request, Image $image)
     {
-        $this->authorize ('manage', $image);
+        $this->authorize('manage', $image);
 
-        $request->validate ([
+        $request->validate([
             'description' => 'nullable|string|max:255',
             'title' => 'nullable|string|max:255',
             'url' => 'nullable|string|max:255'
@@ -126,12 +126,12 @@ class ImageController extends Controller
      */
     public function adultUpdate(Request $request, Image $image)
     {
-        $this->authorize ('manage', $image);
+        $this->authorize('manage', $image);
 
         $image->adult = $request->adult == 'true';
         $image->save();
 
-        return response ()->json();
+        return response()->json();
     }
 
     /**
@@ -141,7 +141,7 @@ class ImageController extends Controller
      */
     public function create()
     {
-        return view ('images.create');
+        return view('images.create');
     }
 
     /**
@@ -152,7 +152,7 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate ([
+        $request->validate([
             'image' => 'required|image|max:2000',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string|max:255',
@@ -160,9 +160,9 @@ class ImageController extends Controller
             'url' => 'nullable|string|max:255',
         ]);
 
-        $this->imageRepository->store ($request);
+        $this->imageRepository->store($request);
 
-        return back ()->with ('ok', __ ("L'image a bien été enregistrée"));
+        return back()->with('ok', __("L'image a bien été enregistrée"));
     }
 
     /**
@@ -173,10 +173,10 @@ class ImageController extends Controller
      */
     public function category($slug)
     {
-        $category = $this->categoryRepository->getBySlug ($slug);
-        $images = $this->imageRepository->getImagesForCategory ($slug);
+        $category = $this->categoryRepository->getBySlug($slug);
+        $images = $this->imageRepository->getImagesForCategory($slug);
 
-        return view ('home', compact ('category', 'images'));
+        return view('home', compact('category', 'images'));
     }
 
     /**
@@ -187,10 +187,10 @@ class ImageController extends Controller
      */
     public function album($slug)
     {
-        $album = $this->albumRepository->getBySlug ($slug);
-        $images = $this->imageRepository->getImagesForAlbum ($slug);
+        $album = $this->albumRepository->getBySlug($slug);
+        $images = $this->imageRepository->getImagesForAlbum($slug);
 
-        return view ('home', compact ('album', 'images'));
+        return view('home', compact('album', 'images'));
     }
 
     /**
@@ -201,9 +201,9 @@ class ImageController extends Controller
      */
     public function user(User $user)
     {
-        $images = $this->imageRepository->getImagesForUser ($user->id);
+        $images = $this->imageRepository->getImagesForUser($user->id);
 
-        return view ('home', compact ('user', 'images'));
+        return view('home', compact('user', 'images'));
     }
 
     /**
@@ -214,11 +214,11 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        $this->authorize ('manage', $image);
+        $this->authorize('manage', $image);
 
-        $image->delete ();
+        $image->delete();
 
-        return back ();
+        return back();
     }
 
     /**
@@ -252,13 +252,13 @@ class ImageController extends Controller
         $user = $request->user();
 
         // Is user image owner ?
-        if($this->imageRepository->isOwner ($user, $image)) {
+        if($this->imageRepository->isOwner($user, $image)) {
             return response()->json(['status' => 'no']);
         }
 
         // Rating
-        $rate = $this->imageRepository->rateImage ($user, $image, $request->value);
-        $this->imageRepository->setImageRate ($image);
+        $rate = $this->imageRepository->rateImage($user, $image, $request->value);
+        $this->imageRepository->setImageRate($image);
 
         // Notification
         $notificationRepository->deleteDuplicate($user, $image);
@@ -282,8 +282,8 @@ class ImageController extends Controller
      */
     public function click(Request $request, Image $image)
     {
-        if ($request->session()->has('images') && in_array ($image->id, session ('images'))) {
-            return response ()->json (['increment' => false]);
+        if($request->session()->has('images') && in_array($image->id, session('images'))) {
+            return response()->json(['increment' => false]);
         }
 
         $request->session()->push('images', $image->id);
