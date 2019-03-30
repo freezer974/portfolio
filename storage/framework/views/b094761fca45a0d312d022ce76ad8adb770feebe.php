@@ -357,7 +357,7 @@
                </div>
             <div class="grid gallery row">
                 <?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="col-lg-4 col-sm-4 col-xs-6 col-md-6 cat<?php echo e($image->category_id); ?> grid-item p-1">
+                    <div class="col-lg-4 col-sm-6 cat<?php echo e($image->category_id); ?> grid-item p-1">
                         <div class="portfolio-box">
                             <div class="portfolio-img">
                                 <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-link="<?php echo e(route('image.click', $image->id)); ?>" title="<?php echo e($image->title); ?>" data-user="<?php echo e($image->user->name); ?>"><img src="<?php echo e(url('thumbs/' . $image->name)); ?>" alt="image"></a>
