@@ -358,10 +358,10 @@
                </div>
             <div class="grid gallery row">
                 @foreach($images as $image)
-                    <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 cat{{ $image->category_id }} grid-item p-0">
+                    <div class="col-lg-4 col-sm-4 col-xs-6 col-md-6 cat{{ $image->category_id }} grid-item p-0">
                         <div class="portfolio-box">
                             <div class="portfolio-img">
-                                <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}"><img src="{{ url('thumbs/' . $image->name) }}" alt="image"></a>
+                                <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}" title="{{ $image->title }}" data-user="{{ $image->user->name }}"><img src="{{ url('thumbs/' . $image->name) }}" alt="image"></a>
                             </div>
                             <div class="portfolio-content">
                                 @isset($image->title)
@@ -373,12 +373,13 @@
                                 @isset($image->url)
                                     <em class="d-block"><a href="{{ $image->url }}" data-toggle="tooltip" title="{{ __('Voir le site web') }}">Site web</a></em>
                                 @endisset
-                                <em>fait par <a href="{{ route('user', $image->user->id) }}" data-toggle="tooltip" title="{{ __('Voir les photos de ') . $image->user->name }}">{{ $image->user->name }}</a></em>
                                 <div class="float-right">
                                     <em>
-                                        (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }}) {{ $image->created_at->formatLocalized('%x') }}
+                                        (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }})
+                                        <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
                                     </em>
                                 </div>
+                                <?php /* rating en attente
                                 <div class="star-rating" id="{{ $image->id }}">
                                     <span class="count-number">({{ $image->users->count() }})</span>
                                     <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
@@ -442,6 +443,7 @@
                                         @endadminOrOwner
                                     </span>
                                 </div>
+                                */ ?>
                             </div>
                         </div>
                     </div>
@@ -559,6 +561,7 @@
     <script>
 
     window.onload = function () {
+
         // jQuery and everything else is loaded
         $(document).ready(function() {
 
@@ -837,30 +840,34 @@
                     var filterValue = $(this).attr('data-filter');
                     $grid.isotope({ filter: filterValue });
                 })
-            })
-
-            $('.gallery').magnificPopup({
-                delegate: ':not(.isotope-hidden) a.img-link',
+                $grid.magnificPopup({
+                delegate: 'a.image-link',
                 type: 'image',
-                mainClass: 'mfp-fade',
-                removalDelay: 160,
-                preloader: false,
-                fixedContentPos: false,
+                tLoading: '<i class="fas fa-spinner fa-pulse fa-4x"></i> #%curr%...',
+                mainClass: 'mfp-img-mobile',
                 gallery: {
-                    enabled:true
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                },
+                image: {
+                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    titleSrc: function(item) {
+                        return item.el.attr('title') + '<small>de ' + item.el.attr('data-user') + '</small>';
+                    }
                 }
             })
+            })
 
-            $('a.image-link').click((e) => {
+            $('.portfolio-box').click((e) => {
                 e.preventDefault()
                 let that = $(e.currentTarget)
-                console.log(that)
                 $.ajax({
                     method: 'patch',
-                    url: that.attr('data-link')
+                    url: that.find('a.image-link').attr('data-link')
                 }).done((data) => {
                     if(data.increment) {
-                        let numberElement = that.siblings('div.portfolio-content').find('.image-click')
+                        let numberElement = that.find('.image-click')
                         numberElement.text(parseInt(numberElement.text()) + 1)
                     }
                 })

@@ -43,7 +43,8 @@
                         <p class="card-text">
                             {{ $image->description }}
                             @isset($image->url)
-                                <em class="d-block"><a href="{{ $image->url}}">Site web</a></em>
+                                <em class="d-block"><a href="{{ $image->url}}" data-toggle="tooltip"
+                                    title="{{ __('Voir ce site web') }}">Site web</a></em>
                             @endisset
                         </p>
                     </div>
@@ -54,9 +55,11 @@
                         </em>
                         <div class="float-right">
                             <em>
-                                (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }}) {{ $image->created_at->formatLocalized('%x') }}
+                                (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }})
+                                <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
                             </em>
                         </div>
+                        <?php /* rating en attente
                         <div class="star-rating" id="{{ $image->id }}">
                             <span class="count-number">({{ $image->users->count() }})</span>
                             <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
@@ -119,6 +122,7 @@
                                 @endadminOrOwner
                             </span>
                         </div>
+                        */ ?>
                     </div>
                 </div>
             @endforeach
