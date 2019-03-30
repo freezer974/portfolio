@@ -19640,6 +19640,11 @@ h1 {
   }
 }
 
+.card {
+  border-width: 2px;
+  border-radius: 0.2rem;
+}
+
 .star-rating {
   direction: rtl;
   display: block;
@@ -19972,5 +19977,9 @@ a#scrollUp:hover i {
 
 .image-source-link {
   color: #98C3D1;
+}
+
+.image-link > img {
+  border-bottom: 1px #eeeeee solid;
 }
 
