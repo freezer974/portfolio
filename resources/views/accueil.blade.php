@@ -361,7 +361,7 @@
                     <div class="col-lg-4 col-sm-6 cat{{ $image->category_id }} grid-item p-1">
                         <div class="portfolio-box">
                             <div class="portfolio-img">
-                                <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}" title="{{ $image->title }}" data-user="{{ $image->user->name }}"><img src="{{ url('thumbs/' . $image->name) }}" alt="image"></a>
+                                <a href="{{ url('images/' . $image->name) }}" class="image-link" data-url="{{ $image->url }}" data-link="{{ route('image.click', $image->id) }}" title="{{ $image->title }}" data-user="{{ $image->user->name }}"><img src="{{ url('thumbs/' . $image->name) }}" alt="image"></a>
                             </div>
                             <div class="portfolio-content">
                                 @isset($image->title)
@@ -848,31 +848,35 @@
                 gallery: {
                     enabled: true,
                     navigateByImgClick: true,
-                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                    preload: [0,1], // Will preload 0 - before current, and 1 after the current image
+                    tCounter: '<span class="mfp-counter">%curr% @lang("sur") %total%</span>'
                 },
                 image: {
-                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    tError: '<a href="%url%">@lang("L\'image #%curr%</a> n\'a pas pu être chargée.")',
                     titleSrc: function(item) {
-                        return item.el.attr('title') + '<small>de ' + item.el.attr('data-user') + '</small>';
+                        let title = item.el.attr('title')
+                            title += (item.el.attr('data-url'))? ' - <a href="' + item.el.attr('data-url') + '">@lang("Site web")</a>' : ''
+                            title += '<small>@lang("de") ' + item.el.attr('data-user') + '</small>'
+                        return title
                     }
                 }
             })
-            })
+        })
 
-            $('.portfolio-box').click((e) => {
-                e.preventDefault()
-                let that = $(e.currentTarget)
-                $.ajax({
-                    method: 'patch',
-                    url: that.find('a.image-link').attr('data-link')
-                }).done((data) => {
-                    if(data.increment) {
-                        let numberElement = that.find('.image-click')
-                        numberElement.text(parseInt(numberElement.text()) + 1)
-                    }
-                })
+        $('.portfolio-box').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            $.ajax({
+                method: 'patch',
+                url: that.find('a.image-link').attr('data-link')
+            }).done((data) => {
+                if(data.increment) {
+                    let numberElement = that.find('.image-click')
+                    numberElement.text(parseInt(numberElement.text()) + 1)
+                }
             })
-        }
+        })
+    }
     </script>
     <!--    Google Maps-->
     <script>

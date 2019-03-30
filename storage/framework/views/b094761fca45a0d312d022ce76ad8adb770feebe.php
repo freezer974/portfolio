@@ -360,7 +360,7 @@
                     <div class="col-lg-4 col-sm-6 cat<?php echo e($image->category_id); ?> grid-item p-1">
                         <div class="portfolio-box">
                             <div class="portfolio-img">
-                                <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-link="<?php echo e(route('image.click', $image->id)); ?>" title="<?php echo e($image->title); ?>" data-user="<?php echo e($image->user->name); ?>"><img src="<?php echo e(url('thumbs/' . $image->name)); ?>" alt="image"></a>
+                                <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-url="<?php echo e($image->url); ?>" data-link="<?php echo e(route('image.click', $image->id)); ?>" title="<?php echo e($image->title); ?>" data-user="<?php echo e($image->user->name); ?>"><img src="<?php echo e(url('thumbs/' . $image->name)); ?>" alt="image"></a>
                             </div>
                             <div class="portfolio-content">
                                 <?php if(isset($image->title)): ?>
@@ -847,31 +847,35 @@
                 gallery: {
                     enabled: true,
                     navigateByImgClick: true,
-                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                    preload: [0,1], // Will preload 0 - before current, and 1 after the current image
+                    tCounter: '<span class="mfp-counter">%curr% <?php echo app('translator')->getFromJson("sur"); ?> %total%</span>'
                 },
                 image: {
-                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    tError: '<a href="%url%"><?php echo app('translator')->getFromJson("L\'image #%curr%</a> n\'a pas pu être chargée."); ?>',
                     titleSrc: function(item) {
-                        return item.el.attr('title') + '<small>de ' + item.el.attr('data-user') + '</small>';
+                        let title = item.el.attr('title')
+                            title += (item.el.attr('data-url'))? ' - <a href="' + item.el.attr('data-url') + '"><?php echo app('translator')->getFromJson("Site web"); ?></a>' : ''
+                            title += '<small><?php echo app('translator')->getFromJson("de"); ?> ' + item.el.attr('data-user') + '</small>'
+                        return title
                     }
                 }
             })
-            })
+        })
 
-            $('.portfolio-box').click((e) => {
-                e.preventDefault()
-                let that = $(e.currentTarget)
-                $.ajax({
-                    method: 'patch',
-                    url: that.find('a.image-link').attr('data-link')
-                }).done((data) => {
-                    if(data.increment) {
-                        let numberElement = that.find('.image-click')
-                        numberElement.text(parseInt(numberElement.text()) + 1)
-                    }
-                })
+        $('.portfolio-box').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            $.ajax({
+                method: 'patch',
+                url: that.find('a.image-link').attr('data-link')
+            }).done((data) => {
+                if(data.increment) {
+                    let numberElement = that.find('.image-click')
+                    numberElement.text(parseInt(numberElement.text()) + 1)
+                }
             })
-        }
+        })
+    }
     </script>
     <!--    Google Maps-->
     <script>
