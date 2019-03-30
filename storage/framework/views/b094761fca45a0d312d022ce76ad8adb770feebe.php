@@ -357,10 +357,10 @@
                </div>
             <div class="grid gallery row">
                 <?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="col-lg-4 col-sm-4 col-xs-6 col-md-4 cat<?php echo e($image->category_id); ?> grid-item p-0">
+                    <div class="col-lg-4 col-sm-4 col-xs-6 col-md-6 cat<?php echo e($image->category_id); ?> grid-item p-0">
                         <div class="portfolio-box">
                             <div class="portfolio-img">
-                                <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-link="<?php echo e(route('image.click', $image->id)); ?>"><img src="<?php echo e(url('thumbs/' . $image->name)); ?>" alt="image"></a>
+                                <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-link="<?php echo e(route('image.click', $image->id)); ?>" title="<?php echo e($image->title); ?>" data-user="<?php echo e($image->user->name); ?>"><img src="<?php echo e(url('thumbs/' . $image->name)); ?>" alt="image"></a>
                             </div>
                             <div class="portfolio-content">
                                 <?php if(isset($image->title)): ?>
@@ -372,76 +372,77 @@
                                 <?php if(isset($image->url)): ?>
                                     <em class="d-block"><a href="<?php echo e($image->url); ?>" data-toggle="tooltip" title="<?php echo e(__('Voir le site web')); ?>">Site web</a></em>
                                 <?php endif; ?>
-                                <em>fait par <a href="<?php echo e(route('user', $image->user->id)); ?>" data-toggle="tooltip" title="<?php echo e(__('Voir les photos de ') . $image->user->name); ?>"><?php echo e($image->user->name); ?></a></em>
                                 <div class="float-right">
                                     <em>
-                                        (<span class="image-click"><?php echo e($image->clicks); ?></span> <?php echo e(trans_choice(__('vue|vues'), $image->clicks)); ?>) <?php echo e($image->created_at->formatLocalized('%x')); ?>
-
+                                        (<span class="image-click"><?php echo e($image->clicks); ?></span> <?php echo e(trans_choice(__('vue|vues'), $image->clicks)); ?>)
+                                        <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
                                     </em>
                                 </div>
-                                <div class="star-rating" id="<?php echo e($image->id); ?>">
-                                    <span class="count-number">(<?php echo e($image->users->count()); ?>)</span>
-                                    <div id="<?php echo e($image->id . '.5'); ?>" data-toggle="tooltip" title="5" <?php if($image->rate > 4): ?> class="star-yellow" <?php endif; ?>>
+                                <?php /* rating en attente
+                                <div class="star-rating" id="{{ $image->id }}">
+                                    <span class="count-number">({{ $image->users->count() }})</span>
+                                    <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <div id="<?php echo e($image->id . '.4'); ?>" data-toggle="tooltip" title="4" <?php if($image->rate > 3): ?> class="star-yellow" <?php endif; ?>>
+                                    <div id="{{ $image->id . '.4' }}" data-toggle="tooltip" title="4" @if($image->rate > 3) class="star-yellow" @endif>
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <div id="<?php echo e($image->id . '.3'); ?>" data-toggle="tooltip" title="3" <?php if($image->rate > 2): ?> class="star-yellow" <?php endif; ?>>
+                                    <div id="{{ $image->id . '.3' }}" data-toggle="tooltip" title="3" @if($image->rate > 2) class="star-yellow" @endif>
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <div id="<?php echo e($image->id . '.2'); ?>" data-toggle="tooltip" title="2" <?php if($image->rate > 1): ?> class="star-yellow" <?php endif; ?>>
+                                    <div id="{{ $image->id . '.2' }}" data-toggle="tooltip" title="2" @if($image->rate > 1) class="star-yellow" @endif>
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <div id="<?php echo e($image->id . '.1'); ?>" data-toggle="tooltip" title="1" <?php if($image->rate > 0): ?> class="star-yellow" <?php endif; ?>>
+                                    <div id="{{ $image->id . '.1' }}" data-toggle="tooltip" title="1" @if($image->rate > 0) class="star-yellow" @endif>
                                         <i class="fas fa-star"></i>
                                     </div>
                                     <span class="float-right">
-                                        <?php if (\Illuminate\Support\Facades\Blade::check('adminOrOwner', $image->user_id)): ?>
+                                        @adminOrOwner($image->user_id)
                                         <a class="toggleIcons"
                                             href="#">
                                         <i class="fa fa-cog"></i>
                                         </a>
                                         <span class="menuIcons" style="display: none">
                                             <a class="form-delete text-danger"
-                                                href="<?php echo e(route('image.destroy', $image->id)); ?>"
+                                                href="{{ route('image.destroy', $image->id) }}"
                                                 data-toggle="tooltip"
-                                                title="<?php echo app('translator')->getFromJson('Supprimer cette photo'); ?>">
+                                                title="@lang('Supprimer cette photo')">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                             <a class="description-manage"
-                                                href="<?php echo e(route('image.description', $image->id)); ?>"
+                                                href="{{ route('image.description', $image->id) }}"
                                                 data-toggle="tooltip"
-                                                title="<?php echo app('translator')->getFromJson('Gérer la description'); ?>">
+                                                title="@lang('Gérer la description')">
                                                 <i class="fa fa-comment"></i>
                                             </a>
                                             <a class="albums-manage"
-                                                href="<?php echo e(route('image.albums', $image->id)); ?>"
+                                                href="{{ route('image.albums', $image->id) }}"
                                                 data-toggle="tooltip"
-                                                title="<?php echo app('translator')->getFromJson('Gérer les albums'); ?>">
+                                                title="@lang('Gérer les albums')">
                                                 <i class="fa fa-folder-open"></i>
                                             </a>
                                             <a class="category-edit"
-                                                data-id="<?php echo e($image->category_id); ?>"
-                                                href="<?php echo e(route('image.update', $image->id)); ?>"
+                                                data-id="{{ $image->category_id }}"
+                                                href="{{ route('image.update', $image->id) }}"
                                                 data-toggle="tooltip"
-                                                title="<?php echo app('translator')->getFromJson('Changer de catégorie'); ?>">
+                                                title="@lang('Changer de catégorie')">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <a class="adult-edit"
-                                                href="<?php echo e(route('image.adult', $image->id)); ?>"
+                                                href="{{ route('image.adult', $image->id) }}"
                                                 data-toggle="tooltip"
-                                                title="<?php echo app('translator')->getFromJson('Changer de statut'); ?>">
-                                                <i class="fa <?php if($image->adult): ?> fa-graduation-cap <?php else: ?> fa-child <?php endif; ?>"></i>
+                                                title="@lang('Changer de statut')">
+                                                <i class="fa @if($image->adult) fa-graduation-cap @else fa-child @endif"></i>
                                             </a>
                                         </span>
-                                        <form action="<?php echo e(route('image.destroy', $image->id)); ?>" method="POST" class="hide">
-                                            <?php echo csrf_field(); ?>
-                                            <?php echo method_field('DELETE'); ?>
+                                        <form action="{{ route('image.destroy', $image->id) }}" method="POST" class="hide">
+                                            @csrf
+                                            @method('DELETE')
                                         </form>
-                                        <?php endif; ?>
+                                        @endadminOrOwner
                                     </span>
                                 </div>
+                                */ ?>
                             </div>
                         </div>
                     </div>
@@ -559,6 +560,7 @@
     <script>
 
     window.onload = function () {
+
         // jQuery and everything else is loaded
         $(document).ready(function() {
 
@@ -837,30 +839,34 @@
                     var filterValue = $(this).attr('data-filter');
                     $grid.isotope({ filter: filterValue });
                 })
-            })
-
-            $('.gallery').magnificPopup({
-                delegate: ':not(.isotope-hidden) a.img-link',
+                $grid.magnificPopup({
+                delegate: 'a.image-link',
                 type: 'image',
-                mainClass: 'mfp-fade',
-                removalDelay: 160,
-                preloader: false,
-                fixedContentPos: false,
+                tLoading: '<i class="fas fa-spinner fa-pulse fa-4x"></i> #%curr%...',
+                mainClass: 'mfp-img-mobile',
                 gallery: {
-                    enabled:true
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                },
+                image: {
+                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    titleSrc: function(item) {
+                        return item.el.attr('title') + '<small>de ' + item.el.attr('data-user') + '</small>';
+                    }
                 }
             })
+            })
 
-            $('a.image-link').click((e) => {
+            $('.portfolio-box').click((e) => {
                 e.preventDefault()
                 let that = $(e.currentTarget)
-                console.log(that)
                 $.ajax({
                     method: 'patch',
-                    url: that.attr('data-link')
+                    url: that.find('a.image-link').attr('data-link')
                 }).done((data) => {
                     if(data.increment) {
-                        let numberElement = that.siblings('div.portfolio-content').find('.image-click')
+                        let numberElement = that.find('.image-click')
                         numberElement.text(parseInt(numberElement.text()) + 1)
                     }
                 })

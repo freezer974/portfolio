@@ -11,18 +11,20 @@
 
             </div>
         <?php endif; ?>
-        <h2 class="text-title mb-3">Mes travaux
+        <?php if(isset($user)): ?>
+            <h2 class="text-title mb-3"><?php echo e(__('Travaux de ') . $user->name); ?></h2>
+        <?php else: ?>
+            <h2 class="text-title mb-3"><?php echo app('translator')->getFromJson('Mes travaux'); ?>
             <?php if(isset($category)): ?>
-                • <span class="text-title mb-3 text-info"> <?php echo e($category->name); ?></span>
+                • <span class="text-title mb-3 text-info"><?php echo app('translator')->getFromJson($category->name); ?></span>
             <?php endif; ?>
-        </h2>
-        <?php if(isset($album)): ?>
-            <h2 class="text-title mb-3"><?php echo e($album->name); ?></h2>
+            <?php if(isset($album)): ?>
+            • <span class="text-title mb-3 text-info"><?php echo app('translator')->getFromJson($album->name); ?></span>
+            <?php endif; ?>
+            </h2>
         <?php endif; ?>
 
-        <?php if(isset($user)): ?>
-            <h2 class="text-title mb-3"><?php echo e(__('Photos de ') . $user->name); ?></h2>
-        <?php endif; ?>
+
         <div class="d-flex justify-content-center">
             <?php echo e($images->links()); ?>
 
@@ -35,23 +37,19 @@
                              src="<?php echo e(url('thumbs/' . $image->name)); ?>"
                              alt="image">
                     </a>
-                    <?php if(isset($image->description)): ?>
-                        <div class="card-body">
+                    <div class="card-body">
+                        <?php if(isset($image->title)): ?>
+                            <h5 class="card-title"><?php echo e($image->title); ?></h5>
+                        <?php endif; ?>
+                        <p class="card-text">
+                            <?php echo e($image->description); ?>
 
-                            <p class="card-text">
-                                <?php if(isset($image->title)): ?>
-                                    <a href="<?php echo e($image->url); ?>"><h4 class="text-dark"><?php echo e($image->title); ?></h4></a>
-                                <?php endif; ?>
-                                <?php echo e($image->description); ?>
-
-                                <?php if(isset($image->url)): ?>
-                                    <em class="d-block"><a href="<?php echo e($image->url); ?>">Site web</a></em>
-                                <?php endif; ?>
-                            </p>
-
-                        </div>
-
-                    <?php endif; ?>
+                            <?php if(isset($image->url)): ?>
+                                <em class="d-block"><a href="<?php echo e($image->url); ?>" data-toggle="tooltip"
+                                    title="<?php echo e(__('Voir ce site web')); ?>">Site web</a></em>
+                            <?php endif; ?>
+                        </p>
+                    </div>
                     <div class="card-footer text-muted">
                         <em>
                             <a href="<?php echo e(route('user', $image->user->id)); ?>" data-toggle="tooltip"
@@ -59,75 +57,75 @@
                         </em>
                         <div class="float-right">
                             <em>
-                                (<span class="image-click"><?php echo e($image->clicks); ?></span> <?php echo e(trans_choice(__('vue|vues'), $image->clicks)); ?>) <?php echo e($image->created_at->formatLocalized('%x')); ?>
-
+                                (<span class="image-click"><?php echo e($image->clicks); ?></span> <?php echo e(trans_choice(__('vue|vues'), $image->clicks)); ?>)
+                                <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
                             </em>
                         </div>
-                        <div class="star-rating" id="<?php echo e($image->id); ?>">
-                            <span class="count-number">(<?php echo e($image->users->count()); ?>)</span>
-                            <div id="<?php echo e($image->id . '.5'); ?>" data-toggle="tooltip" title="5" <?php if($image->rate > 4): ?> class="star-yellow" <?php endif; ?>>
+                        <?php /* rating en attente
+                        <div class="star-rating" id="{{ $image->id }}">
+                            <span class="count-number">({{ $image->users->count() }})</span>
+                            <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div id="<?php echo e($image->id . '.4'); ?>" data-toggle="tooltip" title="4" <?php if($image->rate > 3): ?> class="star-yellow" <?php endif; ?>>
+                            <div id="{{ $image->id . '.4' }}" data-toggle="tooltip" title="4" @if($image->rate > 3) class="star-yellow" @endif>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div id="<?php echo e($image->id . '.3'); ?>" data-toggle="tooltip" title="3" <?php if($image->rate > 2): ?> class="star-yellow" <?php endif; ?>>
+                            <div id="{{ $image->id . '.3' }}" data-toggle="tooltip" title="3" @if($image->rate > 2) class="star-yellow" @endif>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div id="<?php echo e($image->id . '.2'); ?>" data-toggle="tooltip" title="2" <?php if($image->rate > 1): ?> class="star-yellow" <?php endif; ?>>
+                            <div id="{{ $image->id . '.2' }}" data-toggle="tooltip" title="2" @if($image->rate > 1) class="star-yellow" @endif>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div id="<?php echo e($image->id . '.1'); ?>" data-toggle="tooltip" title="1" <?php if($image->rate > 0): ?> class="star-yellow" <?php endif; ?>>
+                            <div id="{{ $image->id . '.1' }}" data-toggle="tooltip" title="1" @if($image->rate > 0) class="star-yellow" @endif>
                                 <i class="fas fa-star"></i>
                             </div>
                             <span class="float-right">
-                                <?php if (\Illuminate\Support\Facades\Blade::check('adminOrOwner', $image->user_id)): ?>
-                                <a class="toggleIcons"
-                                    href="#">
-                                <i class="fa fa-cog"></i>
+                                @adminOrOwner($image->user_id)
+                                <a class="toggleIcons" href="#">
+                                    <i class="fa fa-cog"></i>
                                 </a>
                                 <span class="menuIcons" style="display: none">
                                     <a class="form-delete text-danger"
-                                        href="<?php echo e(route('image.destroy', $image->id)); ?>"
+                                        href="{{ route('image.destroy', $image->id) }}"
                                         data-toggle="tooltip"
-                                        title="<?php echo app('translator')->getFromJson('Supprimer cette photo'); ?>">
+                                        title="@lang('Supprimer cette photo')">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     <a class="description-manage"
-                                        href="<?php echo e(route('image.description', $image->id)); ?>"
+                                        href="{{ route('image.description', $image->id) }}"
                                         data-toggle="tooltip"
-                                        title="<?php echo app('translator')->getFromJson('Gérer la description'); ?>">
+                                        title="@lang('Gérer la description')">
                                         <i class="fa fa-comment"></i>
                                     </a>
                                     <a class="albums-manage"
-                                        href="<?php echo e(route('image.albums', $image->id)); ?>"
+                                        href="{{ route('image.albums', $image->id) }}"
                                         data-toggle="tooltip"
-                                        title="<?php echo app('translator')->getFromJson('Gérer les albums'); ?>">
+                                        title="@lang('Gérer les albums')">
                                         <i class="fa fa-folder-open"></i>
                                     </a>
                                     <a class="category-edit"
-                                        data-id="<?php echo e($image->category_id); ?>"
-                                        href="<?php echo e(route('image.update', $image->id)); ?>"
+                                        data-id="{{ $image->category_id }}"
+                                        href="{{ route('image.update', $image->id) }}"
                                         data-toggle="tooltip"
-                                        title="<?php echo app('translator')->getFromJson('Changer de catégorie'); ?>">
+                                        title="@lang('Changer de catégorie')">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a class="adult-edit"
-                                        href="<?php echo e(route('image.adult', $image->id)); ?>"
+                                        href="{{ route('image.adult', $image->id) }}"
                                         data-toggle="tooltip"
-                                        title="<?php echo app('translator')->getFromJson('Changer de statut'); ?>">
-                                        <i class="fa <?php if($image->adult): ?> fa-graduation-cap <?php else: ?> fa-child <?php endif; ?>"></i>
+                                        title="@lang('Changer de statut')">
+                                        <i class="fa @if($image->adult) fa-graduation-cap @else fa-child @endif"></i>
                                     </a>
                                 </span>
-                                <form action="<?php echo e(route('image.destroy', $image->id)); ?>" method="POST" class="hide">
-                                    <?php echo csrf_field(); ?>
-                                    <?php echo method_field('DELETE'); ?>
+                                <form action="{{ route('image.destroy', $image->id) }}" method="POST" class="hide">
+                                    @csrf
+                                    @method('DELETE')
                                 </form>
-                                <?php endif; ?>
+                                @endadminOrOwner
                             </span>
                         </div>
+                        */ ?>
                     </div>
-
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
