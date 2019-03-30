@@ -30,7 +30,7 @@
         </div>
         <div class="card-columns">
             @foreach($images as $image)
-                <div class="card @if($image->adult) border-danger @endif" id="image{{ $image->id }}">
+                <div class="card" id="image{{ $image->id }}">
                     <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}">
                         <img class="card-img-top"
                              src="{{ url('thumbs/' . $image->name) }}"
