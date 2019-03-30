@@ -32,7 +32,7 @@
         </div>
         <div class="card-columns">
             <?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="card <?php if($image->adult): ?> border-danger <?php endif; ?>" id="image<?php echo e($image->id); ?>">
+                <div class="card" id="image<?php echo e($image->id); ?>">
                     <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-link="<?php echo e(route('image.click', $image->id)); ?>">
                         <img class="card-img-top"
                              src="<?php echo e(url('thumbs/' . $image->name)); ?>"
