@@ -59,8 +59,9 @@
                                 <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
                             </em>
                         </div>
-                        <?php /* rating en attente
+
                         <div class="star-rating" id="{{ $image->id }}">
+                            <?php /* rating en attente
                             <span class="count-number">({{ $image->users->count() }})</span>
                             <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
                                 <i class="fas fa-star"></i>
@@ -77,6 +78,8 @@
                             <div id="{{ $image->id . '.1' }}" data-toggle="tooltip" title="1" @if($image->rate > 0) class="star-yellow" @endif>
                                 <i class="fas fa-star"></i>
                             </div>
+                            */ ?>
+
                             <span class="float-right">
                                 @adminOrOwner($image->user_id)
                                 <a class="toggleIcons" href="#">
@@ -122,7 +125,6 @@
                                 @endadminOrOwner
                             </span>
                         </div>
-                        */ ?>
                     </div>
                 </div>
             @endforeach
