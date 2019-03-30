@@ -264,6 +264,9 @@ a:hover {
 .portfolio-box img {
     width: 100%;
 }
+.portfolio-box:hover img {
+    opacity: 0.5;
+}
 .portfolio-content h4 {
     color: #f6f6f6;
     font-size: 20px;
