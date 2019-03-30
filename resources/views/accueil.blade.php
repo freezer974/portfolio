@@ -358,7 +358,7 @@
                </div>
             <div class="grid gallery row">
                 @foreach($images as $image)
-                    <div class="col-lg-4 col-sm-4 col-xs-6 col-md-6 cat{{ $image->category_id }} grid-item p-0">
+                    <div class="col-lg-4 col-sm-4 col-xs-6 col-md-6 cat{{ $image->category_id }} grid-item p-1">
                         <div class="portfolio-box">
                             <div class="portfolio-img">
                                 <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}" title="{{ $image->title }}" data-user="{{ $image->user->name }}"><img src="{{ url('thumbs/' . $image->name) }}" alt="image"></a>
