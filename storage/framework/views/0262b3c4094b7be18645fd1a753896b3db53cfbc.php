@@ -18,28 +18,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <?php if(currentRoute(route('home'))): ?>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#about">À propos</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#service">Services</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#testimonial">Témoignages</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
-                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#about"><?php echo app('translator')->getFromJson('À propos'); ?></a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#service"><?php echo app('translator')->getFromJson('Services'); ?></a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#testimonial"><?php echo app('translator')->getFromJson('Témoignages'); ?></a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#portfolio"><?php echo app('translator')->getFromJson('Portfolio'); ?></a></li>
+                <li class="nav-item "><a class="nav-link js-scroll-trigger" href="#contact"><?php echo app('translator')->getFromJson('Contact'); ?></a></li>
             <?php endif; ?>
-            <?php if(isset($category)): ?>
-                <?php if(currentRoute(route('all'))): ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle
-                                <?php echo e(currentRoute(route('category', $category->slug))); ?>
 
-                                " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <?php echo app('translator')->getFromJson('Catégories'); ?>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
-                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <a class="dropdown-item" href="<?php echo e(route('category', $category->slug)); ?>"><?php echo e($category->name); ?></a>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </div>
-                    </li>
-                <?php endif; ?>
+            <?php if(!currentRoute(route('home'))): ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle
+                    <?php if(isset($category->slug)): ?> <?php echo e(currentRoute(route('category', $category->slug))); ?> <?php endif; ?>
+                            " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo app('translator')->getFromJson('Catégories'); ?>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
+                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <a class="dropdown-item" href="<?php echo e(route('category', $category->slug)); ?>"><?php echo app('translator')->getFromJson($category->name); ?></a>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                </li>
             <?php endif; ?>
 
             <?php if(isset($albums)): ?>
@@ -118,23 +116,25 @@
             <?php endif; ?>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item ">
+            <?php /*
+            <li class="nav-item dropdown">
                 <a class="nav-link" href="#" id="navbarDropdownFlag" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <img width="18" height="18" alt="<?php echo e(session('locale')); ?>"
-                            src="<?php echo asset('images/flags/' . session('locale') . '-flag.png'); ?>"/>
+                    <img width="18" height="18" alt="{{ session('locale') }}"
+                            src="{!! asset('images/flags/' . session('locale') . '-flag.png') !!}"/>
                 </a>
                 <div id="flags" class="dropdown-menu" aria-labelledby="navbarDropdownFlag">
-                    <?php $__currentLoopData = config('app.locales'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $locale): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($locale != session('locale')): ?>
-                            <a class="dropdown-item" href="<?php echo e(route('language', $locale)); ?>">
-                                <img width="18" height="18" alt="<?php echo e(session('locale')); ?>"
-                                        src="<?php echo asset('images/flags/' . $locale . '-flag.png'); ?>"/>
+                    @foreach(config('app.locales') as $locale)
+                        @if($locale != session('locale'))
+                            <a class="dropdown-item" href="{{ route('language', $locale) }}">
+                                <img width="18" height="18" alt="{{ session('locale') }}"
+                                        src="{!! asset('images/flags/' . $locale . '-flag.png') !!}"/>
                             </a>
-                        <?php endif; ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        @endif
+                    @endforeach
                 </div>
             </li>
+            */ ?>
             <?php if(auth()->guard()->guest()): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
