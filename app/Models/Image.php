@@ -18,20 +18,24 @@ class Image extends Model
 
     public function albums()
     {
-        return $this->belongsToMany (Album::class);
+        return $this->belongsToMany(Album::class);
     }
 
     public function users()
     {
-        return $this->belongsToMany (User::class)->withPivot('rating');
+        return $this->belongsToMany(User::class)->withPivot('rating');
     }
 
     public function scopeLatestWithUser($query)
     {
         $user = auth()->user();
         if($user && $user->adult) {
-            return $query->with ('user')->latest ();
+            return $query->with('user')->latest('adult');
         }
-        return $query->with ('user')->whereAdult(false)->latest ();
+        return $query->with('user')->latest('adult');
+
+        /* origine on montre que les images non adulte
+        return $query->with('user')->whereAdult(false)->latest();
+        */
     }
 }
