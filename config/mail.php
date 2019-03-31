@@ -16,8 +16,8 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
-
+    //'driver' => env('MAIL_DRIVER', 'smtp'),
+	'driver' => 'mail',
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'tony@tony974.net'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@tatoumi.com'),
         'name' => env('MAIL_FROM_NAME', 'Site Tatoumi.com'),
     ],
 
@@ -99,7 +99,7 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
+    'sendmail' => '/usr/sbin/sendmail -t -i',
 
     /*
     |--------------------------------------------------------------------------
