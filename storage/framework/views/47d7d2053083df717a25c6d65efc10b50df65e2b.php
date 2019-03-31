@@ -31,7 +31,7 @@
         </div>
         <div class="card-columns">
             <?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="card <?php if($image->adult): ?> border-danger <?php endif; ?>" id="image<?php echo e($image->id); ?>">
+                <div class="card" id="image<?php echo e($image->id); ?>">
                     <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-link="<?php echo e(route('image.click', $image->id)); ?>">
                         <img class="card-img-top"
                              src="<?php echo e(url('thumbs/' . $image->name)); ?>"
@@ -61,8 +61,9 @@
                                 <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
                             </em>
                         </div>
-                        <?php /* rating en attente
-                        <div class="star-rating" id="{{ $image->id }}">
+
+                        <div class="star-rating" id="<?php echo e($image->id); ?>">
+                            <?php /* rating en attente
                             <span class="count-number">({{ $image->users->count() }})</span>
                             <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
                                 <i class="fas fa-star"></i>
@@ -79,52 +80,53 @@
                             <div id="{{ $image->id . '.1' }}" data-toggle="tooltip" title="1" @if($image->rate > 0) class="star-yellow" @endif>
                                 <i class="fas fa-star"></i>
                             </div>
+                            */ ?>
+
                             <span class="float-right">
-                                @adminOrOwner($image->user_id)
+                                <?php if (\Illuminate\Support\Facades\Blade::check('adminOrOwner', $image->user_id)): ?>
                                 <a class="toggleIcons" href="#">
                                     <i class="fa fa-cog"></i>
                                 </a>
                                 <span class="menuIcons" style="display: none">
                                     <a class="form-delete text-danger"
-                                        href="{{ route('image.destroy', $image->id) }}"
+                                        href="<?php echo e(route('image.destroy', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Supprimer cette photo')">
+                                        title="<?php echo app('translator')->getFromJson('Supprimer cette photo'); ?>">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     <a class="description-manage"
-                                        href="{{ route('image.description', $image->id) }}"
+                                        href="<?php echo e(route('image.description', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Gérer la description')">
+                                        title="<?php echo app('translator')->getFromJson('Gérer la description'); ?>">
                                         <i class="fa fa-comment"></i>
                                     </a>
                                     <a class="albums-manage"
-                                        href="{{ route('image.albums', $image->id) }}"
+                                        href="<?php echo e(route('image.albums', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Gérer les albums')">
+                                        title="<?php echo app('translator')->getFromJson('Gérer les albums'); ?>">
                                         <i class="fa fa-folder-open"></i>
                                     </a>
                                     <a class="category-edit"
-                                        data-id="{{ $image->category_id }}"
-                                        href="{{ route('image.update', $image->id) }}"
+                                        data-id="<?php echo e($image->category_id); ?>"
+                                        href="<?php echo e(route('image.update', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Changer de catégorie')">
+                                        title="<?php echo app('translator')->getFromJson('Changer de catégorie'); ?>">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a class="adult-edit"
-                                        href="{{ route('image.adult', $image->id) }}"
+                                        href="<?php echo e(route('image.adult', $image->id)); ?>"
                                         data-toggle="tooltip"
-                                        title="@lang('Changer de statut')">
-                                        <i class="fa @if($image->adult) fa-graduation-cap @else fa-child @endif"></i>
+                                        title="<?php echo app('translator')->getFromJson('Changer de statut'); ?>">
+                                        <i class="fa <?php if($image->adult): ?> fa-graduation-cap <?php else: ?> fa-child <?php endif; ?>"></i>
                                     </a>
                                 </span>
-                                <form action="{{ route('image.destroy', $image->id) }}" method="POST" class="hide">
-                                    @csrf
-                                    @method('DELETE')
+                                <form action="<?php echo e(route('image.destroy', $image->id)); ?>" method="POST" class="hide">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>
                                 </form>
-                                @endadminOrOwner
+                                <?php endif; ?>
                             </span>
                         </div>
-                        */ ?>
                     </div>
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -842,7 +842,7 @@
                 $grid.magnificPopup({
                 delegate: 'a.image-link',
                 type: 'image',
-                tLoading: '<i class="fas fa-spinner fa-pulse fa-4x"></i> #%curr%...',
+                tLoading: '<i class="fas fa-spinner fa-pulse fa-2x"></i>  <?php echo app('translator')->getFromJson("Chargement..."); ?>',
                 mainClass: 'mfp-img-mobile',
                 gallery: {
                     enabled: true,
