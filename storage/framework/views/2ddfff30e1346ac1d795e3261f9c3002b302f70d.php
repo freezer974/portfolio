@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/accueil.blade.php */ ?>
+<?php $__env->startSection('content'); ?>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -16,16 +16,16 @@
         <div class="single-slider justify-content-center d-flex">
             <div class="container">
                 <div class="slider-content my-auto clip text-light">
-                    <h2>@lang('Salut, Je suis') Tony Chevalier</h2>
+                    <h2><?php echo app('translator')->getFromJson('Salut, Je suis'); ?> Tony Chevalier</h2>
                     <h2 class="ah-headline">
-                        <span>@lang('Un auto-entrepreneur dans le domaine du ')</span>
+                        <span><?php echo app('translator')->getFromJson('Un auto-entrepreneur dans le domaine du '); ?></span>
                         <span class="ah-words-wrapper">
-                            <b class="is-visible">@lang('Graphisme')</b>
-                            <b>@lang('Site web')</b>
-                            <b>@lang('Coaching')</b>
+                            <b class="is-visible"><?php echo app('translator')->getFromJson('Graphisme'); ?></b>
+                            <b><?php echo app('translator')->getFromJson('Site web'); ?></b>
+                            <b><?php echo app('translator')->getFromJson('Coaching'); ?></b>
                         </span>
                     </h2>
-                    <a href="#contact" role="button" class="btn btn-outline-light js-scroll-trigger">@lang('Contactez-moi')</a>
+                    <a href="#contact" role="button" class="btn btn-outline-light js-scroll-trigger"><?php echo app('translator')->getFromJson('Contactez-moi'); ?></a>
                 </div>
                 <div>
                     <ul class="navigation">
@@ -350,32 +350,32 @@
             </div>
                <div class="portfolio-menu">
                    <div class="button-group filter-button-group">
-                        <a class="button" href="{{ route('all') }}">Voir tous</a>
-                        @foreach($categories as $category)
-                            <button data-filter=".cat{{ $category->id }}">{{ $category->name }}</button>
-                        @endforeach
+                        <a class="button" href="<?php echo e(route('all')); ?>">Voir tous</a>
+                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <button data-filter=".cat<?php echo e($category->id); ?>"><?php echo e($category->name); ?></button>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                </div>
             <div class="grid gallery row">
-                @foreach($images as $image)
-                    <div class="col-lg-4 col-sm-6 cat{{ $image->category_id }} grid-item p-1">
+                <?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-lg-4 col-sm-6 cat<?php echo e($image->category_id); ?> grid-item p-1">
                         <div class="portfolio-box">
                             <div class="portfolio-img">
-                                <a href="{{ url('images/' . $image->name) }}" class="image-link" data-url="{{ $image->url }}" data-link="{{ route('image.click', $image->id) }}" title="{{ $image->title }}" data-user="{{ $image->user->name }}"><img src="{{ url('thumbs/' . $image->name) }}" alt="image"></a>
+                                <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-url="<?php echo e($image->url); ?>" data-link="<?php echo e(route('image.click', $image->id)); ?>" title="<?php echo e($image->title); ?>" data-user="<?php echo e($image->user->name); ?>"><img src="<?php echo e(url('thumbs/' . $image->name)); ?>" alt="image"></a>
                             </div>
                             <div class="portfolio-content">
-                                @isset($image->title)
-                                    <h4 class="text-dark">{{ $image->title }}</h4>
-                                @endisset
-                                @isset($image->description)
-                                    <span class="text-muted">{{ $image->description }}</span>
-                                @endisset
-                                @isset($image->url)
-                                    <em class="d-block"><a href="{{ $image->url }}" data-toggle="tooltip" title="{{ __('Voir le site web') }}">Site web</a></em>
-                                @endisset
+                                <?php if(isset($image->title)): ?>
+                                    <h4 class="text-dark"><?php echo e($image->title); ?></h4>
+                                <?php endif; ?>
+                                <?php if(isset($image->description)): ?>
+                                    <span class="text-muted"><?php echo e($image->description); ?></span>
+                                <?php endif; ?>
+                                <?php if(isset($image->url)): ?>
+                                    <em class="d-block"><a href="<?php echo e($image->url); ?>" data-toggle="tooltip" title="<?php echo e(__('Voir le site web')); ?>">Site web</a></em>
+                                <?php endif; ?>
                                 <div class="float-right">
                                     <em>
-                                        (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }})
+                                        (<span class="image-click"><?php echo e($image->clicks); ?></span> <?php echo e(trans_choice(__('vue|vues'), $image->clicks)); ?>)
                                         <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
                                     </em>
                                 </div>
@@ -447,7 +447,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </div>
@@ -493,39 +493,39 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
-                    <form method="POST" action="{{ route('contactus.store') }}">
-                        @csrf
+                    <form method="POST" action="<?php echo e(route('contactus.store')); ?>">
+                        <?php echo csrf_field(); ?>
                         <div class="form-row">
-                            @include('partials.form-group', [
+                            <?php echo $__env->make('partials.form-group', [
                                 'title' => __('Votre nom'),
                                 'type' => 'text',
                                 'class' => ' col-sm-6',
                                 'name' => 'name',
                                 'required' => true,
-                            ])
-                            @include('partials.form-group', [
+                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php echo $__env->make('partials.form-group', [
                                 'title' => __('Votre email'),
                                 'type' => 'email',
                                 'class' => ' col-sm-6',
                                 'name' => 'email',
                                 'required' => true,
-                            ])
+                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
-                        @include('partials.form-group', [
+                        <?php echo $__env->make('partials.form-group', [
                             'title' => __('Numéro de téléphone'),
                             'type' => 'text',
                             'name' => 'phone',
                             'required' => true,
-                        ])
-                        @include('partials.form-group', [
+                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php echo $__env->make('partials.form-group', [
                             'title' => __('Votre message'),
                             'type' => 'text',
                             'name' => 'message',
                             'required' => true,
-                        ])
-                        @component('components.button')
-                            @lang('Envoyer')
-                        @endcomponent
+                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php $__env->startComponent('components.button'); ?>
+                            <?php echo app('translator')->getFromJson('Envoyer'); ?>
+                        <?php echo $__env->renderComponent(); ?>
                     </form>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
@@ -541,7 +541,7 @@
 			<div class="basic-footer text-center gray-bg py-2">
 				<div class="container">
 					<div class="footer-logo">
-						<a href="{{ route('home') }}"><h5>Tatoumi Création</h5></a>
+						<a href="<?php echo e(route('home')); ?>"><h5>Tatoumi Création</h5></a>
 					</div>
                     <div class="footer-social-icon">
                                     <a href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
@@ -549,14 +549,14 @@
                                     <a href="https://www.linkedin.com/in/tonychevalier974/"> <i class="fab fa-linkedin-in fa-lg"></i></a>
                     </div>
 					<div class="copyright mt-2">
-						<p>&copy; Tous droits réservés par <a href="{{ route('home') }}">Tatoumi Création</a> 2018-2019</p>
+						<p>&copy; Tous droits réservés par <a href="<?php echo e(route('home')); ?>">Tatoumi Création</a> 2018-2019</p>
 					</div>
 				</div>
 			</div>
 		</footer>
     </div>
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 
     <script>
 
@@ -579,12 +579,12 @@
                 e.preventDefault();
                 let href = $(e.currentTarget).attr('href')
                 swal.fire({
-                    title: '@lang('Vraiment supprimer cette photo ?')',
+                    title: '<?php echo app('translator')->getFromJson('Vraiment supprimer cette photo ?'); ?>',
                     type: 'error',
                     showCancelButton: true,
                     confirmButtonColor: '#DD6B55',
-                    confirmButtonText: '@lang('Oui')',
-                    cancelButtonText: '@lang('Non')'
+                    confirmButtonText: '<?php echo app('translator')->getFromJson('Oui'); ?>',
+                    cancelButtonText: '<?php echo app('translator')->getFromJson('Non'); ?>'
                 }).then((result) => {
                     if (result.value) {
                         $("form[action='" + href + "'").submit()
@@ -599,7 +599,7 @@
 
             const swallAlertServer = () => {
                 swal.fire({
-                    title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
+                    title: '<?php echo app('translator')->getFromJson('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...'); ?>',
                     type: 'warning'
                 })
             }
@@ -730,12 +730,12 @@
 
             let memoStars = []
             $('.star-rating div').click((e) => {
-                @auth
+                <?php if(auth()->guard()->check()): ?>
                     let element = $(e.currentTarget)
                     let values = element.attr('id').split('.')
                     element.addClass('fa-spin')
                     $.ajax({
-                        url: "{{ url('rating') }}" + '/' + values[0],
+                        url: "<?php echo e(url('rating')); ?>" + '/' + values[0],
                         type: 'PUT',
                         data: {value: values[1]}
                     })
@@ -757,12 +757,12 @@
                                 .text('(' + data.count + ')')
                             if(data.rate) {
                                 if(data.rate == values[1]) {
-                                    title = '@lang("Vous avez déjà donné cette note !")'
+                                    title = '<?php echo app('translator')->getFromJson("Vous avez déjà donné cette note !"); ?>'
                                 } else {
-                                    title = '@lang("Votre vote a été modifié !")'
+                                    title = '<?php echo app('translator')->getFromJson("Votre vote a été modifié !"); ?>'
                                 }
                             } else {
-                                title = '@lang("Merci pour votre vote !")'
+                                title = '<?php echo app('translator')->getFromJson("Merci pour votre vote !"); ?>'
                             }
                             swal.fire({
                                 title: title,
@@ -770,7 +770,7 @@
                             })
                         } else {
                             swal.fire({
-                                title: '@lang('Vous ne pouvez pas voter pour vos photos !')',
+                                title: '<?php echo app('translator')->getFromJson('Vous ne pouvez pas voter pour vos photos !'); ?>',
                                 type: 'error'
                             })
                         }
@@ -780,12 +780,12 @@
                         swallAlertServer()
                         element.removeClass('fa-spin')
                     })
-                @else
+                <?php else: ?>
                     swal.fire({
-                        title: '@lang('Vous devez être connecté pour pouvoir voter !')',
+                        title: '<?php echo app('translator')->getFromJson('Vous devez être connecté pour pouvoir voter !'); ?>',
                         type: 'error'
                     })
-                @endauth
+                <?php endif; ?>
             })
 
             $('.star-rating').hover(
@@ -843,20 +843,20 @@
                 $grid.magnificPopup({
                 delegate: 'a.image-link',
                 type: 'image',
-                tLoading: '<i class="fas fa-spinner fa-pulse fa-2x"></i>  @lang("Chargement...")',
+                tLoading: '<i class="fas fa-spinner fa-pulse fa-2x"></i>  <?php echo app('translator')->getFromJson("Chargement..."); ?>',
                 mainClass: 'mfp-img-mobile',
                 gallery: {
                     enabled: true,
                     navigateByImgClick: true,
                     preload: [0,1], // Will preload 0 - before current, and 1 after the current image
-                    tCounter: '<span class="mfp-counter">%curr% @lang("sur") %total%</span>'
+                    tCounter: '<span class="mfp-counter">%curr% <?php echo app('translator')->getFromJson("sur"); ?> %total%</span>'
                 },
                 image: {
-                    tError: '<a href="%url%">@lang("L\'image #%curr%</a> n\'a pas pu être chargée.")',
+                    tError: '<a href="%url%"><?php echo app('translator')->getFromJson("L\'image #%curr%</a> n\'a pas pu être chargée."); ?>',
                     titleSrc: function(item) {
                         let title = item.el.attr('title')
-                            title += (item.el.attr('data-url'))? ' - <a href="' + item.el.attr('data-url') + '">@lang("Site web")</a>' : ''
-                            title += '<small>@lang("de") ' + item.el.attr('data-user') + '</small>'
+                            title += (item.el.attr('data-url'))? ' - <a href="' + item.el.attr('data-url') + '"><?php echo app('translator')->getFromJson("Site web"); ?></a>' : ''
+                            title += '<small><?php echo app('translator')->getFromJson("de"); ?> ' + item.el.attr('data-user') + '</small>'
                         return title
                     }
                 }
@@ -901,6 +901,8 @@
 
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key={{ Config::get('app.googlekey') }}&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo e(Config::get('app.googlekey')); ?>&callback=initMap" async defer></script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
