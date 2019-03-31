@@ -83,7 +83,5 @@ Route::middleware('ajax')->name('image.click')->patch('image/{image}/click', 'Im
 
 Route::name('language')->get('language/{lang}', 'HomeController@language');
 
-Route::post('/contact', function(Request $request){
-    Mail::send(new ContactMail($request));
-    return redirect()->route('home')->with('ok',  __('Merci de nous avoir contacté, vous recevrez une réponse dans moins de 24h.'));
-});
+Route::get('/#contact', 'ContactUSController@contactUS');
+Route::post('contact-us', ['as'=>'contactus.store','uses'=>'ContactUSController@contactUSPost']);
