@@ -1,4 +1,3 @@
-<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/accueil.blade.php */ ?>
 <?php $__env->startSection('content'); ?>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -906,3 +905,4 @@
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php /* /homepages/25/d350060631/htdocs/tatoumicreation/resources/views/accueil.blade.php */ ?>
