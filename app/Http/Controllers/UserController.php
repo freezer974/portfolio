@@ -82,7 +82,7 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $this->repository->update ($user, $request);
-        return redirect ()->route('user.index')->with ('ok', __ ("L'utilisateur a bien été modifié"));
+        return redirect ()->route('user.index')->with ('ok', __("L'utilisateur a bien été modifié"));
     }
 
     /**
@@ -93,7 +93,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete ();
-        return response ()->json ();
+        $user->delete();
+        return response()->json();
     }
 }
