@@ -371,7 +371,7 @@
                                     <span class="text-muted"><?php echo e($image->description); ?></span>
                                 <?php endif; ?>
                                 <?php if(isset($image->url)): ?>
-                                    <em class="d-block"><a href="<?php echo e($image->url); ?>" data-toggle="tooltip" title="<?php echo e(__('Voir le site web')); ?>">Site web</a></em>
+                                    <em class="d-inline"><a href="<?php echo e($image->url); ?>" data-toggle="tooltip" title="<?php echo e(__('Voir le site web')); ?>">Site web</a></em>
                                 <?php endif; ?>
                                 <div class="float-right">
                                     <em>
@@ -843,7 +843,7 @@
                 $grid.magnificPopup({
                 delegate: 'a.image-link',
                 type: 'image',
-                tLoading: '<i class="fas fa-spinner fa-pulse fa-4x"></i> #%curr%...',
+                tLoading: '<i class="fas fa-spinner fa-pulse fa-2x"></i>  <?php echo app('translator')->getFromJson("Chargement..."); ?>',
                 mainClass: 'mfp-img-mobile',
                 gallery: {
                     enabled: true,
