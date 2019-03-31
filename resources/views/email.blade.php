@@ -1,3 +1,10 @@
+Vous avez un message de : {{ $name }}
 <p>
-{{ $email->content }}
+Nom: {{ $name }}
+</p>
+<p>
+Email: {{ $email }}
+</p>
+<p>
+Message: {{ $user_message }}
 </p>
