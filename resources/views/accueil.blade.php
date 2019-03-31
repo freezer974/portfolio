@@ -492,7 +492,9 @@
                         </div>
                     </div>
                 </div>
+                <?php /*
                 <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
+
                     <form method="POST" action="{{ route('contactus.store') }}">
                         @csrf
                         <div class="form-row">
@@ -527,8 +529,8 @@
                             @lang('Envoyer')
                         @endcomponent
                     </form>
-                </div>
-                <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
+                </div> */ ?>
+                <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 mb-3">
                     <div id="map"></div>
                 </div>
             </div>
