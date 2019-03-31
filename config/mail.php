@@ -16,8 +16,8 @@ return [
     |
     */
 
-    //'driver' => env('MAIL_DRIVER', 'smtp'),
-	'driver' => 'mail',
+    // 'driver' => env('MAIL_DRIVER', 'sendmail'),
+ 'driver' => 'mail',
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 465),
+    'port' => env('MAIL_PORT',25),
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+    'encryption' => env('MAIL_ENCRYPTION', ''),
 
     /*
     |--------------------------------------------------------------------------
