@@ -491,23 +491,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-6 mb-3">
-
+                <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
                     <form method="POST" action="<?php echo e(route('contactus.store')); ?>">
                         <?php echo csrf_field(); ?>
                         <div class="form-row">
                             <?php echo $__env->make('partials.form-group', [
                                 'title' => __('Votre nom'),
                                 'type' => 'text',
-                                'class' => ' col-sm-6',
+                                'class' => 'col-sm-12 col-lg-6',
                                 'name' => 'name',
+                                'placeholder' => __("Ex: Payet Marc"),
                                 'required' => true,
                             ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                             <?php echo $__env->make('partials.form-group', [
                                 'title' => __('Votre email'),
                                 'type' => 'email',
-                                'class' => ' col-sm-6',
+                                'class' => 'col-sm-12 col-lg-6',
                                 'name' => 'email',
+                                'placeholder' => __("Ex: votre-nom@mail.com"),
                                 'required' => true,
                             ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
@@ -515,20 +516,28 @@
                             'title' => __('Numéro de téléphone'),
                             'type' => 'text',
                             'name' => 'phone',
+                            'placeholder' => __("Ex: 0262123456"),
                             'required' => true,
                         ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        <?php echo $__env->make('partials.form-group', [
+                        <?php echo $__env->make('partials.textarea-form-group', [
                             'title' => __('Votre message'),
-                            'type' => 'text',
                             'name' => 'message',
+                            'placeholder' => __("Ici votre message ou demande de devis"),
+                            'rows' => '4',
                             'required' => true,
                         ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         <?php $__env->startComponent('components.button'); ?>
+                            <?php $__env->slot('color'); ?>
+                                outline-info
+                            <?php $__env->endSlot(); ?>
+                            <?php $__env->slot('col'); ?>
+                                col
+                            <?php $__env->endSlot(); ?>
                             <?php echo app('translator')->getFromJson('Envoyer'); ?>
                         <?php echo $__env->renderComponent(); ?>
                     </form>
                 </div>
-                <div class="col-sm-12 col-md-6 mb-3">
+                <div class="col-sm-12 col-md-8 col-lg-6 mb-3">
                     <div id="map"></div>
                 </div>
             </div>
@@ -904,6 +913,10 @@
       <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo e(Config::get('app.googlekey')); ?>&callback=initMap" async defer></script>
 
 <?php $__env->stopSection(); ?>
+
+
+
+
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/accueil.blade.php */ ?>
