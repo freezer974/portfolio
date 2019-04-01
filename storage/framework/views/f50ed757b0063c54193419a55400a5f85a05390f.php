@@ -1,4 +1,3 @@
-<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/layouts/app.blade.php */ ?>
 <!DOCTYPE html>
 <html lang="<?php echo e(app()->getLocale()); ?>">
 <head>
@@ -223,3 +222,5 @@
 </script>
 </body>
 </html>
+
+<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/layouts/app.blade.php */ ?>
