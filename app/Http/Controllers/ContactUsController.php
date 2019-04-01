@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Url;
 use App\Http\Requests;
 use App\Models\ContactUs;
 use Mail;
+use Validator;
 
 class ContactUsController extends Controller
 {
 
     public function contactUs()
     {
-        return view('home');
+        return redirect(route('home') . '#form-contact');
     }
 
     /**
@@ -23,12 +26,20 @@ class ContactUsController extends Controller
 
     public function contactUsPost(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required|regex:/[0-9]{10}/',
-            'message' => 'required'
+            'message' => 'required|min:3|max:1000'
         ]);
+
+        if($validator->fails())
+        {
+            return Redirect::to(URL::previous() . "#form-contact")->withErrors($validator)->withInput();
+        }
+
+
+
         ContactUs::create($request->all());
 
         Mail::send('email',
