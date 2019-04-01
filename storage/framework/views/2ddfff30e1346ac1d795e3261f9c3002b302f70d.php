@@ -1,4 +1,3 @@
-<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/accueil.blade.php */ ?>
 <?php $__env->startSection('content'); ?>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -492,45 +491,44 @@
                         </div>
                     </div>
                 </div>
-                <?php /*
-                <div class="col-lg-6 col-sm-12 col-xs-12 col-md-6 mb-3">
+                <div class="col-sm-12 col-md-6 mb-3">
 
-                    <form method="POST" action="{{ route('contactus.store') }}">
-                        @csrf
+                    <form method="POST" action="<?php echo e(route('contactus.store')); ?>">
+                        <?php echo csrf_field(); ?>
                         <div class="form-row">
-                            @include('partials.form-group', [
+                            <?php echo $__env->make('partials.form-group', [
                                 'title' => __('Votre nom'),
                                 'type' => 'text',
                                 'class' => ' col-sm-6',
                                 'name' => 'name',
                                 'required' => true,
-                            ])
-                            @include('partials.form-group', [
+                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php echo $__env->make('partials.form-group', [
                                 'title' => __('Votre email'),
                                 'type' => 'email',
                                 'class' => ' col-sm-6',
                                 'name' => 'email',
                                 'required' => true,
-                            ])
+                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
-                        @include('partials.form-group', [
+                        <?php echo $__env->make('partials.form-group', [
                             'title' => __('Numéro de téléphone'),
                             'type' => 'text',
                             'name' => 'phone',
                             'required' => true,
-                        ])
-                        @include('partials.form-group', [
+                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php echo $__env->make('partials.form-group', [
                             'title' => __('Votre message'),
                             'type' => 'text',
                             'name' => 'message',
                             'required' => true,
-                        ])
-                        @component('components.button')
-                            @lang('Envoyer')
-                        @endcomponent
+                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php $__env->startComponent('components.button'); ?>
+                            <?php echo app('translator')->getFromJson('Envoyer'); ?>
+                        <?php echo $__env->renderComponent(); ?>
                     </form>
-                </div> */ ?>
-                <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 mb-3">
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3">
                     <div id="map"></div>
                 </div>
             </div>
@@ -908,3 +906,4 @@
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/accueil.blade.php */ ?>
