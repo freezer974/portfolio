@@ -39,8 +39,8 @@ class ContactUsController extends Controller
         'user_message' => $request->get('message')
         ), function($message)
         {
-            $message->from('contact@tatoumi.com');
-            $message->to('noreply@tatoumi.com', 'Admin')
+            $message->from('noreply@tatoumi.com');
+            $message->to('tony@tatoumi.com', 'Admin')
             ->subject('Contact sur le site Tatoumi Création');
         });
 
