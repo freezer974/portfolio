@@ -12,7 +12,7 @@ class ContactUsController extends Controller
 
     public function contactUs()
     {
-        return view('contactUs');
+        return view('home');
     }
 
     /**
