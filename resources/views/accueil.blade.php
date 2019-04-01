@@ -492,23 +492,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-6 mb-3">
-
+                <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
                     <form method="POST" action="{{ route('contactus.store') }}">
                         @csrf
                         <div class="form-row">
                             @include('partials.form-group', [
                                 'title' => __('Votre nom'),
                                 'type' => 'text',
-                                'class' => ' col-sm-6',
+                                'class' => 'col-sm-12 col-lg-6',
                                 'name' => 'name',
+                                'placeholder' => __("Ex: Payet Marc"),
                                 'required' => true,
                             ])
                             @include('partials.form-group', [
                                 'title' => __('Votre email'),
                                 'type' => 'email',
-                                'class' => ' col-sm-6',
+                                'class' => 'col-sm-12 col-lg-6',
                                 'name' => 'email',
+                                'placeholder' => __("Ex: votre-nom@mail.com"),
                                 'required' => true,
                             ])
                         </div>
@@ -516,20 +517,28 @@
                             'title' => __('Numéro de téléphone'),
                             'type' => 'text',
                             'name' => 'phone',
+                            'placeholder' => __("Ex: 0262123456"),
                             'required' => true,
                         ])
-                        @include('partials.form-group', [
+                        @include('partials.textarea-form-group', [
                             'title' => __('Votre message'),
-                            'type' => 'text',
                             'name' => 'message',
+                            'placeholder' => __("Ici votre message ou demande de devis"),
+                            'rows' => '4',
                             'required' => true,
                         ])
                         @component('components.button')
+                            @slot('color')
+                                outline-info
+                            @endslot
+                            @slot('col')
+                                col
+                            @endslot
                             @lang('Envoyer')
                         @endcomponent
                     </form>
                 </div>
-                <div class="col-sm-12 col-md-6 mb-3">
+                <div class="col-sm-12 col-md-8 col-lg-6 mb-3">
                     <div id="map"></div>
                 </div>
             </div>
@@ -905,3 +914,7 @@
       <script src="https://maps.googleapis.com/maps/api/js?key={{ Config::get('app.googlekey') }}&callback=initMap" async defer></script>
 
 @endsection
+
+
+
+
