@@ -492,7 +492,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
+                <div class="col-sm-12 col-md-4 col-lg-6 mb-3" id="form-contact">
                     <form method="POST" action="{{ route('contactus.store') }}">
                         @csrf
                         <div class="form-row">
@@ -515,7 +515,7 @@
                         </div>
                         @include('partials.form-group', [
                             'title' => __('Numéro de téléphone'),
-                            'type' => 'text',
+                            'type' => 'tel',
                             'name' => 'phone',
                             'placeholder' => __("Ex: 0262123456"),
                             'required' => true,

@@ -1,4 +1,3 @@
-<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/email.blade.php */ ?>
 Vous avez un message de : <?php echo e($name); ?>
 
 <p>
@@ -13,3 +12,5 @@ Email: <?php echo e($email); ?>
 Message: <?php echo e($user_message); ?>
 
 </p>
+
+<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/email.blade.php */ ?>

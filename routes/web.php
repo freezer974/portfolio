@@ -83,5 +83,5 @@ Route::middleware('ajax')->name('image.click')->patch('image/{image}/click', 'Im
 
 Route::name('language')->get('language/{lang}', 'HomeController@language');
 
-Route::get('/#contact', 'ContactUsController@contactUs');
+Route::get('contact-us', 'ContactUsController@contactUs');
 Route::post('contact-us', ['as'=>'contactus.store','uses'=>'ContactUsController@contactUsPost']);

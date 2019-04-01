@@ -1,4 +1,3 @@
-<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/views/minimal.blade.php */ ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -61,3 +60,5 @@
         </div>
     </body>
 </html>
+
+<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/views/minimal.blade.php */ ?>
