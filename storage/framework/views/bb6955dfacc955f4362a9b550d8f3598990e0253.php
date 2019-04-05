@@ -196,6 +196,7 @@
     </div>
 <?php endif; ?>
 <?php echo $__env->yieldContent('content'); ?>
+<?php echo $__env->make('cookieConsent::index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
 <?php echo Toastr::message(); ?>
 
@@ -214,15 +215,27 @@
         });
     })
 
+    if ($(window).width() < 992) {
+        $("nav.navbar").addClass("scroll-header")
+    }
 
-    $(window).on('scroll', function () {
+    function testWindowSizeAndPosition(){
         var scroll = $(window).scrollTop();
-        if (scroll < 15) {
+        var width = $(window).width();
+        if (scroll < 15 && width >= 992 ) {
             $("nav.navbar").removeClass("scroll-header");
         } else {
             $("nav.navbar").addClass("scroll-header");
         }
+    }
+
+    $(window).on('scroll', function () {
+        testWindowSizeAndPosition();
     });
+
+    $(window).resize(function() {
+        testWindowSizeAndPosition();
+    })
 
 </script>
 </body>
