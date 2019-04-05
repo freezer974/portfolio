@@ -75,7 +75,7 @@ Route::middleware ('auth', 'verified')->group(function () {
 
 Route::name('category')->get('category/{slug}', 'ImageController@category');
 
-Route::name('user')->get ('user/{user}', 'ImageController@user');
+Route::name('user')->get('user/{user}', 'ImageController@user');
 
 Route::name ('album')->get ('album/{slug}', 'ImageController@album');
 
@@ -85,3 +85,9 @@ Route::name('language')->get('language/{lang}', 'HomeController@language');
 
 Route::get('contact-us', 'ContactUsController@contactUs');
 Route::post('contact-us', ['as'=>'contactus.store','uses'=>'ContactUsController@contactUsPost']);
+
+
+Route::get('/mentionslegales', function()
+{
+    return view('mentionslegales');
+})->name('mentionslegales');
