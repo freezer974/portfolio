@@ -572,7 +572,7 @@
     </div>
 @endsection
 @section('script')
-<script src="https://www.google.com/recaptcha/api.js?render={{ Config::get('app.googlerecaptchakey')}}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ Config::get('app.googlerecaptchakey')}}"></script>
 
     <script>
 
@@ -583,6 +583,21 @@
             }
         });
     });
+
+    if ($("#contact").offset().top < ($(window).scrollTop() + 58)) {
+        $(".grecaptcha-badge").removeClass('d-none');
+    }
+
+    $(window).on('scroll', function () {
+       
+        if ($("#contact").offset().top < ($(window).scrollTop() + 58))
+        {
+            $(".grecaptcha-badge").removeClass('d-none');
+        } else {
+            $(".grecaptcha-badge").addClass('d-none');
+        }
+    });
+
     window.onload = function () {
 
         // jQuery and everything else is loaded

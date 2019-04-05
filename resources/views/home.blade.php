@@ -31,10 +31,10 @@
         <div class="card-columns">
             @foreach($images as $image)
                 <div class="card" id="image{{ $image->id }}">
-                    <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}">
+                    <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}" data-url="{{ $image->url }}" data-user="{{ $image->user->name }}" title="{{ $image->title }}">
                         <img class="card-img-top"
                              src="{{ url('thumbs/' . $image->name) }}"
-                             alt="image">
+                             alt="{{ $image->title }}">
                     </a>
                     <div class="card-body">
                         @isset($image->title)
@@ -403,7 +403,6 @@
         $('a.image-link').click((e) => {
             e.preventDefault()
             let that = $(e.currentTarget)
-            console.log(that)
             $.ajax({
                 method: 'patch',
                 url: that.attr('data-link')
@@ -421,17 +420,23 @@
             $('.card-columns').magnificPopup({
                 delegate: 'a.image-link',
                 type: 'image',
+                tLoading: '<i class="fas fa-spinner fa-pulse fa-2x"></i>  @lang("Chargement...")',
                 tClose: '@lang("Fermer (Esc)")'@if($images->count() > 1),
                 gallery: {
                     enabled: true,
-                    tPrev: '@lang("Précédent (Flèche gauche)")',
-                    tNext: '@lang("Suivant (Flèche droite)")'
-                },
-                callbacks: {
-                    buildControls: function () {
-                        this.contentContainer.append(this.arrowLeft.add(this.arrowRight))
+                    navigateByImgClick: true,
+                    preload: [0,1], // Will preload 0 - before current, and 1 after the current image
+                    tCounter: '<span class="mfp-counter">%curr% @lang("sur") %total%</span>'
+                },@endif
+                image: {
+                    tError: '<a href="%url%">@lang("L\'image #%curr%</a> n\'a pas pu être chargée.")',
+                    titleSrc: function(item) {
+                        let title = item.el.attr('title')
+                            title += (item.el.attr('data-url'))? ' - <a href="' + item.el.attr('data-url') + '">@lang("Site web")</a>' : ''
+                            title += '<small>@lang("de") ' + item.el.attr('data-user') + '</small>'
+                        return title
                     }
-                }@endif
+                }
             })
             $('a.toggleIcons').click((e) => {
                 e.preventDefault();
