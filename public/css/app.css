@@ -410,7 +410,6 @@ img.mfp-img {
     transition: none !important;
   }
 }
-
 @charset "UTF-8";
 
 /*!
@@ -19832,7 +19831,7 @@ h1 {
 }
 
 .fixed-bottom {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .site-wrapper {
