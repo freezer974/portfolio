@@ -6,6 +6,7 @@ use App\Repositories\AlbumRepository;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\CategoryRepository;
+use Illuminate\Support\Facades\Validator;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -51,5 +52,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::if ('maintenance', function () {
             return auth ()->check () && auth ()->user ()->admin && app()->isDownForMaintenance();
         });
+
+        Validator::extend('recaptcha', 'App\\Validators\\ReCaptcha@validate');
     }
 }
