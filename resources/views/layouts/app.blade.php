@@ -193,6 +193,7 @@
     </div>
 @endif
 @yield('content')
+@include('cookieConsent::index')
 <script src="{{ asset('js/app.js') }}"></script>
 {!! Toastr::message() !!}
 @yield('script')
@@ -210,15 +211,27 @@
         });
     })
 
+    if ($(window).width() < 992) {
+        $("nav.navbar").addClass("scroll-header")
+    }
 
-    $(window).on('scroll', function () {
+    function testWindowSizeAndPosition(){
         var scroll = $(window).scrollTop();
-        if (scroll < 15) {
+        var width = $(window).width();
+        if (scroll < 15 && width >= 992 ) {
             $("nav.navbar").removeClass("scroll-header");
         } else {
             $("nav.navbar").addClass("scroll-header");
         }
+    }
+
+    $(window).on('scroll', function () {
+        testWindowSizeAndPosition();
     });
+
+    $(window).resize(function() {
+        testWindowSizeAndPosition();
+    })
 
 </script>
 </body>

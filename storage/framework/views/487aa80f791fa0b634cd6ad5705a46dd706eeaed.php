@@ -563,7 +563,7 @@
                         <a href="https://github.com/freezer974"><i class="fab fa-github fa-lg"></i></a>
                     </div>
 					<div class="copyright mt-2">
-						<p>&copy; Tous droits réservés par <a href="<?php echo e(route('home')); ?>">Tatoumi Création</a> 2018-2019</p>
+						<p>&copy; Tous droits réservés par <a href="<?php echo e(route('home')); ?>">Tatoumi Création</a> 2018-2019 • <a href="<?php echo e(route('mentionslegales')); ?>">Mentions Légales</a> </p>
 					</div>
 				</div>
 			</div>
