@@ -20,6 +20,9 @@
 // Headline
 @import "~jquery-animated-headlines/src/scss/jquery.animatedheadline.scss";
 
+//toastr
+@import "~toastr/toastr.scss";
+
 
 
 html, body {
@@ -430,4 +433,9 @@ a#scrollUp:hover i{
 
 .image-link > img {
     border-bottom: 1px #eeeeee solid;
+}
+
+// toast position top
+.toast-top-right{
+    top: 66px;
 }
