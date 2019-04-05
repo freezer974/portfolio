@@ -46,16 +46,15 @@ class ContactUsController extends Controller
         ContactUs::create($request->all());
 
         Mail::send('email',
-        array(
-        'name' => $request->get('name'),
-        'email' => $request->get('email'),
-        'phone' => $request->get('phone'),
-        'user_message' => $request->get('message')
-        ), function($message)
-        {
-            $message->from('noreply@tatoumi.com');
-            $message->to('tony@tatoumi.com', 'Admin')
-            ->subject(__('Contact sur le site Tatoumi Création'));
+            array(
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'phone' => $request->get('phone'),
+                'user_message' => $request->get('message')
+            ), function($message){
+                $message->from('noreply@tatoumi.com');
+                $message->to('tony@tatoumi.com', 'Admin')
+                ->subject(__('Contact sur le site Tatoumi Création'));
         });
         Toastr::success(__('Merci de nous avoir contacté, vous recevrez une réponse dans moins de 24h.'), __('Contact'));
         return redirect()->route('home');
