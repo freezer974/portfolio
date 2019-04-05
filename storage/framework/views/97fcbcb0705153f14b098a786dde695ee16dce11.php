@@ -61,4 +61,4 @@
     </body>
 </html>
 
-<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/views/minimal.blade.php */ ?>
+<?php /* /Users/tonychevalier/sites/tatoumicreation/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/views/minimal.blade.php */ ?>

@@ -122,6 +122,8 @@ return [
 
     'key' => env('APP_KEY'),
     'googlekey' => env('GOOGLE_KEY'),
+    'googlerecaptchakey' => env('GOOGLE_RECAPTCHA_KEY'),
+    'googlerecaptchasecret' => env('GOOGLE_RECAPTCHA_SECRET'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -238,6 +240,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Toastr' => Brian2694\Toastr\Facades\Toastr::class,
 
     ],
 
