@@ -145,6 +145,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.linkedin.com/in/tonychevalier974/"> <i class="fab fa-linkedin-in fa-lg"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/freezer974"> <i class="fab fa-github fa-lg"></i></a>
+                </li>
             <?php else: ?>
                 <?php if (\Illuminate\Support\Facades\Blade::check('maintenance')): ?>
                     <li class="nav-item">
@@ -194,6 +197,8 @@
 <?php endif; ?>
 <?php echo $__env->yieldContent('content'); ?>
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+<?php echo Toastr::message(); ?>
+
 <?php echo $__env->yieldContent('script'); ?>
 <script>
     $(() => {
@@ -223,4 +228,4 @@
 </body>
 </html>
 
-<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/layouts/app.blade.php */ ?>
+<?php /* /Users/tonychevalier/sites/tatoumicreation/resources/views/layouts/app.blade.php */ ?>

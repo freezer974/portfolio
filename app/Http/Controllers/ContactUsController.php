@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Url;
-use App\Http\Requests;
-use App\Models\ContactUs;
 use Mail;
 use Validator;
+use App\Http\Requests;
+use App\Models\ContactUs;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Url;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Redirect;
 
 class ContactUsController extends Controller
 {
@@ -30,11 +31,13 @@ class ContactUsController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required|regex:/[0-9]{10}/',
-            'message' => 'required|min:3|max:1000'
+            'message' => 'required|min:3|max:1000',
+            'recaptcha' => 'required|recaptcha',
         ]);
 
         if($validator->fails())
         {
+            Toastr::error(__('Corriger les erreurs dans le formulaire'), __('Contact'));
             return Redirect::to(URL::previous() . "#form-contact")->withErrors($validator)->withInput();
         }
 
@@ -52,9 +55,9 @@ class ContactUsController extends Controller
         {
             $message->from('noreply@tatoumi.com');
             $message->to('tony@tatoumi.com', 'Admin')
-            ->subject('Contact sur le site Tatoumi Création');
+            ->subject(__('Contact sur le site Tatoumi Création'));
         });
-
-        return redirect()->route('home')->with('ok',  __('Merci de nous avoir contacté, vous recevrez une réponse dans moins de 24h.'));
+        Toastr::success(__('Merci de nous avoir contacté, vous recevrez une réponse dans moins de 24h.'), __('Contact'));
+        return redirect()->route('home');
     }
 }
