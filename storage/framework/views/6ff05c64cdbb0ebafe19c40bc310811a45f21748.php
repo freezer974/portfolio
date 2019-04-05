@@ -13,4 +13,4 @@ Message: <?php echo e($user_message); ?>
 
 </p>
 
-<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/email.blade.php */ ?>
+<?php /* /Users/tonychevalier/sites/tatoumicreation/resources/views/email.blade.php */ ?>

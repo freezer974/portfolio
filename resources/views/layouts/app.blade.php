@@ -144,6 +144,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.linkedin.com/in/tonychevalier974/"> <i class="fab fa-linkedin-in fa-lg"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/freezer974"> <i class="fab fa-github fa-lg"></i></a>
+                </li>
             @else
                 @maintenance
                     <li class="nav-item">
@@ -191,6 +194,7 @@
 @endif
 @yield('content')
 <script src="{{ asset('js/app.js') }}"></script>
+{!! Toastr::message() !!}
 @yield('script')
 <script>
     $(() => {
