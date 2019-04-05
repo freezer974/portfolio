@@ -4,6 +4,9 @@
 /storage/*.key
 /vendor
 .env
+.env.example
+.gitignore
+.gitattributes
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -11,3 +14,5 @@ npm-debug.log
 yarn-error.log
 /public/images/*.*
 /public/thumbs/*.*
+yarn.lock
+.vscode
