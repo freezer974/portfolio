@@ -4,4 +4,4 @@
 
 </button>
 
-<?php /* /Users/tonychevalier/sites/simplon/heroku/tatoumi/resources/views/components/button.blade.php */ ?>
+<?php /* /Users/tonychevalier/sites/tatoumicreation/resources/views/components/button.blade.php */ ?>
