@@ -527,6 +527,10 @@
                             'rows' => '4',
                             'required' => true,
                         ])
+                        @include('partials.recaptcha-hidden', [
+                            'name' => 'recaptcha',
+                            'required' => true,
+                        ])
                         @component('components.button')
                             @slot('color')
                                 outline-info
@@ -554,9 +558,10 @@
 						<a href="{{ route('home') }}"><h5>Tatoumi Création</h5></a>
 					</div>
                     <div class="footer-social-icon">
-                                    <a href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
-                                    <a href="https://twitter.com/ChevalierTony"><i class="fab fa-twitter fa-lg"></i></a>
-                                    <a href="https://www.linkedin.com/in/tonychevalier974/"> <i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="https://twitter.com/ChevalierTony"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="https://www.linkedin.com/in/tonychevalier974/"> <i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="https://github.com/freezer974"><i class="fab fa-github fa-lg"></i></a>
                     </div>
 					<div class="copyright mt-2">
 						<p>&copy; Tous droits réservés par <a href="{{ route('home') }}">Tatoumi Création</a> 2018-2019</p>
@@ -567,9 +572,17 @@
     </div>
 @endsection
 @section('script')
+<script src="https://www.google.com/recaptcha/api.js?render={{ Config::get('app.googlerecaptchakey')}}"></script>
 
     <script>
 
+    grecaptcha.ready(function() {
+        grecaptcha.execute('{{ Config::get("app.googlerecaptchakey")}}', {action: "contact_us"}).then(function(token) {
+            if (token) {
+                document.getElementById('recaptcha').value = token;
+            }
+        });
+    });
     window.onload = function () {
 
         // jQuery and everything else is loaded
@@ -605,252 +618,250 @@
             $('.clip').animatedHeadline()
         })
 
+        const swallAlertServer = () => {
+            swal.fire({
+                title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
+                type: 'warning'
+            })
+        }
 
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        })
 
-            const swallAlertServer = () => {
+        $('a.description-manage').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            let text = that.parents('.card').find('.card-text').text()
+            $('#description').val(text)
+            $('#descriptionForm').attr('action', that.attr('href')).find('input').removeClass('is-invalid').next().text()
+            $('#changeDescription').modal('show')
+        })
+
+        $('#descriptionForm').submit((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            $.ajax({
+                method: 'put',
+                url: that.attr('action'),
+                data: that.serialize()
+            })
+            .done((data) => {
+                let card = $('#image' + data.id)
+                let body = card.find('.card-body')
+                if(body.length) {
+                    body.children().text(data.description)
+                } else {
+                    card.children('a').after('<div class="card-body"><p class="card-text">' + data.description + '</p></div>')
+                }
+                $('#changeDescription').modal('hide')
+            })
+            .fail((data) => {
+                if(data.status === 422) {
+                    $.each(data.responseJSON.errors, function (key, value) {
+                        $('#descriptionForm input[name=' + key + ']').addClass('is-invalid').next().text(value)
+                    })
+                } else {
+                    swallAlertServer()
+                }
+            })
+        })
+
+        $('a.category-edit').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            $('select').val(that.attr('data-id'))
+            $('#editForm').attr('action', that.attr('href'))
+            $('#changeCategory').modal('show')
+        })
+
+        $('a.adult-edit').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            let icon = that.children()
+            let adult = icon.hasClass('fa-graduation-cap')
+            if(adult) {
+                icon.removeClass('fa-graduation-cap')
+            } else {
+                icon.removeClass('fa-child')
+            }
+            icon.addClass('fa-cog fa-spin')
+            adult = !adult
+            $.ajax({
+                method: 'put',
+                url: that.attr('href'),
+                data: { adult: adult }
+            })
+            .done(() => {
+                that.tooltip('hide')
+                let icon = that.children()
+                icon.removeClass('fa-cog fa-spin')
+                let card = that.parents('.card')
+                if(adult) {
+                    icon.addClass('fa-graduation-cap')
+                    card.addClass('border-danger')
+                } else {
+                    icon.addClass('fa-child')
+                    card.removeClass('border-danger')
+                }
+            })
+            .fail(() => {
+                swallAlertServer()
+            })
+        })
+
+        $('a.albums-manage').click((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            that.tooltip('hide')
+            that.children().removeClass('fa-folder-open').addClass('fa-cog fa-spin')
+            e.preventDefault()
+            $.get(that.attr('href'))
+            .done((data) => {
+                that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                $('#listeAlbums').html(data)
+                $('#manageAlbums').attr('action', that.attr('href'))
+                $('#editAlbums').modal('show')
+            })
+            .fail(() => {
+                that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                swallAlertServer()
+            })
+        })
+
+        $('#manageAlbums').submit((e) => {
+            e.preventDefault()
+            let that = $(e.currentTarget)
+            $.ajax({
+                method: 'put',
+                url: that.attr('action'),
+                data: that.serialize()
+            })
+                .done((data) => {
+                    if(data === 'reload') {
+                        location.reload();
+                    } else {
+                        $('#editAlbums').modal('hide')
+                    }
+                })
+                .fail(() => {
+                    swallAlertServer()
+                })
+        })
+
+        let memoStars = []
+        $('.star-rating div').click((e) => {
+            @auth
+                let element = $(e.currentTarget)
+                let values = element.attr('id').split('.')
+                element.addClass('fa-spin')
+                $.ajax({
+                    url: "{{ url('rating') }}" + '/' + values[0],
+                    type: 'PUT',
+                    data: {value: values[1]}
+                })
+                .done((data) => {
+                    if (data.status === 'ok') {
+                        let image = $('#' + data.id)
+                        memoStars = []
+                        image.children('div')
+                            .removeClass('star-yellow')
+                            .each(function (index, element) {
+                                if (data.value > 4 - index) {
+                                    $(element).addClass('star-yellow')
+                                    memoStars.push(true)
+                                }
+                                memoStars.push(false)
+                            })
+                            .end()
+                            .find('span.count-number')
+                            .text('(' + data.count + ')')
+                        if(data.rate) {
+                            if(data.rate == values[1]) {
+                                title = '@lang("Vous avez déjà donné cette note !")'
+                            } else {
+                                title = '@lang("Votre vote a été modifié !")'
+                            }
+                        } else {
+                            title = '@lang("Merci pour votre vote !")'
+                        }
+                        swal.fire({
+                            title: title,
+                            type: 'warning'
+                        })
+                    } else {
+                        swal.fire({
+                            title: '@lang('Vous ne pouvez pas voter pour vos photos !')',
+                            type: 'error'
+                        })
+                    }
+                    element.removeClass('fa-spin')
+                })
+                .fail(() => {
+                    swallAlertServer()
+                    element.removeClass('fa-spin')
+                })
+            @else
                 swal.fire({
-                    title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
-                    type: 'warning'
+                    title: '@lang('Vous devez être connecté pour pouvoir voter !')',
+                    type: 'error'
+                })
+            @endauth
+        })
+
+        $('.star-rating').hover(
+            (e) => {
+                memoStars = []
+                $(e.currentTarget).children('div')
+                    .each((index, element) => {
+                        memoStars.push($(element).hasClass('star-yellow'))
+                    })
+                    .removeClass('star-yellow')
+            }, (e) => {
+            $.each(memoStars, (index, value) => {
+                if(value) {
+                    $(e.currentTarget).children('div:eq(' + index + ')').addClass('star-yellow')
+                }
+            })
+        })
+
+        $(".go-down").on('click', function(event) {
+            if (this.hash !== "") {
+                event.preventDefault()
+                var hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top - $("nav.navbar").height()
+                }, 800, function(){
+                    window.location.hash = hash;
                 })
             }
+        })
 
-            $.ajaxSetup({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-            })
+        $('.counter').counterUp({
+            delay: .8,
+            time: 150
+        })
 
-            $('a.description-manage').click((e) => {
-                e.preventDefault()
-                let that = $(e.currentTarget)
-                let text = that.parents('.card').find('.card-text').text()
-                $('#description').val(text)
-                $('#descriptionForm').attr('action', that.attr('href')).find('input').removeClass('is-invalid').next().text()
-                $('#changeDescription').modal('show')
-            })
+        $('.carousel').carousel()
 
-            $('#descriptionForm').submit((e) => {
-                e.preventDefault()
-                let that = $(e.currentTarget)
-                $.ajax({
-                    method: 'put',
-                    url: that.attr('action'),
-                    data: that.serialize()
-                })
-                .done((data) => {
-                    let card = $('#image' + data.id)
-                    let body = card.find('.card-body')
-                    if(body.length) {
-                        body.children().text(data.description)
-                    } else {
-                        card.children('a').after('<div class="card-body"><p class="card-text">' + data.description + '</p></div>')
-                    }
-                    $('#changeDescription').modal('hide')
-                })
-                .fail((data) => {
-                    if(data.status === 422) {
-                        $.each(data.responseJSON.errors, function (key, value) {
-                            $('#descriptionForm input[name=' + key + ']').addClass('is-invalid').next().text(value)
-                        })
-                    } else {
-                        swallAlertServer()
-                    }
-                })
-            })
-
-            $('a.category-edit').click((e) => {
-                e.preventDefault()
-                let that = $(e.currentTarget)
-                $('select').val(that.attr('data-id'))
-                $('#editForm').attr('action', that.attr('href'))
-                $('#changeCategory').modal('show')
-            })
-
-            $('a.adult-edit').click((e) => {
-                e.preventDefault()
-                let that = $(e.currentTarget)
-                let icon = that.children()
-                let adult = icon.hasClass('fa-graduation-cap')
-                if(adult) {
-                    icon.removeClass('fa-graduation-cap')
-                } else {
-                    icon.removeClass('fa-child')
-                }
-                icon.addClass('fa-cog fa-spin')
-                adult = !adult
-                $.ajax({
-                    method: 'put',
-                    url: that.attr('href'),
-                    data: { adult: adult }
-                })
-                .done(() => {
-                    that.tooltip('hide')
-                    let icon = that.children()
-                    icon.removeClass('fa-cog fa-spin')
-                    let card = that.parents('.card')
-                    if(adult) {
-                        icon.addClass('fa-graduation-cap')
-                        card.addClass('border-danger')
-                    } else {
-                        icon.addClass('fa-child')
-                        card.removeClass('border-danger')
-                    }
-                })
-                .fail(() => {
-                    swallAlertServer()
-                })
-            })
-
-            $('a.albums-manage').click((e) => {
-                e.preventDefault()
-                let that = $(e.currentTarget)
-                that.tooltip('hide')
-                that.children().removeClass('fa-folder-open').addClass('fa-cog fa-spin')
-                e.preventDefault()
-                $.get(that.attr('href'))
-                .done((data) => {
-                    that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
-                    $('#listeAlbums').html(data)
-                    $('#manageAlbums').attr('action', that.attr('href'))
-                    $('#editAlbums').modal('show')
-                })
-                .fail(() => {
-                    that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
-                    swallAlertServer()
-                })
-            })
-
-            $('#manageAlbums').submit((e) => {
-                e.preventDefault()
-                let that = $(e.currentTarget)
-                $.ajax({
-                    method: 'put',
-                    url: that.attr('action'),
-                    data: that.serialize()
-                })
-                    .done((data) => {
-                        if(data === 'reload') {
-                            location.reload();
-                        } else {
-                            $('#editAlbums').modal('hide')
-                        }
-                    })
-                    .fail(() => {
-                        swallAlertServer()
-                    })
-            })
-
-            let memoStars = []
-            $('.star-rating div').click((e) => {
-                @auth
-                    let element = $(e.currentTarget)
-                    let values = element.attr('id').split('.')
-                    element.addClass('fa-spin')
-                    $.ajax({
-                        url: "{{ url('rating') }}" + '/' + values[0],
-                        type: 'PUT',
-                        data: {value: values[1]}
-                    })
-                    .done((data) => {
-                        if (data.status === 'ok') {
-                            let image = $('#' + data.id)
-                            memoStars = []
-                            image.children('div')
-                                .removeClass('star-yellow')
-                                .each(function (index, element) {
-                                    if (data.value > 4 - index) {
-                                        $(element).addClass('star-yellow')
-                                        memoStars.push(true)
-                                    }
-                                    memoStars.push(false)
-                                })
-                                .end()
-                                .find('span.count-number')
-                                .text('(' + data.count + ')')
-                            if(data.rate) {
-                                if(data.rate == values[1]) {
-                                    title = '@lang("Vous avez déjà donné cette note !")'
-                                } else {
-                                    title = '@lang("Votre vote a été modifié !")'
-                                }
-                            } else {
-                                title = '@lang("Merci pour votre vote !")'
-                            }
-                            swal.fire({
-                                title: title,
-                                type: 'warning'
-                            })
-                        } else {
-                            swal.fire({
-                                title: '@lang('Vous ne pouvez pas voter pour vos photos !')',
-                                type: 'error'
-                            })
-                        }
-                        element.removeClass('fa-spin')
-                    })
-                    .fail(() => {
-                        swallAlertServer()
-                        element.removeClass('fa-spin')
-                    })
-                @else
-                    swal.fire({
-                        title: '@lang('Vous devez être connecté pour pouvoir voter !')',
-                        type: 'error'
-                    })
-                @endauth
-            })
-
-            $('.star-rating').hover(
-                (e) => {
-                    memoStars = []
-                    $(e.currentTarget).children('div')
-                        .each((index, element) => {
-                            memoStars.push($(element).hasClass('star-yellow'))
-                        })
-                        .removeClass('star-yellow')
-                }, (e) => {
-                $.each(memoStars, (index, value) => {
-                    if(value) {
-                        $(e.currentTarget).children('div:eq(' + index + ')').addClass('star-yellow')
-                    }
-                })
-            })
-
-            $(".go-down").on('click', function(event) {
-                if (this.hash !== "") {
-                    event.preventDefault()
-                    var hash = this.hash;
-                    $('html, body').animate({
-                        scrollTop: $(hash).offset().top - $("nav.navbar").height()
-                    }, 800, function(){
-                        window.location.hash = hash;
-                    })
+        $('.grid').imagesLoaded( function() {
+            var $grid = $('.grid').isotope({
+                itemSelector: '.grid-item',
+                percentPosition: true,
+                masonry: {
+                // use outer width of grid-sizer for columnWidth
+                columnWidth: '.grid-item'
                 }
             })
+            // filter items on button click
+            $('.filter-button-group').on( 'click', 'button', function() {
+                $('.button-group > button').removeClass('active');
+                $(this).addClass('active');
 
-            $('.counter').counterUp({
-                delay: .8,
-                time: 150
+                var filterValue = $(this).attr('data-filter');
+                $grid.isotope({ filter: filterValue });
             })
-
-            $('.carousel').carousel()
-
-            $('.grid').imagesLoaded( function() {
-                var $grid = $('.grid').isotope({
-                    itemSelector: '.grid-item',
-                    percentPosition: true,
-                    masonry: {
-                    // use outer width of grid-sizer for columnWidth
-                    columnWidth: '.grid-item'
-                    }
-                })
-                // filter items on button click
-                $('.filter-button-group').on( 'click', 'button', function() {
-                    $('.button-group > button').removeClass('active');
-                    $(this).addClass('active');
-
-                    var filterValue = $(this).attr('data-filter');
-                    $grid.isotope({ filter: filterValue });
-                })
-                $grid.magnificPopup({
+            $grid.magnificPopup({
                 delegate: 'a.image-link',
                 type: 'image',
                 tLoading: '<i class="fas fa-spinner fa-pulse fa-2x"></i>  @lang("Chargement...")',
