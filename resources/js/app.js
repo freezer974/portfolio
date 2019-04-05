@@ -1,5 +1,8 @@
 window._ = require('lodash');
 window.swal = require('sweetalert2');
+window.toastr = require('toastr');
+
+
 
 try {
     window.$ = window.jQuery = require('jquery');
@@ -8,6 +11,7 @@ try {
     require('bootstrap');
     require('isotope-layout/dist/isotope.pkgd.min.js');
     require('magnific-popup');
+    require('jquery-infinitescroll/dist/jquery-infiniteScroll.js');
     require('@fortawesome/fontawesome-free/js/all.js');
     require('jquery-animated-headlines');
     require('waypoints/lib/jquery.waypoints.min.js');
@@ -16,5 +20,4 @@ try {
     require('startbootstrap-scrolling-nav/js/scrolling-nav.js');
     require('imagesloaded');
     require('scrollup');
-
 } catch (e) {}
