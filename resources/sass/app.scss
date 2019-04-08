@@ -114,10 +114,6 @@ a:hover {
     content: "Parcourir";
 }
 
-.fixed-bottom {
-    opacity: 0.9;
-}
-
 .site-wrapper {
     display: grid;
     height: 100%;
@@ -438,4 +434,9 @@ a#scrollUp:hover i{
 // toast position top
 .toast-top-right{
     top: 66px;
+}
+
+.pagination>li>a, .pagination>li>span { 
+    border-radius: 18px !important;
+    margin: 0 5px;
 }
