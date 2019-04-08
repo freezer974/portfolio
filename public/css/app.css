@@ -19830,10 +19830,13 @@ h1 {
   content: "Parcourir";
 }
 
+<<<<<<< HEAD
 .fixed-bottom {
   opacity: 0.8;
 }
 
+=======
+>>>>>>> 16a509052d59358848c6a76aa4144fea72491bde
 .site-wrapper {
   display: grid;
   height: 100%;
@@ -20219,3 +20222,8 @@ a#scrollUp:hover i {
   top: 66px;
 }
 
+.pagination > li > a,
+.pagination > li > span {
+  border-radius: 18px !important;
+  margin: 0 5px;
+}
