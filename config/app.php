@@ -124,6 +124,7 @@ return [
     'googlekey' => env('GOOGLE_KEY'),
     'googlerecaptchakey' => env('GOOGLE_RECAPTCHA_KEY'),
     'googlerecaptchasecret' => env('GOOGLE_RECAPTCHA_SECRET'),
+    'google_analytic' => env('GOOGLE_ANALYTIC'),
 
     'cipher' => 'AES-256-CBC',
 
