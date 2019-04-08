@@ -26,7 +26,7 @@
 
 
         <div class="d-flex justify-content-center">
-            {{ $images->links() }}
+            {{ $images->onEachSide(2)->links() }}
         </div>
         <div class="card-columns">
             @foreach($images as $image)
