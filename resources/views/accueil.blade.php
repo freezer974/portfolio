@@ -461,37 +461,6 @@
                 <hr class="mx-auto col-4 my-5">
             </div>
             <div class="row">
-                <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
-                    <div class="contact-details d-flex">
-                        <div class="col-sm-4 mb-5">
-                            <div class="contact-box">
-                                <span class="contact-icon">
-                                    <i class="fa fa-map-marker" aria-hidden="true" class="p-3"></i>
-                                </span>
-                                <h3>Adresse</h3>
-                                <p>574 rocade sud, 97440, Saint-André</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 mb-5">
-                            <div class="contact-box">
-                                <span class="contact-icon">
-                                    <a href="mailto:contact@tatoumi.com"><i class="fa fa-envelope" aria-hidden="true"  class="p-3"></i></a>
-                                </span>
-                                <h3>Email</h3>
-                                <p><a href="mailto:contact@tatoumi.com">contact@tatoumi.com</a></p>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 mb-5">
-                            <div class="contact-box">
-                                <span class="contact-icon">
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                </span>
-                                <h3>Service Client</h3>
-                                <p>(+262) 692 24 84 33</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 mb-3" id="form-contact">
                     <form method="POST" action="{{ route('contactus.store') }}">
                         @csrf
@@ -929,10 +898,27 @@
                 zoom: 15
             });
 
+            var contentString = '<div id="content">'+
+                                    '<div id="siteNotice">'+
+                                    '</div>'+
+                                        '<img src="http://localhost:8888/images/logo/logo-tatoumi-creation-noir.png" alt="logo tatoumi" class="w-100 mb-3">'+                                    '<div id="bodyContent">'+
+                                        '<p><b>@lang("Adresse")</b> : 574 rocade sud, 97440, Saint-André </p>' +
+                                        '<p><b>Téléphone</b> : (+262) 692 24 84 33</p>'+
+                                    '</div>'+
+                                '</div>';
+            
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
             var marker = new google.maps.Marker({
                 position: tatoumi,
                 map: map,
                 title: 'Tatoumi Création'
+            });
+            
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
             });
 
         }
