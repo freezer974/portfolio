@@ -173,7 +173,7 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 mb-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-tasks fa-2x pb-2 text-dark"></i>
-                        <h1 class="counter text-info">169</h1>
+                        <h1 class="counter text-info">171</h1>
                         <p>Projets réalisés</p>
                     </div>
                 </div>
@@ -187,14 +187,14 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 mb-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-clock fa-2x pb-2 text-dark"></i>
-                        <h1 class="counter text-info">2179</h1>
+                        <h1 class="counter text-info">2201</h1>
                         <p>Heures travaillées</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-glass-martini fa-2x pb-2 text-dark" aria-hidden="true"></i>
-                        <h1 class="counter text-info">475</h1>
+                        <h1 class="counter text-info">482</h1>
                         <p>Jus frais consommés</p>
                     </div>
                 </div>
@@ -328,7 +328,7 @@
                     <div class="testimonial-active carousel slide" data-ride="carousel">
                         <div class="single-testimonial carousel-item active">
                             <p>Beau travail, rapide et éfficace. A l'écoute dans la demande du client, suivi de la demande du client et de ses exigences, force de propositions et de créativité.</p>
-                            <h5> par <strong>Mme Marie-France Ah-sing</strong></h5>
+                            <h5> par <strong>Mme Marie-France Ah-Sing</strong></h5>
                         </div>
                         <div class="single-testimonial carousel-item">
                             <p>De bon conseil, généreux, patient. Respectieux de mes exgigences, vous avez su fournir un travail remarquable, votre professionnalisme à permis de structurer ma demande.</p>
@@ -833,8 +833,8 @@
                 itemSelector: '.grid-item',
                 percentPosition: true,
                 masonry: {
-                // use outer width of grid-sizer for columnWidth
-                columnWidth: '.grid-item'
+                    // use outer width of grid-sizer for columnWidth
+                    columnWidth: '.grid-item'
                 }
             })
             // filter items on button click
