@@ -1,4 +1,5 @@
-<?php $__env->startSection('content'); ?>
+@extends('layouts.app')
+@section('content')
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -15,16 +16,16 @@
         <div class="single-slider justify-content-center d-flex">
             <div class="container">
                 <div class="slider-content my-auto clip text-light">
-                    <h2><?php echo app('translator')->getFromJson('Salut, Je suis'); ?> Tony Chevalier</h2>
+                    <h2>@lang('Salut, Je suis') Tony Chevalier</h2>
                     <h2 class="ah-headline">
-                        <span><?php echo app('translator')->getFromJson('Un auto-entrepreneur dans le domaine du '); ?></span>
+                        <span>@lang('Un auto-entrepreneur dans le domaine du ')</span>
                         <span class="ah-words-wrapper">
-                            <b class="is-visible"><?php echo app('translator')->getFromJson('Graphisme'); ?></b>
-                            <b><?php echo app('translator')->getFromJson('Site web'); ?></b>
-                            <b><?php echo app('translator')->getFromJson('Coaching'); ?></b>
+                            <b class="is-visible">@lang('Graphisme')</b>
+                            <b>@lang('Site web')</b>
+                            <b>@lang('Coaching')</b>
                         </span>
                     </h2>
-                    <a href="#contact" role="button" class="btn btn-outline-light js-scroll-trigger"><?php echo app('translator')->getFromJson('Contactez-moi'); ?></a>
+                    <a href="#contact" role="button" class="btn btn-outline-light js-scroll-trigger">@lang('Contactez-moi')</a>
                 </div>
                 <div>
                     <ul class="navigation">
@@ -172,7 +173,7 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 mb-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-tasks fa-2x pb-2 text-dark"></i>
-                        <h1 class="counter text-info">169</h1>
+                        <h1 class="counter text-info">171</h1>
                         <p>Projets réalisés</p>
                     </div>
                 </div>
@@ -186,14 +187,14 @@
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 mb-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-clock fa-2x pb-2 text-dark"></i>
-                        <h1 class="counter text-info">2179</h1>
+                        <h1 class="counter text-info">2201</h1>
                         <p>Heures travaillées</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3">
                     <div class="bg-white p-4">
                         <i class="fa fa-glass-martini fa-2x pb-2 text-dark" aria-hidden="true"></i>
-                        <h1 class="counter text-info">475</h1>
+                        <h1 class="counter text-info">482</h1>
                         <p>Jus frais consommés</p>
                     </div>
                 </div>
@@ -327,7 +328,7 @@
                     <div class="testimonial-active carousel slide" data-ride="carousel">
                         <div class="single-testimonial carousel-item active">
                             <p>Beau travail, rapide et éfficace. A l'écoute dans la demande du client, suivi de la demande du client et de ses exigences, force de propositions et de créativité.</p>
-                            <h5> par <strong>Mme Marie-France Ah-sing</strong></h5>
+                            <h5> par <strong>Mme Marie-France Ah-Sing</strong></h5>
                         </div>
                         <div class="single-testimonial carousel-item">
                             <p>De bon conseil, généreux, patient. Respectieux de mes exgigences, vous avez su fournir un travail remarquable, votre professionnalisme à permis de structurer ma demande.</p>
@@ -349,32 +350,32 @@
             </div>
                <div class="portfolio-menu">
                    <div class="button-group filter-button-group">
-                        <a class="button" href="<?php echo e(route('all')); ?>">Voir tous</a>
-                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <button data-filter=".cat<?php echo e($category->id); ?>"><?php echo e($category->name); ?></button>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <a class="button" href="{{ route('all') }}">Voir tous</a>
+                        @foreach($categories as $category)
+                            <button data-filter=".cat{{ $category->id }}">{{ $category->name }}</button>
+                        @endforeach
                     </div>
                </div>
             <div class="grid gallery row">
-                <?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="col-lg-4 col-sm-6 cat<?php echo e($image->category_id); ?> grid-item p-1">
+                @foreach($images as $image)
+                    <div class="col-lg-4 col-sm-6 cat{{ $image->category_id }} grid-item p-1">
                         <div class="portfolio-box">
                             <div class="portfolio-img">
-                                <a href="<?php echo e(url('images/' . $image->name)); ?>" class="image-link" data-url="<?php echo e($image->url); ?>" data-link="<?php echo e(route('image.click', $image->id)); ?>" title="<?php echo e($image->title); ?>" data-user="<?php echo e($image->user->name); ?>"><img src="<?php echo e(url('thumbs/' . $image->name)); ?>" alt="image"></a>
+                                <a href="{{ url('images/' . $image->name) }}" class="image-link" data-url="{{ $image->url }}" data-link="{{ route('image.click', $image->id) }}" title="{{ $image->title }}" data-user="{{ $image->user->name }}"><img src="{{ url('thumbs/' . $image->name) }}" alt="image"></a>
                             </div>
                             <div class="portfolio-content">
-                                <?php if(isset($image->title)): ?>
-                                    <h4 class="text-dark"><?php echo e($image->title); ?></h4>
-                                <?php endif; ?>
-                                <?php if(isset($image->description)): ?>
-                                    <span class="text-muted"><?php echo e($image->description); ?></span>
-                                <?php endif; ?>
-                                <?php if(isset($image->url)): ?>
-                                    <em class="d-block"><a href="<?php echo e($image->url); ?>" data-toggle="tooltip" title="<?php echo e(__('Voir le site web')); ?>">Site web</a></em>
-                                <?php endif; ?>
+                                @isset($image->title)
+                                    <h4 class="text-dark">{{ $image->title }}</h4>
+                                @endisset
+                                @isset($image->description)
+                                    <span class="text-muted">{{ $image->description }}</span>
+                                @endisset
+                                @isset($image->url)
+                                    <em class="d-block"><a href="{{ $image->url }}" data-toggle="tooltip" title="{{ __('Voir le site web') }}">Site web</a></em>
+                                @endisset
                                 <div class="float-right">
                                     <em>
-                                        (<span class="image-click"><?php echo e($image->clicks); ?></span> <?php echo e(trans_choice(__('vue|vues'), $image->clicks)); ?>)
+                                        (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }})
                                         <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
                                     </em>
                                 </div>
@@ -446,7 +447,7 @@
                             </div>
                         </div>
                     </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                @endforeach
             </div>
         </div>
     </div>
@@ -460,85 +461,54 @@
                 <hr class="mx-auto col-4 my-5">
             </div>
             <div class="row">
-                <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
-                    <div class="contact-details d-flex">
-                        <div class="col-sm-4 mb-5">
-                            <div class="contact-box">
-                                <span class="contact-icon">
-                                    <i class="fa fa-map-marker" aria-hidden="true" class="p-3"></i>
-                                </span>
-                                <h3>Adresse</h3>
-                                <p>574 rocade sud, 97440, Saint-André</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 mb-5">
-                            <div class="contact-box">
-                                <span class="contact-icon">
-                                    <a href="mailto:contact@tatoumi.com"><i class="fa fa-envelope" aria-hidden="true"  class="p-3"></i></a>
-                                </span>
-                                <h3>Email</h3>
-                                <p><a href="mailto:contact@tatoumi.com">contact@tatoumi.com</a></p>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 mb-5">
-                            <div class="contact-box">
-                                <span class="contact-icon">
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                </span>
-                                <h3>Service Client</h3>
-                                <p>(+262) 692 24 84 33</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 mb-3" id="form-contact">
-                    <form method="POST" action="<?php echo e(route('contactus.store')); ?>">
-                        <?php echo csrf_field(); ?>
+                    <form method="POST" action="{{ route('contactus.store') }}">
+                        @csrf
                         <div class="form-row">
-                            <?php echo $__env->make('partials.form-group', [
+                            @include('partials.form-group', [
                                 'title' => __('Votre nom'),
                                 'type' => 'text',
                                 'class' => 'col-sm-12 col-lg-6',
                                 'name' => 'name',
                                 'placeholder' => __("Ex: Payet Marc"),
                                 'required' => true,
-                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                            <?php echo $__env->make('partials.form-group', [
+                            ])
+                            @include('partials.form-group', [
                                 'title' => __('Votre email'),
                                 'type' => 'email',
                                 'class' => 'col-sm-12 col-lg-6',
                                 'name' => 'email',
                                 'placeholder' => __("Ex: votre-nom@mail.com"),
                                 'required' => true,
-                            ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            ])
                         </div>
-                        <?php echo $__env->make('partials.form-group', [
+                        @include('partials.form-group', [
                             'title' => __('Numéro de téléphone'),
                             'type' => 'tel',
                             'name' => 'phone',
                             'placeholder' => __("Ex: 0262123456"),
                             'required' => true,
-                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        <?php echo $__env->make('partials.textarea-form-group', [
+                        ])
+                        @include('partials.textarea-form-group', [
                             'title' => __('Votre message'),
                             'name' => 'message',
                             'placeholder' => __("Ici votre message ou demande de devis"),
                             'rows' => '4',
                             'required' => true,
-                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        <?php echo $__env->make('partials.recaptcha-hidden', [
+                        ])
+                        @include('partials.recaptcha-hidden', [
                             'name' => 'recaptcha',
                             'required' => true,
-                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        <?php $__env->startComponent('components.button'); ?>
-                            <?php $__env->slot('color'); ?>
+                        ])
+                        @component('components.button')
+                            @slot('color')
                                 outline-info
-                            <?php $__env->endSlot(); ?>
-                            <?php $__env->slot('col'); ?>
+                            @endslot
+                            @slot('col')
                                 col
-                            <?php $__env->endSlot(); ?>
-                            <?php echo app('translator')->getFromJson('Envoyer'); ?>
-                        <?php echo $__env->renderComponent(); ?>
+                            @endslot
+                            @lang('Envoyer')
+                        @endcomponent
                     </form>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-6 mb-3">
@@ -554,7 +524,7 @@
 			<div class="basic-footer text-center gray-bg py-2">
 				<div class="container">
 					<div class="footer-logo">
-						<a href="<?php echo e(route('home')); ?>"><h5>Tatoumi Création</h5></a>
+						<a href="{{ route('home') }}"><h5>Tatoumi Création</h5></a>
 					</div>
                     <div class="footer-social-icon">
                         <a href="https://www.facebook.com/tonychevalier974"><i class="fab fa-facebook-f fa-lg"></i></a>
@@ -563,20 +533,20 @@
                         <a href="https://github.com/freezer974"><i class="fab fa-github fa-lg"></i></a>
                     </div>
 					<div class="copyright mt-2">
-						<p>&copy; Tous droits réservés par <a href="<?php echo e(route('home')); ?>">Tatoumi Création</a> 2018-2019 • <a href="<?php echo e(route('mentionslegales')); ?>">Mentions Légales</a> </p>
+						<p>&copy; Tous droits réservés par <a href="{{ route('home') }}">Tatoumi Création</a> 2018-2019 • <a href="{{ route('mentionslegales') }}">Mentions Légales</a> </p>
 					</div>
 				</div>
 			</div>
 		</footer>
     </div>
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('script'); ?>
-    <script src="https://www.google.com/recaptcha/api.js?render=<?php echo e(Config::get('app.googlerecaptchakey')); ?>"></script>
+@endsection
+@section('script')
+    <script src="https://www.google.com/recaptcha/api.js?render={{ Config::get('app.googlerecaptchakey')}}"></script>
 
     <script>
 
     grecaptcha.ready(function() {
-        grecaptcha.execute('<?php echo e(Config::get("app.googlerecaptchakey")); ?>', {action: "contact_us"}).then(function(token) {
+        grecaptcha.execute('{{ Config::get("app.googlerecaptchakey")}}', {action: "contact_us"}).then(function(token) {
             if (token) {
                 document.getElementById('recaptcha').value = token;
             }
@@ -616,12 +586,12 @@
                 e.preventDefault();
                 let href = $(e.currentTarget).attr('href')
                 swal.fire({
-                    title: '<?php echo app('translator')->getFromJson('Vraiment supprimer cette photo ?'); ?>',
+                    title: '@lang('Vraiment supprimer cette photo ?')',
                     type: 'error',
                     showCancelButton: true,
                     confirmButtonColor: '#DD6B55',
-                    confirmButtonText: '<?php echo app('translator')->getFromJson('Oui'); ?>',
-                    cancelButtonText: '<?php echo app('translator')->getFromJson('Non'); ?>'
+                    confirmButtonText: '@lang('Oui')',
+                    cancelButtonText: '@lang('Non')'
                 }).then((result) => {
                     if (result.value) {
                         $("form[action='" + href + "'").submit()
@@ -634,7 +604,7 @@
 
         const swallAlertServer = () => {
             swal.fire({
-                title: '<?php echo app('translator')->getFromJson('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...'); ?>',
+                title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
                 type: 'warning'
             })
         }
@@ -765,12 +735,12 @@
 
         let memoStars = []
         $('.star-rating div').click((e) => {
-            <?php if(auth()->guard()->check()): ?>
+            @auth
                 let element = $(e.currentTarget)
                 let values = element.attr('id').split('.')
                 element.addClass('fa-spin')
                 $.ajax({
-                    url: "<?php echo e(url('rating')); ?>" + '/' + values[0],
+                    url: "{{ url('rating') }}" + '/' + values[0],
                     type: 'PUT',
                     data: {value: values[1]}
                 })
@@ -792,12 +762,12 @@
                             .text('(' + data.count + ')')
                         if(data.rate) {
                             if(data.rate == values[1]) {
-                                title = '<?php echo app('translator')->getFromJson("Vous avez déjà donné cette note !"); ?>'
+                                title = '@lang("Vous avez déjà donné cette note !")'
                             } else {
-                                title = '<?php echo app('translator')->getFromJson("Votre vote a été modifié !"); ?>'
+                                title = '@lang("Votre vote a été modifié !")'
                             }
                         } else {
-                            title = '<?php echo app('translator')->getFromJson("Merci pour votre vote !"); ?>'
+                            title = '@lang("Merci pour votre vote !")'
                         }
                         swal.fire({
                             title: title,
@@ -805,7 +775,7 @@
                         })
                     } else {
                         swal.fire({
-                            title: '<?php echo app('translator')->getFromJson('Vous ne pouvez pas voter pour vos photos !'); ?>',
+                            title: '@lang('Vous ne pouvez pas voter pour vos photos !')',
                             type: 'error'
                         })
                     }
@@ -815,12 +785,12 @@
                     swallAlertServer()
                     element.removeClass('fa-spin')
                 })
-            <?php else: ?>
+            @else
                 swal.fire({
-                    title: '<?php echo app('translator')->getFromJson('Vous devez être connecté pour pouvoir voter !'); ?>',
+                    title: '@lang('Vous devez être connecté pour pouvoir voter !')',
                     type: 'error'
                 })
-            <?php endif; ?>
+            @endauth
         })
 
         $('.star-rating').hover(
@@ -863,8 +833,8 @@
                 itemSelector: '.grid-item',
                 percentPosition: true,
                 masonry: {
-                // use outer width of grid-sizer for columnWidth
-                columnWidth: '.grid-item'
+                    // use outer width of grid-sizer for columnWidth
+                    columnWidth: '.grid-item'
                 }
             })
             // filter items on button click
@@ -878,20 +848,20 @@
             $grid.magnificPopup({
                 delegate: 'a.image-link',
                 type: 'image',
-                tLoading: '<i class="fas fa-spinner fa-pulse fa-2x"></i>  <?php echo app('translator')->getFromJson("Chargement..."); ?>',
+                tLoading: '<i class="fas fa-spinner fa-pulse fa-2x"></i>  @lang("Chargement...")',
                 mainClass: 'mfp-img-mobile',
                 gallery: {
                     enabled: true,
                     navigateByImgClick: true,
                     preload: [0,1], // Will preload 0 - before current, and 1 after the current image
-                    tCounter: '<span class="mfp-counter">%curr% <?php echo app('translator')->getFromJson("sur"); ?> %total%</span>'
+                    tCounter: '<span class="mfp-counter">%curr% @lang("sur") %total%</span>'
                 },
                 image: {
-                    tError: '<a href="%url%"><?php echo app('translator')->getFromJson("L\'image #%curr%</a> n\'a pas pu être chargée."); ?>',
+                    tError: '<a href="%url%">@lang("L\'image #%curr%</a> n\'a pas pu être chargée.")',
                     titleSrc: function(item) {
                         let title = item.el.attr('title')
-                            title += (item.el.attr('data-url'))? ' - <a href="' + item.el.attr('data-url') + '"><?php echo app('translator')->getFromJson("Site web"); ?></a>' : ''
-                            title += '<small><?php echo app('translator')->getFromJson("de"); ?> ' + item.el.attr('data-user') + '</small>'
+                            title += (item.el.attr('data-url'))? ' - <a href="' + item.el.attr('data-url') + '">@lang("Site web")</a>' : ''
+                            title += '<small>@lang("de") ' + item.el.attr('data-user') + '</small>'
                         return title
                     }
                 }
@@ -928,21 +898,35 @@
                 zoom: 15
             });
 
+            var contentString = '<div id="content">'+
+                                    '<div id="siteNotice">'+
+                                    '</div>'+
+                                        '<img src="http://localhost:8888/images/logo/logo-tatoumi-creation-noir.png" alt="logo tatoumi" class="w-100 mb-3">'+                                    '<div id="bodyContent">'+
+                                        '<p><b>@lang("Adresse")</b> : 574 rocade sud, 97440, Saint-André </p>' +
+                                        '<p><b>Téléphone</b> : (+262) 692 24 84 33</p>'+
+                                    '</div>'+
+                                '</div>';
+            
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
             var marker = new google.maps.Marker({
                 position: tatoumi,
                 map: map,
                 title: 'Tatoumi Création'
             });
+            
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
 
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo e(Config::get('app.googlekey')); ?>&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key={{ Config::get('app.googlekey') }}&callback=initMap" async defer></script>
 
-<?php $__env->stopSection(); ?>
-
-
+@endsection
 
 
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php /* /Users/tonychevalier/sites/tatoumicreation/resources/views/accueil.blade.php */ ?>
+
