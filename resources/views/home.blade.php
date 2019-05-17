@@ -57,7 +57,7 @@
                                 <div class="float-right">
                                     <em>
                                         (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }})
-                                        <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
+                                        {{ ucwords($image->created_at->formatLocalized('%B %G')) }}
                                     </em>
                                 </div>
 
