@@ -19,119 +19,108 @@
                 • <span class="text-title mb-3 text-info">@lang($category->name)</span>
             @endif
             @isset($album)
-            • <span class="text-title mb-3 text-info">@lang($album->name)</span>
+                • <span class="text-title mb-3 text-info">@lang($album->name)</span>
             @endif
             </h2>
         @endif
 
-
-        <div class="d-flex justify-content-center">
-            {{ $images->onEachSide(2)->links() }}
-        </div>
-        <div class="card-columns">
-            @foreach($images as $image)
-                <div class="card" id="image{{ $image->id }}">
-                    <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}" data-url="{{ $image->url }}" data-user="{{ $image->user->name }}" title="{{ $image->title }}">
-                        <img class="card-img-top"
-                             src="{{ url('thumbs/' . $image->name) }}"
-                             alt="{{ $image->title }}">
-                    </a>
-                    <div class="card-body">
-                        @isset($image->title)
-                            <h5 class="card-title">{{ $image->title }}</h5>
-                        @endisset
-                        <p class="card-text">
-                            {{ $image->description }}
-                            @isset($image->url)
-                                <em class="d-block"><a href="{{ $image->url}}" data-toggle="tooltip"
-                                    title="{{ __('Voir ce site web') }}">Site web</a></em>
+        @if ($images->count() > 0)
+            <div class="d-flex justify-content-center">
+                {{ $images->onEachSide(2)->links() }}
+            </div>
+            <div class="card-columns">
+                @foreach($images as $image)
+                    <div class="card" id="image{{ $image->id }}">
+                        <a href="{{ url('images/' . $image->name) }}" class="image-link" data-link="{{ route('image.click', $image->id) }}" data-url="{{ $image->url }}" data-user="{{ $image->user->name }}" title="{{ $image->title }}">
+                            <img class="card-img-top"
+                                src="{{ url('thumbs/' . $image->name) }}"
+                                alt="{{ $image->title }}">
+                        </a>
+                        <div class="card-body">
+                            @isset($image->title)
+                                <h5 class="card-title">{{ $image->title }}</h5>
                             @endisset
-                        </p>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <em>
-                            <a href="{{ route('user', $image->user->id) }}" data-toggle="tooltip"
-                                title="{{ __('Voir les photos de ') . $image->user->name }}">{{ $image->user->name }}</a>
-                        </em>
-                        <div class="float-right">
-                            <em>
-                                (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }})
-                                <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
-                            </em>
+                            <p class="card-text">
+                                <span class="description-image">{{ $image->description }}</span>
+                                @isset($image->url)
+                                    <em class="d-block"><a href="{{ $image->url}}" data-toggle="tooltip"
+                                        title="{{ __('Voir ce site web') }}">Site web</a></em>
+                                @endisset
+                            </p>
                         </div>
+                        @adminOrOwner($image->user_id)
+                            <div class="card-footer text-muted">
+                                <em>
+                                    <a href="{{ route('user', $image->user->id) }}" data-toggle="tooltip"
+                                        title="{{ __('Voir les photos de ') . $image->user->name }}">{{ $image->user->name }}</a>
+                                </em>
+                                <div class="float-right">
+                                    <em>
+                                        (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }})
+                                        <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
+                                    </em>
+                                </div>
 
-                        <div class="star-rating" id="{{ $image->id }}">
-                            <?php /* rating en attente
-                            <span class="count-number">({{ $image->users->count() }})</span>
-                            <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
-                                <i class="fas fa-star"></i>
+                                <div class="star-rating" id="{{ $image->id }}">
+                                    <span class="float-right">
+                                        <a class="toggleIcons" href="#">
+                                            <i class="fa fa-cog"></i>
+                                        </a>
+                                        <span class="menuIcons" style="display: none">
+                                            <a class="form-delete text-danger"
+                                                href="{{ route('image.destroy', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Supprimer cette photo')">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <a class="description-manage"
+                                                href="{{ route('image.description', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Gérer la description')">
+                                                <i class="fa fa-comment"></i>
+                                            </a>
+                                            <a class="albums-manage"
+                                                href="{{ route('image.albums', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Gérer les albums')">
+                                                <i class="fa fa-folder-open"></i>
+                                            </a>
+                                            <a class="category-edit"
+                                                data-id="{{ $image->category_id }}"
+                                                href="{{ route('image.update', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Changer de catégorie')">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="adult-edit"
+                                                href="{{ route('image.adult', $image->id) }}"
+                                                data-toggle="tooltip"
+                                                title="@lang('Changer de statut')">
+                                                <i class="fa @if($image->adult) fa-graduation-cap @else fa-child @endif"></i>
+                                            </a>
+                                        </span>
+                                        <form action="{{ route('image.destroy', $image->id) }}" method="POST" class="hide">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </span>
+                                </div>
                             </div>
-                            <div id="{{ $image->id . '.4' }}" data-toggle="tooltip" title="4" @if($image->rate > 3) class="star-yellow" @endif>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div id="{{ $image->id . '.3' }}" data-toggle="tooltip" title="3" @if($image->rate > 2) class="star-yellow" @endif>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div id="{{ $image->id . '.2' }}" data-toggle="tooltip" title="2" @if($image->rate > 1) class="star-yellow" @endif>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div id="{{ $image->id . '.1' }}" data-toggle="tooltip" title="1" @if($image->rate > 0) class="star-yellow" @endif>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            */ ?>
-
-                            <span class="float-right">
-                                @adminOrOwner($image->user_id)
-                                <a class="toggleIcons" href="#">
-                                    <i class="fa fa-cog"></i>
-                                </a>
-                                <span class="menuIcons" style="display: none">
-                                    <a class="form-delete text-danger"
-                                        href="{{ route('image.destroy', $image->id) }}"
-                                        data-toggle="tooltip"
-                                        title="@lang('Supprimer cette photo')">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                    <a class="description-manage"
-                                        href="{{ route('image.description', $image->id) }}"
-                                        data-toggle="tooltip"
-                                        title="@lang('Gérer la description')">
-                                        <i class="fa fa-comment"></i>
-                                    </a>
-                                    <a class="albums-manage"
-                                        href="{{ route('image.albums', $image->id) }}"
-                                        data-toggle="tooltip"
-                                        title="@lang('Gérer les albums')">
-                                        <i class="fa fa-folder-open"></i>
-                                    </a>
-                                    <a class="category-edit"
-                                        data-id="{{ $image->category_id }}"
-                                        href="{{ route('image.update', $image->id) }}"
-                                        data-toggle="tooltip"
-                                        title="@lang('Changer de catégorie')">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a class="adult-edit"
-                                        href="{{ route('image.adult', $image->id) }}"
-                                        data-toggle="tooltip"
-                                        title="@lang('Changer de statut')">
-                                        <i class="fa @if($image->adult) fa-graduation-cap @else fa-child @endif"></i>
-                                    </a>
-                                </span>
-                                <form action="{{ route('image.destroy', $image->id) }}" method="POST" class="hide">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
-                                @endadminOrOwner
-                            </span>
-                        </div>
+                        @endadminOrOwner
                     </div>
-                </div>
-            @endforeach
-        </div>
-        <div class="d-flex justify-content-center">
-            {{ $images->links() }}
-        </div>
+                @endforeach
+            </div>
+        @else
+            <h5 class="text-title">
+                @lang("Il n'y a pas de travaux dans ") 
+                @isset($category)
+                    @lang($category->name)
+                @endif
+                @isset($album)
+                    @lang($album->name)
+                @endif
+            </h5>
+        @endif
     </main>
     <div class="modal fade" id="changeDescription" tabindex="-1" role="dialog" aria-labelledby="descriptionLabel"
      aria-hidden="true">
@@ -144,10 +133,31 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="descriptionForm" action="" method="POST">
+                    <form id="descriptionForm" action="" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="title" id="title">
+                            <small class="invalid-feedback"></small>
+                        </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="description" id="description">
                             <small class="invalid-feedback"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="url" id="url">
+                            <small class="invalid-feedback"></small>
+                        </div>
+                        <div class="form-group{{ $errors->has('image') ? ' is-invalid' : '' }}">
+                            <div class="custom-file">
+                                <input type="file" id="image" name="image"
+                                    class="{{ $errors->has('image') ? ' is-invalid ' : '' }}custom-file-input" >
+                                <label class="custom-file-label" for="image">@lang('Choisir un fichier…')</label>
+                                <small class="invalid-feedback"></small>
+                                
+                            </div>
+                            <br>
+                        </div>
+                        <div class="form-group">
+                            <img id="preview" class="img-fluid" src="#" alt="">
                         </div>
                         <button type="submit" class="btn btn-primary">@lang('Envoyer')</button>
                     </form>
@@ -202,9 +212,25 @@
 @endsection
 @section('script')
     <script>
+        $(() => {
+            $('input[type="file"]').on('change', (e) => {
+                let that = e.currentTarget
+                if (that.files && that.files[0]) {
+                    $(that).next('.custom-file-label').html(that.files[0].name)
+                    let reader = new FileReader()
+                    reader.onload = (e) => {
+                        $('#preview').attr('src', e.target.result).removeClass('d-none');
+                    }
+                    reader.readAsDataURL(that.files[0])
+                }
+            })
+            $('[rel="next"]').addClass('next')
+            $('.site-wrapper').fadeOut(1000)
+
+        })
         const swallAlertServer = () => {
                 swal.fire({
-                    title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
+                    title: '@lang("Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...")',
                     type: 'warning'
                 })
             }
@@ -214,33 +240,100 @@
         $('a.description-manage').click((e) => {
             e.preventDefault()
             let that = $(e.currentTarget)
-            let text = that.parents('.card').find('.card-text').text()
-            $('#description').val(text)
+            let src = that.parents('.card').find('.card-img-top').attr('src')
+            $('#preview').attr('src', src)
+            let title = that.parents('.card').find('.card-title').text()
+            $('#title').val(title)
+            let description = that.parents('.card').find('.card-text>.description-image').text()
+            $('#description').val(description)
+            let url = that.parents('.card').find('.card-text>em>a').attr('href')
+            $('#url').val(url)
             $('#descriptionForm').attr('action', that.attr('href')).find('input').removeClass('is-invalid').next().text()
             $('#changeDescription').modal('show')
         })
         $('#descriptionForm').submit((e) => {
             e.preventDefault()
             let that = $(e.currentTarget)
+
+            var formData = new FormData(that[0]);
+            
+            /* for (var [key, value] of formData.entries()) { 
+                console.log(key, value);
+            } */
+
             $.ajax({
-                method: 'put',
+                type: 'post',
                 url: that.attr('action'),
-                data: that.serialize()
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false
             })
             .done((data) => {
                 let card = $('#image' + data.id)
                 let body = card.find('.card-body')
                 if(body.length) {
-                    body.children().text(data.description)
+                    if (data.name) {
+                        if (card.find('img').length) {
+                            card.children('a')
+                                .attr('href', '{{ url("images" ) }}/' + data.name)
+                                .find('img').attr('src','{{ url("thumbs") }}/' + data.name)
+                        } else {
+                            card.append('a')
+                                .attr('href', '{{ url("images" ) }}' + data.name)
+                                .append('img').attr('src','{{ url("thumbs") }}/' + data.name)
+                        }
+                    } else {
+                        card.find('a').hide()
+                    }
+                    if (data.title) {
+                        if (body.find('.card-title').length) {
+                            body.find('.card-title').text(data.title).show()
+                        } else {
+                            body.prepend('<h5 class="card-title">' + data.title + '</h5>')
+                        }
+                    } else {
+                        body.find('.card-title').hide()
+                    }
+                    if (data.description) {
+                        if (body.children('.card-text').find('span.description-image').length)
+                        {
+                            body.children('.card-text').find('span.description-image').text(data.description).show()
+                        } else {
+                            body.children('.card-text').prepend('<span class="description-image">' + data.description + '</span>')
+                        }
+                    } else {
+                        body.children('.card-text').find('span.description-image').hide()
+                    }
+                    if (data.url) {
+                        if (body.children().find('em').length) {
+                            body.children().find('em').show().children('a').attr('href', data.url)
+                        } else {
+                            body.children('.card-text').append('<em class="d-block"><a href="' + data.url + '" data-toggle="tooltip" title="@lang('Voir ce site web')">Site web</a></em>')
+                        }
+                    } else {
+                        body.children().find('em').addClass('d-none').hide()
+                    }
                 } else {
-                    card.children('a').after('<div class="card-body"><p class="card-text">' + data.description + '</p></div>')
+                    card.children('a')
+                        .attr('href', '{{ url("images" ) }}/' + data.name)
+                        .append('img').attr('src','{{ url("thumbs") }}/' + data.name)
+                        .parent()
+                        .after('<div class="card-body"></div>')
+                        .append('<h5 class="card-title">' + data.title + '</h5>')
+                        .after('<p class="card-text"></p>')
+                        .append('<span class="description-image">' + data.description + '</span>')
+                        .after('<em class="d-block"><a href="' + data.url + '" data-toggle="tooltip" title="@lang('Voir ce site web')">Site web</a></em>')
                 }
+                $('#descriptionForm')[0].reset()
+                $('#descriptionForm').find('label.custom-file-label').text("@lang('Choisir un fichier…')")
                 $('#changeDescription').modal('hide')
             })
             .fail((data) => {
+                console.log(data)
                 if(data.status === 422) {
                     $.each(data.responseJSON.errors, function (key, value) {
-                        $('#descriptionForm input[name=' + key + ']').addClass('is-invalid').next().text(value)
+                        $('#descriptionForm input[name=' + key + ']').addClass('is-invalid').parent().find('.invalid-feedback').text(value)
                     })
                 } else {
                     swallAlertServer()
@@ -404,7 +497,7 @@
             e.preventDefault()
             let that = $(e.currentTarget)
             $.ajax({
-                method: 'patch',
+                method: 'put',
                 url: that.attr('data-link')
             }).done((data) => {
                 if(data.increment) {
@@ -415,7 +508,6 @@
         })
 
         $(document).ready(function() {
-            $('.site-wrapper').fadeOut(1000)
             $('[data-toggle="tooltip"]').tooltip()
             $('.card-columns').magnificPopup({
                 delegate: 'a.image-link',

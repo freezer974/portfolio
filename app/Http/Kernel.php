@@ -38,8 +38,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\Settings::class,
             \App\Http\Middleware\Locale::class,
             \App\Http\Middleware\Settings::class,
-
-
+            \App\Http\Middleware\HandlePutFormData::class,
         ],
 
         'api' => [

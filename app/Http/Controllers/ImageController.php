@@ -108,11 +108,11 @@ class ImageController extends Controller
         $request->validate([
             'description' => 'nullable|string|max:255',
             'title' => 'nullable|string|max:255',
-            'url' => 'nullable|string|max:255'
+            'url' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,gif,png|max:2048'
         ]);
 
-        $image->description = $request->description;
-        $image->save();
+        $this->imageRepository->update($request, $image);
 
         return $image;
     }
@@ -171,12 +171,18 @@ class ImageController extends Controller
      * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function category($slug)
+    public function category(Request $request, $slug)
     {
-        $category = $this->categoryRepository->getBySlug($slug);
-        $images = $this->imageRepository->getImagesForCategory($slug);
+        if ($request->ajax()) {
+            $images = $this->imageRepository->getImagesForCategory($slug, true);
+            return $images;
+        } else {
+            $category = $this->categoryRepository->getBySlug($slug);
+            $images = $this->imageRepository->getImagesForCategory($slug);
 
-        return view('home', compact('category', 'images'));
+            return view('home', compact('category', 'images'));
+        }
+        
     }
 
     /**

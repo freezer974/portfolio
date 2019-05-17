@@ -352,7 +352,7 @@
                    <div class="button-group filter-button-group">
                         <a class="button" href="{{ route('all') }}">Voir tous</a>
                         @foreach($categories as $category)
-                            <button data-filter=".cat{{ $category->id }}">{{ $category->name }}</button>
+                            <button data-filter=".cat{{ $category->id }}" data-url="{{ route('category', $category->slug) }}">{{ $category->name }}</button>
                         @endforeach
                     </div>
                </div>
@@ -379,71 +379,6 @@
                                         <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
                                     </em>
                                 </div>
-                                <?php /* rating en attente
-                                <div class="star-rating" id="{{ $image->id }}">
-                                    <span class="count-number">({{ $image->users->count() }})</span>
-                                    <div id="{{ $image->id . '.5' }}" data-toggle="tooltip" title="5" @if($image->rate > 4) class="star-yellow" @endif>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div id="{{ $image->id . '.4' }}" data-toggle="tooltip" title="4" @if($image->rate > 3) class="star-yellow" @endif>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div id="{{ $image->id . '.3' }}" data-toggle="tooltip" title="3" @if($image->rate > 2) class="star-yellow" @endif>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div id="{{ $image->id . '.2' }}" data-toggle="tooltip" title="2" @if($image->rate > 1) class="star-yellow" @endif>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div id="{{ $image->id . '.1' }}" data-toggle="tooltip" title="1" @if($image->rate > 0) class="star-yellow" @endif>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span class="float-right">
-                                        @adminOrOwner($image->user_id)
-                                        <a class="toggleIcons"
-                                            href="#">
-                                        <i class="fa fa-cog"></i>
-                                        </a>
-                                        <span class="menuIcons" style="display: none">
-                                            <a class="form-delete text-danger"
-                                                href="{{ route('image.destroy', $image->id) }}"
-                                                data-toggle="tooltip"
-                                                title="@lang('Supprimer cette photo')">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                            <a class="description-manage"
-                                                href="{{ route('image.description', $image->id) }}"
-                                                data-toggle="tooltip"
-                                                title="@lang('Gérer la description')">
-                                                <i class="fa fa-comment"></i>
-                                            </a>
-                                            <a class="albums-manage"
-                                                href="{{ route('image.albums', $image->id) }}"
-                                                data-toggle="tooltip"
-                                                title="@lang('Gérer les albums')">
-                                                <i class="fa fa-folder-open"></i>
-                                            </a>
-                                            <a class="category-edit"
-                                                data-id="{{ $image->category_id }}"
-                                                href="{{ route('image.update', $image->id) }}"
-                                                data-toggle="tooltip"
-                                                title="@lang('Changer de catégorie')">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a class="adult-edit"
-                                                href="{{ route('image.adult', $image->id) }}"
-                                                data-toggle="tooltip"
-                                                title="@lang('Changer de statut')">
-                                                <i class="fa @if($image->adult) fa-graduation-cap @else fa-child @endif"></i>
-                                            </a>
-                                        </span>
-                                        <form action="{{ route('image.destroy', $image->id) }}" method="POST" class="hide">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                        @endadminOrOwner
-                                    </span>
-                                </div>
-                                */ ?>
                             </div>
                         </div>
                     </div>
@@ -812,11 +747,11 @@
         $(".go-down").on('click', function(event) {
             if (this.hash !== "") {
                 event.preventDefault()
-                var hash = this.hash;
+                var hash = this.hash
                 $('html, body').animate({
                     scrollTop: $(hash).offset().top - $("nav.navbar").height()
                 }, 800, function(){
-                    window.location.hash = hash;
+                    window.location.hash = hash
                 })
             }
         })
@@ -838,12 +773,84 @@
                 }
             })
             // filter items on button click
-            $('.filter-button-group').on( 'click', 'button', function() {
+            $('.filter-button-group').on( 'click', 'button', function(e) {
                 $('.button-group > button').removeClass('active');
                 $(this).addClass('active');
 
-                var filterValue = $(this).attr('data-filter');
-                $grid.isotope({ filter: filterValue });
+                let that = $(e.currentTarget)
+
+                $.ajax({
+                    type: 'get',
+                    url: that.attr('data-url'),
+                })
+                .done((data) => {
+                    $.each(data, function(index, item) {
+                        let $gridItem = 
+                            $('<div/>')
+                                .addClass('col-lg-3 col-md-4 col-sm-6 p-1 grid-item cat' + item.category_id)
+
+                        let $title = 
+                            item.title ? 
+                                $('<h4/>').addClass('text-dark').text(item.title) : ''
+
+                        let $description = 
+                            item.description ? 
+                                $('<span/>').addClass('text-muted').text(item.description) : ''
+                        
+                        let $siteweb = 
+                            item.url ? 
+                                $('<em/>')
+                                    .addClass('d-block')
+                                    .append($('<a/>')
+                                    .attr('href', item.url)
+                                    .attr('data-toggle', 'tooltip')
+                                    .attr('title', '@lang("Voir le site web")')
+                                    .text('Site web')) : ''
+                        
+                        let $clicks = $('<span/>').addClass('image-click').text(item.clicks + ' ')
+                        
+                        let $box = $('<div/>').addClass('portfolio-box')
+                        let $vue = $('<div/>')
+                            .addClass('float-right')
+                            .append($('<em/>')
+                                .append('(')
+                                .append($clicks)
+                                .append('@choice(__("vue|vues"),'+ item.clicks + ')' )
+                                .append(')'))
+                                            
+                        let $content = $('<div/>')
+                            .addClass('portfolio-content')
+                            .append($title)
+                            .append($description)
+                            .append($siteweb)
+                            .append($vue)
+                                                    
+                        let $img = $('<div/>')
+                            .addClass('portfolio-img')
+                            .append($('<a/>')
+                                .attr('href', '{{ url("images" ) }}/' + item.name)
+                                .attr('data-link', '{{ url("images" ) }}/' + item.id + '/click')
+                                .attr('data-url', item.url)
+                                .attr('title', item.title)
+                                .attr('data-user', item.user.name)
+                                .append($('<img/>')
+                                    .attr('src', '{{ url("thumbs" ) }}/' + item.name)
+                                    .attr('alt', item.title)))
+
+                        $gridItem.append(
+                            $box.append($img)
+                                .append($content)
+                        )
+                        $grid.isotope('remove', $grid.children().eq(index)).isotope('layout');
+
+                        $gridItem.imagesLoaded( function() {
+                            $grid.append( $gridItem )
+                            .isotope( 'appended', $gridItem )
+                        })
+                    })
+                }).fail((data) => {
+                    console.log(data)
+                })
             })
             $grid.magnificPopup({
                 delegate: 'a.image-link',
@@ -872,7 +879,7 @@
             e.preventDefault()
             let that = $(e.currentTarget)
             $.ajax({
-                method: 'patch',
+                method: 'put',
                 url: that.find('a.image-link').attr('data-link')
             }).done((data) => {
                 if(data.increment) {
@@ -926,7 +933,3 @@
       <script src="https://maps.googleapis.com/maps/api/js?key={{ Config::get('app.googlekey') }}&callback=initMap" async defer></script>
 
 @endsection
-
-
-
-

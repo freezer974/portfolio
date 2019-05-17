@@ -5,16 +5,17 @@ namespace App\Repositories;
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as InterventionImage;
+use Illuminate\Http\Request;
 
 class ImageRepository
 {
-    public function store($request)
+    public function store(Request $request)
     {
         // Save image
         $path = basename($request->image->store('images'));
         // Save thumb
-        $image = InterventionImage::make($request->image)->widen(500)->encode();
-        Storage::put('thumbs/' . $path, $image);
+        $thumb = InterventionImage::make($request->image)->widen(500)->encode();
+        Storage::put('thumbs/' . $path, $thumb);
         // Save in base
         $image = new Image;
         $image->description = $request->description;
@@ -25,17 +26,42 @@ class ImageRepository
         $image->name = $path;
         $request->user()->images()->save($image);
     }
+    
+    public function update(Request $request, Image $image)
+    {
+        $image->description = $request->description;
+        $image->title = $request->title;
+        $image->url = $request->url;
+        
+        if ($request->hasFile('image')) {
+            $oldFilename =  $image->name;
+           // Save image
+            $path = basename($request->image->store('images'));
+            // Save thumb
+            $thumb = InterventionImage::make($request->image)->widen(500)->encode();
+            Storage::put('thumbs/' . $path, $thumb);
+            // Save in base
+            $image->name = $path;
+            Storage::delete(['images/' . $oldFilename, 'thumbs/' . $oldFilename]);
+        }
+        
+        // garder le même utilisateur même si c'est l'admin
+        $request->user()->images()->save($image);
+    }
 
     public function getAllImages()
     {
         return $this->paginateAndRate(Image::latestWithUser());
     }
 
-    public function getImagesForCategory($slug)
+    public function getImagesForCategory($slug, $ajax = null)
     {
         $query = Image::latestWithUser()->whereHas('category', function($query) use($slug) {
             $query->whereSlug($slug);
         });
+        if ($ajax) {
+            return $this->setRating($query->limit(config('app.pagination'))->orderBy('updated_at', 'DESC')->get());
+        }
         return $this->paginateAndRate($query);
     }
 

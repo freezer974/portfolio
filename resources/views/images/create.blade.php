@@ -37,10 +37,16 @@
                 'required' => false,
                 ])
             @include('partials.form-group', [
-            'title' => __('Description (optionnelle)'),
-            'type' => 'text',
-            'name' => 'description',
-            'required' => false,
+                'title' => __('Description (optionnelle)'),
+                'type' => 'text',
+                'name' => 'description',
+                'required' => false,
+            ])
+            @include('partials.form-group', [
+                'title' => __('Date de création'),
+                'type' => 'date',
+                'name' => 'created_at',
+                'required' => true,
             ])
             @include('partials.form-group', [
             'title' => __('Url (optionnelle)'),

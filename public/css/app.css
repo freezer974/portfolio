@@ -17580,11 +17580,6 @@ body.swal2-toast-column .swal2-toast .swal2-validation-message {
   }
 }
 
-body.swal2-shown {
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-}
-
 body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
   overflow: hidden;
 }
@@ -17682,21 +17677,6 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   overflow-x: hidden;
   background-color: transparent;
   -webkit-overflow-scrolling: touch;
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  /* stylelint-disable-line scss/no-duplicate-dollar-variables */
 }
 
 .swal2-container.swal2-top {
@@ -18047,6 +18027,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   border-radius: 0.1875em;
   background: inherit;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06);
+  color: inherit;
   font-size: 1.125em;
 }
 
@@ -18100,6 +18081,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 
 .swal2-range output {
   width: 20%;
+  color: inherit;
   font-weight: 600;
   text-align: center;
 }
@@ -18136,7 +18118,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   max-width: 100%;
   padding: 0.375em 0.625em;
   background: inherit;
-  color: #545454;
+  color: inherit;
   font-size: 1.125em;
 }
 
@@ -18145,6 +18127,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   align-items: center;
   justify-content: center;
   background: inherit;
+  color: inherit;
 }
 
 .swal2-radio label,
@@ -18504,11 +18487,6 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 @media print {
-  body.swal2-shown {
-    /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-    /* stylelint-disable-line scss/no-duplicate-dollar-variables */
-  }
-
   body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
     overflow-y: scroll !important;
   }

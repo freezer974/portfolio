@@ -58,18 +58,18 @@ Route::middleware ('auth', 'verified')->group(function () {
 
     Route::name('image.')->middleware('ajax')->group(function () {
         Route::prefix('image')->group(function () {
-            Route::name('description')->put('{image}/description', 'ImageController@descriptionUpdate');
+            Route::name('description')->post('{image}/description', 'ImageController@descriptionUpdate');
             Route::name ('adult')->put('{image}/adult', 'ImageController@adultUpdate');
             Route::name('albums')->get('{image}/albums', 'ImageController@albums');
-            Route::name ('albums.update')->put ('{image}/albums', 'ImageController@albumsUpdate');
+            Route::name ('albums.update')->put('{image}/albums', 'ImageController@albumsUpdate');
         });
-        Route::name ('rating')->put ('rating/{image}', 'ImageController@rate');
+        Route::name('rating')->put('rating/{image}', 'ImageController@rate');
 
     });
 
     Route::name ('notification.')->prefix('notification')->group(function () {
         Route::name ('index')->get ('/', 'NotificationController@index');
-        Route::name ('update')->patch ('{notification}', 'NotificationController@update');
+        Route::name ('update')->put ('{notification}', 'NotificationController@update');
     });
 });
 
@@ -79,7 +79,7 @@ Route::name('user')->get('user/{user}', 'ImageController@user');
 
 Route::name ('album')->get ('album/{slug}', 'ImageController@album');
 
-Route::middleware('ajax')->name('image.click')->patch('image/{image}/click', 'ImageController@click');
+Route::middleware('ajax')->name('image.click')->put('image/{image}/click', 'ImageController@click');
 
 Route::name('language')->get('language/{lang}', 'HomeController@language');
 

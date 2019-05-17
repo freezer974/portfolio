@@ -11,7 +11,7 @@ try {
     require('bootstrap');
     require('isotope-layout/dist/isotope.pkgd.min.js');
     require('magnific-popup');
-    require('jquery-infinitescroll/dist/jquery-infiniteScroll.js');
+    require('infinite-scroll/dist/infinite-scroll.pkgd.min.js');
     require('@fortawesome/fontawesome-free/js/all.js');
     require('jquery-animated-headlines');
     require('waypoints/lib/jquery.waypoints.min.js');
