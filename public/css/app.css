@@ -8128,6 +8128,11 @@ pre code {
   opacity: 1;
 }
 
+.form-control::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
 .form-control:-ms-input-placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11064,8 +11069,10 @@ input[type=button].btn-block {
 @media (min-width: 576px) {
   .card-columns {
     -webkit-column-count: 3;
+       -moz-column-count: 3;
             column-count: 3;
     -webkit-column-gap: 1.25rem;
+       -moz-column-gap: 1.25rem;
             column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
@@ -18052,6 +18059,12 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   color: #cccccc;
 }
 
+.swal2-input::-moz-placeholder,
+.swal2-file::-moz-placeholder,
+.swal2-textarea::-moz-placeholder {
+  color: #cccccc;
+}
+
 .swal2-input:-ms-input-placeholder,
 .swal2-file:-ms-input-placeholder,
 .swal2-textarea:-ms-input-placeholder {
@@ -19823,6 +19836,7 @@ h1 {
 @media (min-width: 576px) and (max-width: 767.98px) {
   .card-columns {
     -webkit-column-count: 2;
+       -moz-column-count: 2;
             column-count: 2;
   }
 }
@@ -19830,6 +19844,7 @@ h1 {
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .card-columns {
     -webkit-column-count: 3;
+       -moz-column-count: 3;
             column-count: 3;
   }
 }
@@ -19837,6 +19852,7 @@ h1 {
 @media (min-width: 1200px) {
   .card-columns {
     -webkit-column-count: 4;
+       -moz-column-count: 4;
             column-count: 4;
   }
 }
