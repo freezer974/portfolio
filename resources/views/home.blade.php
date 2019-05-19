@@ -351,7 +351,6 @@
                 $('#changeDescription').modal('hide')
             })
             .fail((data) => {
-                console.log(data)
                 if(data.status === 422) {
                     $.each(data.responseJSON.errors, function (key, value) {
                         $('#descriptionForm input[name=' + key + ']').addClass('is-invalid').parent().find('.invalid-feedback').text(value)

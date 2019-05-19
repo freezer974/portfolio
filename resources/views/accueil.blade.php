@@ -779,7 +779,6 @@
                 })
                 .done((data) => {
                     $grid.isotope('remove', $grid.children()).isotope('layout')
-                    console.log(data)
                     $.each(data, function(index, item) {
                         let $gridItem = 
                             $('<div/>')
@@ -836,7 +835,7 @@
                         })
                     })
                 }).fail((data) => {
-                    console.log(data)
+                    swallAlertServer()
                 })
             })
             $grid.magnificPopup({
