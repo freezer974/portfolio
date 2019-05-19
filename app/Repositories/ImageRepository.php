@@ -24,6 +24,7 @@ class ImageRepository
         $image->category_id = $request->category_id;
         $image->adult = isset($request->adult);
         $image->name = $path;
+        $image->published_at = $request->published_at;
         $request->user()->images()->save($image);
     }
     
@@ -32,7 +33,8 @@ class ImageRepository
         $image->description = $request->description;
         $image->title = $request->title;
         $image->url = $request->url;
-        
+        $image->published_at = $request->published_at;
+
         if ($request->hasFile('image')) {
             $oldFilename =  $image->name;
            // Save image
@@ -60,7 +62,7 @@ class ImageRepository
             $query->whereSlug($slug);
         });
         if ($ajax) {
-            return $this->setRating($query->limit(config('app.pagination'))->orderBy('updated_at', 'DESC')->get());
+            return $this->setRating($query->limit(config('app.pagination'))->orderBy('published_at', 'DESC')->get());
         }
         return $this->paginateAndRate($query);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
@@ -12,8 +13,10 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'url', 'name'
+        'title', 'description', 'url', 'name', 'published_at'
     ];
+
+    protected $dates = ['created_at', 'updated_at', 'published_at'];
 
     public function category()
     {
@@ -46,5 +49,15 @@ class Image extends Model
         /* origine on montre que les images non adulte
         return $query->with('user')->whereAdult(false)->latest();
         */
+    }
+
+    public function getPublishedAtAttribute($date)
+    {
+        return Carbon::parse($date);
+    }
+
+    public function setPublishedAtAttribute($date)
+    {
+        $this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date)->toDateString();
     }
 }

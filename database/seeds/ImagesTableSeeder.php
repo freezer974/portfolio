@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\Image;
 use Carbon\Carbon;
+use Faker\Factory as Faker;
+
+use App\Models\Image;
+use Illuminate\Database\Seeder;
 
 class ImagesTableSeeder extends Seeder
 {
@@ -13,8 +15,17 @@ class ImagesTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create('fr_FR');
-        for ($i = 0; $i < 100; $i++) {
+        $faker = Faker::create('fr_FR');
+        $lists = [];
+
+        Storage::delete(Storage::files('images'));
+        $this->command->info('Suppression des images dans le dossier <fg=red>images</>');
+
+        Storage::delete(Storage::files('thumbs'));
+        $this->command->info('Suppression des images dans le dossier <fg=red>thumbs</>');
+
+        
+        for ($i = 0; $i < 20; $i++) {
             $image = new Image;
             $image->category_id = $faker->numberBetween($min = 1, $max = 3);
             $image->user_id = $faker->numberBetween($min = 1, $max = 3);
@@ -25,6 +36,16 @@ class ImagesTableSeeder extends Seeder
             $image->adult = $faker->numberBetween($min = 0, $max = 1);
             $image->clicks = $faker->randomDigit;
             $image->save();
+            $count = count($lists)+1;
+            $this->command->info('Creation de l\'image : <fg=white>'. $image->name . '</> <fg=yellow>(' . $count . '/20)</>');
+            array_push($lists, $image->name);
+        }
+
+        foreach($lists as $list)
+        {
+            if (\File::copy('public/images/'.$list , 'public/thumbs/'.$list)) {
+                $this->command->info('Copie de l\'image : <fg=white>'. $image->name . '</>');
+            }
         }
     }
 }

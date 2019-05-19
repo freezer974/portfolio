@@ -42,18 +42,20 @@
                 'name' => 'description',
                 'required' => false,
             ])
+
             @include('partials.form-group', [
-                'title' => __('Date de création'),
+                'title' => __('Url (optionnelle)'),
+                'type' => 'text',
+                'name' => 'url',
+                'required' => false,
+            ])
+            @include('partials.form-group', [
+                'title' => __('Date de publication'),
                 'type' => 'date',
-                'name' => 'created_at',
+                'name' => 'published_at',
                 'required' => true,
-            ])
-            @include('partials.form-group', [
-            'title' => __('Url (optionnelle)'),
-            'type' => 'text',
-            'name' => 'url',
-            'required' => false,
-            ])
+                'value' => $image->published_at->format('Y-m-d'),
+            ])            
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="adult" name="adult">

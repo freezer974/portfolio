@@ -49,14 +49,14 @@
                <hr class="mx-auto col-4 my-5">
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
+                <div class="col-lg-6 col-md-6 mb-3">
                     <div class="success-story">
                         <h2>Nous avons quelques Success Story</h2>
                         <p>Fort de 15 ans d'expériences dans l'infographie et le web, j'ai su mettre mes compétences aux services d'entreprises, de professionnels et de particuliers, afin de réaliser des produits pour promouvoir leur image et prestations au sein de la société réunionnaise et francophone.</p>
 						<p class="hidden-sm">Je souhaite vous faire profiter de ses années d'expériences en réalisant vos projets par un suivi rigoureux, des conseils judicieux, une exécution rapide afin de vous fournir dans les meilleurs délais vos travaux graphiques ou web. Je suis aussi engagé pour le respect de l'environnement pour cela vos travaux et sites internet que j'héberge sont stockés sur des serveurs écologiques.</p>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
+                <div class="col-lg-6 col-md-6 mb-3">
                     <div class="skill">
                         <h2>Mes compétences</h2>
                         <div class="skill py-2">
@@ -373,12 +373,6 @@
                                 @isset($image->url)
                                     <em class="d-block"><a href="{{ $image->url }}" data-toggle="tooltip" title="{{ __('Voir le site web') }}">Site web</a></em>
                                 @endisset
-                                <div class="float-right">
-                                    <em>
-                                        (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }})
-                                        <?php /* corriger les date insertion {{ $image->created_at->formatLocalized('%x') }} */ ?>
-                                    </em>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -512,13 +506,13 @@
             $('.site-wrapper').fadeOut(1000)
 
             $('a.toggleIcons').click((e) => {
-                e.preventDefault();
+                e.preventDefault()
                 let that = $(e.currentTarget)
                 that.next().toggle('slow').end().children().toggleClass('fa-cog').toggleClass('fa-play')
             })
 
             $('a.form-delete').click((e) => {
-                e.preventDefault();
+                e.preventDefault()
                 let href = $(e.currentTarget).attr('href')
                 swal.fire({
                     title: '@lang('Vraiment supprimer cette photo ?')',
@@ -658,7 +652,7 @@
             })
                 .done((data) => {
                     if(data === 'reload') {
-                        location.reload();
+                        location.reload()
                     } else {
                         $('#editAlbums').modal('hide')
                     }
@@ -774,8 +768,8 @@
             })
             // filter items on button click
             $('.filter-button-group').on( 'click', 'button', function(e) {
-                $('.button-group > button').removeClass('active');
-                $(this).addClass('active');
+                $('.button-group > button').removeClass('active')
+                $(this).addClass('active')
 
                 let that = $(e.currentTarget)
 
@@ -784,6 +778,8 @@
                     url: that.attr('data-url'),
                 })
                 .done((data) => {
+                    $grid.isotope('remove', $grid.children()).isotope('layout')
+                    console.log(data)
                     $.each(data, function(index, item) {
                         let $gridItem = 
                             $('<div/>')
@@ -810,20 +806,12 @@
                         let $clicks = $('<span/>').addClass('image-click').text(item.clicks + ' ')
                         
                         let $box = $('<div/>').addClass('portfolio-box')
-                        let $vue = $('<div/>')
-                            .addClass('float-right')
-                            .append($('<em/>')
-                                .append('(')
-                                .append($clicks)
-                                .append('@choice(__("vue|vues"),'+ item.clicks + ')' )
-                                .append(')'))
                                             
                         let $content = $('<div/>')
                             .addClass('portfolio-content')
                             .append($title)
                             .append($description)
                             .append($siteweb)
-                            .append($vue)
                                                     
                         let $img = $('<div/>')
                             .addClass('portfolio-img')
@@ -841,7 +829,6 @@
                             $box.append($img)
                                 .append($content)
                         )
-                        $grid.isotope('remove', $grid.children().eq(index)).isotope('layout');
 
                         $gridItem.imagesLoaded( function() {
                             $grid.append( $gridItem )

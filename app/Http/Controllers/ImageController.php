@@ -109,7 +109,8 @@ class ImageController extends Controller
             'description' => 'nullable|string|max:255',
             'title' => 'nullable|string|max:255',
             'url' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,gif,png|max:2048'
+            'image' => 'nullable|image|mimes:jpg,jpeg,gif,png|max:2048',
+            'published_at' => 'required|date|date_format:Y-m-d',
         ]);
 
         $this->imageRepository->update($request, $image);
@@ -141,7 +142,7 @@ class ImageController extends Controller
      */
     public function create()
     {
-        return view('images.create');
+        return view('images.create', ['image' => new Image()]);
     }
 
     /**
@@ -158,6 +159,7 @@ class ImageController extends Controller
             'description' => 'nullable|string|max:255',
             'title' => 'nullable|string|max:255',
             'url' => 'nullable|string|max:255',
+            'published_at' => 'required|date|date_format:Y-m-d',
         ]);
 
         $this->imageRepository->store($request);

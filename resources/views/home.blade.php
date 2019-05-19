@@ -57,7 +57,7 @@
                                 <div class="float-right">
                                     <em>
                                         (<span class="image-click">{{ $image->clicks }}</span> {{ trans_choice(__('vue|vues'), $image->clicks) }})
-                                        {{ ucwords($image->created_at->formatLocalized('%B %G')) }}
+                                        <span id="data-published" data-published="{{ $image->published_at->format('Y-m-d') }}">{{ ucwords($image->published_at->formatLocalized('%B %G')) }}</span>
                                     </em>
                                 </div>
 
@@ -146,13 +146,16 @@
                             <input type="text" class="form-control" name="url" id="url">
                             <small class="invalid-feedback"></small>
                         </div>
+                        <div class="form-group">
+                            <input type="date" class="form-control" name="published_at" id="published_at">
+                            <small class="invalid-feedback"></small>
+                        </div>
                         <div class="form-group{{ $errors->has('image') ? ' is-invalid' : '' }}">
                             <div class="custom-file">
                                 <input type="file" id="image" name="image"
                                     class="{{ $errors->has('image') ? ' is-invalid ' : '' }}custom-file-input" >
                                 <label class="custom-file-label" for="image">@lang('Choisir un fichier…')</label>
                                 <small class="invalid-feedback"></small>
-                                
                             </div>
                             <br>
                         </div>
@@ -248,8 +251,11 @@
             $('#description').val(description)
             let url = that.parents('.card').find('.card-text>em>a').attr('href')
             $('#url').val(url)
+            let published_at = that.parents('.card').find('span#data-published').attr('data-published')
+            $('#published_at').val(published_at)
             $('#descriptionForm').attr('action', that.attr('href')).find('input').removeClass('is-invalid').next().text()
             $('#changeDescription').modal('show')
+
         })
         $('#descriptionForm').submit((e) => {
             e.preventDefault()
@@ -272,6 +278,7 @@
             .done((data) => {
                 let card = $('#image' + data.id)
                 let body = card.find('.card-body')
+                let footer = card.find('.card-footer')
                 if(body.length) {
                     if (data.name) {
                         if (card.find('img').length) {
@@ -313,6 +320,20 @@
                         }
                     } else {
                         body.children().find('em').addClass('d-none').hide()
+                    }
+                    if (data.published_at) {
+                        if (footer.children().find('span#data-published').length) {
+                            var date = new Date(data.published_at);
+                            footer.children().find('span#data-published').show().attr('data-published', date.toISOString().slice(0,10))
+                            var mois = +date.toISOString().slice(5,7)
+                            var annee = date.toISOString().slice(0,4)
+                            var listeMois = ['','Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+                            footer.children().find('span#data-published').show().html(listeMois[mois] + ' ' + annee)
+                        } else {
+                            footer.children('.card-footer').append('<em class="d-block"><span id="data-published" data-published ="'+ data.published_at +'">' + data.published_at + '</span></em>')
+                        }
+                    } else {
+                        footer.children().find('em').addClass('d-none').hide()
                     }
                 } else {
                     card.children('a')

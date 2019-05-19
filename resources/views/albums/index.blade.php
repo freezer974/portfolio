@@ -3,6 +3,11 @@
     @component('components.card')
         @slot('title')
             @lang('Gestion des albums')
+            <a role="button" href="{{ route('album.create') }}"
+                class="btn btn-primary btn-sm float-right invisible" data-toggle="tooltip"
+                title="@lang("Créer un album")">
+                <i class="fas fa-plus fa-lg"></i>
+            </a>
         @endslot
         <table class="table table-dark text-white">
             <tbody>
